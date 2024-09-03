@@ -8,8 +8,8 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? "bg-orange-400 text-white  px-3 py-2 rounded"
-              : "px-3 py-2  relative hover:bg-orange-400 hover:text-white rounded-md duration-300 z-10 text-black"
+              ? "bg-orange-400 text-white  px-3 py-1 rounded"
+              : "px-3 py-1  relative hover:bg-orange-400 hover:text-white rounded-md duration-300 z-10 text-black"
           } // Apply styles based on active state
         >
           Home
@@ -49,8 +49,8 @@ const Navbar = () => {
           to="/food-item"
           className={({ isActive }) =>
             isActive
-              ? "bg-orange-400 text-white  px-3 py-2 rounded"
-              : "px-3 py-2  relative hover:bg-orange-400 hover:text-white rounded-md duration-300 z-10 text-black"
+              ? "bg-orange-400 text-white  px-3 py-1 rounded"
+              : "px-3 py-1 relative hover:bg-orange-400 hover:text-white rounded-md duration-300 z-10 text-black"
           } // Apply styles based on active state
         >
           Food Item
@@ -61,8 +61,8 @@ const Navbar = () => {
           to="#"
           className={({ isActive }) =>
             isActive
-              ? "bg-orange-400 text-white  px-3 py-2 rounded"
-              : "px-3 py-2  relative hover:bg-orange-400 hover:text-white rounded-md duration-300 z-10 text-black"
+              ? "bg-orange-400 text-white  px-3 py-1 rounded"
+              : "px-3 py-1  relative hover:bg-orange-400 hover:text-white rounded-md duration-300 z-10 text-black"
           } // Apply styles based on active state
         >
           Dashboard
@@ -97,13 +97,15 @@ const Navbar = () => {
             {navLink}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="px-2 font-bold cursor-pointer text-xl">daisyUI</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className=" flex gap-5 relative px-1">{navLink}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn btn-sm text-white bg-orange-400 ">Login</a>
+        <a className="btn btn-sm text-white bg-orange-400 border-none ">
+          Login
+        </a>
       </div>
     </div>
   );
