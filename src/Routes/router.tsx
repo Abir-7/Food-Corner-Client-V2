@@ -5,6 +5,10 @@ import FoodItem from "../Pages/FoodItemPage/FoodItem";
 import Login from "../Pages/LoginPage/Login";
 import Signup from "../Pages/SignupPage/Signup";
 
+import { generatedRoute } from "../utils/routeGenerator";
+import { userRouteOption } from "./userRoute/userRoute";
+import DashboardLayout from "../Layouts/DashboardLayout.tsx/DashboardLayout";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -13,6 +17,11 @@ export const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/food-item", element: <FoodItem /> },
     ],
+  },
+  {
+    path: "/customer",
+    element: <DashboardLayout />,
+    children: generatedRoute(userRouteOption),
   },
   {
     path: "/user-login",

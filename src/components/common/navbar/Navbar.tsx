@@ -1,6 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
+import { useAppSelector } from "../../../Redux/hooks";
 
 const Navbar = () => {
+  const { user } = useAppSelector((state) => state.auth);
+  console.log(user);
   const navLink = (
     <>
       <li>
