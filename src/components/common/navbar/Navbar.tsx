@@ -1,9 +1,18 @@
 import { Link, NavLink } from "react-router-dom";
 import { useAppSelector } from "../../../Redux/hooks";
+import { decodeToken } from "../../../utils/decodeToken";
+import { JwtPayload } from "jwt-decode";
 
 const Navbar = () => {
-  const { user } = useAppSelector((state) => state.auth);
-  console.log(user);
+  const { token } = useAppSelector((state) => state.auth);
+  let user;
+
+  if (token) {
+    user = decodeToken(token) as JwtPayload & {
+      role: string;
+      userEmail: string;
+    };
+  }
   const navLink = (
     <>
       <li>
@@ -60,16 +69,18 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink
-          to="#"
-          className={({ isActive }) =>
-            isActive
-              ? "bg-orange-400 text-white  px-3 py-1 rounded"
-              : "px-3 py-1  relative hover:bg-orange-400 hover:text-white rounded-md duration-300 z-10 text-black"
-          } // Apply styles based on active state
-        >
-          Dashboard
-        </NavLink>
+        {token && (
+          <NavLink
+            to={`/${user?.role}/dashboard`}
+            className={({ isActive }) =>
+              isActive
+                ? "bg-orange-400 text-white  px-3 py-1 rounded"
+                : "px-3 py-1  relative hover:bg-orange-400 hover:text-white rounded-md duration-300 z-10 text-black"
+            } // Apply styles based on active state
+          >
+            Dashboard
+          </NavLink>
+        )}
       </li>
     </>
   );

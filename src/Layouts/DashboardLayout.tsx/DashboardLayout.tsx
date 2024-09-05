@@ -4,17 +4,29 @@ import {
   sideNavLinkGenerator,
 } from "../../utils/sideNavLinkGenerator";
 import { userRouteOption } from "../../Routes/userRoute/userRoute";
+import { useAppSelector } from "../../Redux/hooks";
+import { decodeToken } from "../../utils/decodeToken";
+import { JwtPayload } from "jwt-decode";
+
+const userRole = {
+  ADMIN: "admin",
+  FACULTY: "faculty",
+  USER: "customer",
+};
 
 const DashboardLayout = () => {
-  const userRole = {
-    ADMIN: "admin",
-    FACULTY: "faculty",
-    USER: "customer",
-  };
+  const { token } = useAppSelector((state) => state.auth);
+  let user;
 
+  if (token) {
+    user = decodeToken(token) as JwtPayload & {
+      role: string;
+      userEmail: string;
+    };
+  }
   let sideBarItems;
 
-  switch ("customer") {
+  switch (user?.role) {
     case userRole.ADMIN:
       // sideBarItems = sideNavLinkGenerator(adminOption, userRole.ADMIN);
       break;

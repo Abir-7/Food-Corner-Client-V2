@@ -8,6 +8,7 @@ import Signup from "../Pages/SignupPage/Signup";
 import { generatedRoute } from "../utils/routeGenerator";
 import { userRouteOption } from "./userRoute/userRoute";
 import DashboardLayout from "../Layouts/DashboardLayout.tsx/DashboardLayout";
+import PrivetRoute from "../Layouts/PrivetRoute";
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +21,12 @@ export const router = createBrowserRouter([
   },
   {
     path: "/customer",
-    element: <DashboardLayout />,
+    element: (
+      <PrivetRoute role="customer">
+        {" "}
+        <DashboardLayout />
+      </PrivetRoute>
+    ),
     children: generatedRoute(userRouteOption),
   },
   {
