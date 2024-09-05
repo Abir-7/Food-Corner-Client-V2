@@ -9,8 +9,13 @@ import { FieldValues } from "react-hook-form";
 import { IApiResponse } from "../../Redux/interface/global.interface";
 import { useLoginUserMutation } from "../../Redux/api/authApi/authApi";
 import { toast } from "sonner";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../Redux/feature/userSlice/userSlice";
+import { decodeToken } from "../../utils/decodeToken";
+import { JwtPayload } from "jwt-decode";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [userLogin] = useLoginUserMutation();
   const onFormSubmit = async (data: FieldValues) => {
     console.log(data);
@@ -18,6 +23,12 @@ const Login = () => {
     console.log(res);
     if (res.data?.success) {
       toast.success(res.data.message);
+      const userData = decodeToken(res.data.data?.token) as JwtPayload & {
+        role: string;
+        userEmail: string;
+      };
+      console.log(userData);
+      dispatch(setUser({ user: userData, token: res.data.data?.token }));
     }
   };
   return (

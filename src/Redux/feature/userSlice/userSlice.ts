@@ -1,14 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { JwtPayload } from "jwt-decode";
 
 export interface UserState {
   token: string | null;
-  user: {
-    userEmail: string;
-    role: string;
-    exp: number;
-    iat: number;
-  } | null;
+  user:
+    | (JwtPayload & {
+        role: string;
+        userEmail: string;
+      })
+    | null;
 }
 
 const initialState: UserState = {
@@ -20,7 +21,7 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    userLogin: (state, actions: PayloadAction<UserState>) => {
+    setUser: (state, actions: PayloadAction<UserState>) => {
       state.user = actions.payload.user;
       state.token = actions.payload.token;
     },
@@ -32,6 +33,6 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { userLogin, userLogout } = userSlice.actions;
+export const { setUser, userLogout } = userSlice.actions;
 
 export default userSlice.reducer;
