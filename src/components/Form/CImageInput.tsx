@@ -32,14 +32,14 @@ const CImageInput = ({ name, label, errorMsg }: ImageInputProps) => {
                 <span className="label-text">{label}</span>
               </label>
               <input
-                className="file-input  file-input-orange file-input-sm w-full file-input-bordered"
+                className="file-input file-input-orange file-input-sm w-full file-input-bordered"
                 type="file"
                 accept="image/*"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
                   if (file) {
                     handleImageChange(file);
-                    field.onChange(file); // Pass the selected file to react-hook-form
+                    field.onChange(file); // Ensure this is what react-hook-form expects
                   }
                 }}
               />

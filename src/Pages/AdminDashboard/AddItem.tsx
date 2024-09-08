@@ -6,10 +6,17 @@ import CTextArea from "../../components/Form/CTextArea";
 import CSelect from "../../components/Form/CSelect";
 import CInputArray from "../../components/Form/CInputArray";
 import CImageInput from "../../components/Form/CImageInput";
+//import { uploadImageToCloudinary } from "../../utils/uploadImage";
+import CInputCheckBox from "../../components/Form/CInputCheckBox";
 
 const AddItem = () => {
   const onFormSubmit = async (data: FieldValues) => {
     console.log(data);
+    if (data?.photo) {
+      console.log("sdsds");
+      // const uploadedImageUrl = await uploadImageToCloudinary(data.photo);
+      // console.log(uploadedImageUrl, "upload");
+    }
   };
 
   return (
@@ -45,16 +52,32 @@ const AddItem = () => {
             errorMsg="Menu quantity is required"
             type="number"
           ></CInput>
+          {/*  */}
+
+          <div>
+            <label className="label">
+              <span className={`label-text `}>{"Available For"}</span>
+            </label>
+            <div className="grid grid-cols-3 border border-slate-300 px-2 rounded-lg">
+              <CInputCheckBox
+                availableFor="Breakfast"
+                name="availableFor.Breakfast"
+                type="checkbox"
+              ></CInputCheckBox>
+              <CInputCheckBox
+                availableFor="Dinner"
+                name="availableFor.Dinner"
+                type="checkbox"
+              ></CInputCheckBox>
+              <CInputCheckBox
+                availableFor="Lunch"
+                name="availableFor.Lunch"
+                type="checkbox"
+              ></CInputCheckBox>
+            </div>
+          </div>
           <CSelect
-            options={[
-              { value: "Breakfast", label: "Breakfast" },
-              { value: "Lunch", label: "Lunch" },
-              { value: "Dinner", label: "Dinner" },
-            ]}
-            name="availableFor"
-            label="Available Time"
-          ></CSelect>
-          <CSelect
+            errorMsg="Select Cuisine"
             options={[{ value: "Thai", label: "Thai" }]}
             name="cuisine"
             label="Cuisine"
