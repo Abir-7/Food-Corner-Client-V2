@@ -3,7 +3,7 @@ import { FaHeart, FaShoppingCart } from "react-icons/fa";
 const CartFavButton = () => {
   return (
     <>
-      <div className="top-20 fixed flex flex-col gap-2 bg-orange-400 rounded-xl ">
+      <div className="top-20 fixed flex flex-col gap-2 bg-orange-400 rounded-xl shadow-md ">
         <div className="indicator text-white  ">
           <span className="indicator-item badge badge-warning text-xs font-medium text-white">
             {"1"}

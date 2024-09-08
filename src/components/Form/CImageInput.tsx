@@ -32,7 +32,7 @@ const CImageInput = ({ name, label, errorMsg }: ImageInputProps) => {
                 <span className="label-text">{label}</span>
               </label>
               <input
-                className="file-input file-input-sm w-full file-input-bordered"
+                className="file-input  file-input-orange file-input-sm w-full file-input-bordered"
                 type="file"
                 accept="image/*"
                 onChange={(e) => {

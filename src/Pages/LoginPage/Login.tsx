@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bg1 from "../../assets/login.jpg";
 import { FaArrowLeft } from "react-icons/fa";
 import loginImage from "../../assets/login3.jpg";
@@ -15,6 +15,7 @@ import { decodeToken } from "../../utils/decodeToken";
 import { JwtPayload } from "jwt-decode";
 
 const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [userLogin] = useLoginUserMutation();
   const onFormSubmit = async (data: FieldValues) => {
@@ -29,6 +30,7 @@ const Login = () => {
       };
       console.log(userData);
       dispatch(setUser({ user: userData, token: res.data.data?.token }));
+      navigate("/");
     }
   };
   return (

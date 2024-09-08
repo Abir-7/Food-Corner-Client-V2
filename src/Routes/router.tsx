@@ -9,6 +9,7 @@ import { generatedRoute } from "../utils/routeGenerator";
 import { userRouteOption } from "./userRoute/userRoute";
 import DashboardLayout from "../Layouts/DashboardLayout.tsx/DashboardLayout";
 import PrivetRoute from "../Layouts/PrivetRoute";
+import { adminRouteOption } from "./userRoute/adminRoute/adminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,16 @@ export const router = createBrowserRouter([
       </PrivetRoute>
     ),
     children: generatedRoute(userRouteOption),
+  },
+  {
+    path: "/admin",
+    element: (
+      <PrivetRoute role="admin">
+        {" "}
+        <DashboardLayout />
+      </PrivetRoute>
+    ),
+    children: generatedRoute(adminRouteOption),
   },
   {
     path: "/user-login",

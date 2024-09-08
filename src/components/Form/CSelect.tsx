@@ -28,7 +28,7 @@ const CSelect = ({ name, label, errorMsg, options }: InputProps) => {
                 value={field.value || ""}
               >
                 <option key={null} value={""}>
-                  Select Gender
+                  Select Cuisine
                 </option>
                 {/* Map over options */}
                 {options.map((option) => (

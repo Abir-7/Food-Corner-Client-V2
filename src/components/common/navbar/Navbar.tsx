@@ -2,8 +2,11 @@ import { Link, NavLink } from "react-router-dom";
 import { useAppSelector } from "../../../Redux/hooks";
 import { decodeToken } from "../../../utils/decodeToken";
 import { JwtPayload } from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { userLogout } from "../../../Redux/feature/userSlice/userSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const { token } = useAppSelector((state) => state.auth);
   let user;
 
@@ -117,12 +120,21 @@ const Navbar = () => {
         <ul className=" flex gap-5 relative px-1">{navLink}</ul>
       </div>
       <div className="navbar-end">
-        <Link
-          to="/user-login"
-          className="btn btn-sm text-white bg-orange-400 border-none "
-        >
-          Login
-        </Link>
+        {user?.userEmail ? (
+          <button
+            onClick={() => dispatch(userLogout())}
+            className="btn btn-sm text-white bg-orange-400 border-none "
+          >
+            Logout
+          </button>
+        ) : (
+          <Link
+            to="/user-login"
+            className="btn btn-sm text-white bg-orange-400 border-none "
+          >
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );
