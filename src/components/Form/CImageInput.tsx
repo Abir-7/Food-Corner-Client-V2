@@ -1,16 +1,22 @@
-import { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 interface ImageInputProps {
   name: string;
   label: string;
   errorMsg?: string | false;
+  setPreview: (srg: string) => void;
+  preview: string | null;
 }
 
-const CImageInput = ({ name, label, errorMsg }: ImageInputProps) => {
-  const { control } = useFormContext();
-  const [preview, setPreview] = useState<string | null>(null);
-
+const CImageInput = ({
+  name,
+  setPreview,
+  label,
+  preview,
+  errorMsg,
+}: ImageInputProps) => {
+  const { control, getValues } = useFormContext();
+  console.log(getValues(name));
   const handleImageChange = (file: File) => {
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -39,7 +45,7 @@ const CImageInput = ({ name, label, errorMsg }: ImageInputProps) => {
                   const file = e.target.files?.[0];
                   if (file) {
                     handleImageChange(file);
-                    field.onChange(file); // Ensure this is what react-hook-form expects
+                    field.onChange(file);
                   }
                 }}
               />

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import SectionHeader from "../../components/common/SectionHeader/SectionHeader";
-import CForm from "../../components/Form/CForm";
-import { FieldValues } from "react-hook-form";
+import CForm, { IAddItemForm } from "../../components/Form/CForm";
+
 import CInput from "../../components/Form/CInput";
 import CTextArea from "../../components/Form/CTextArea";
 import CSelect from "../../components/Form/CSelect";
@@ -12,13 +12,15 @@ import CInputCheckBox from "../../components/Form/CInputCheckBox";
 import { useAddMenuMutation } from "../../Redux/api/menuApi/menuApi";
 import { IApiResponse } from "../../Redux/interface/global.interface";
 import { toast } from "sonner";
+import { useState } from "react";
 
 const AddItem = () => {
+  const [preview, setPreview] = useState<string | null>(null);
   const [addItem] = useAddMenuMutation();
-  const onFormSubmit = async (data: FieldValues) => {
+  const onFormSubmit = async (data: IAddItemForm) => {
     console.log(data);
 
-    if (data.price.lenght == 0) {
+    if (data?.price?.length == 0 || !data?.price) {
       toast.error("Add product price and size.");
     } else {
       if (data?.photo) {
@@ -32,6 +34,7 @@ const AddItem = () => {
           const res = (await addItem(newData)) as IApiResponse<any>;
           if (res?.data?.success) {
             toast.success("Item added successfully");
+            setPreview(null);
           }
         }
       }
@@ -103,6 +106,8 @@ const AddItem = () => {
             label="Cuisine"
           ></CSelect>
           <CImageInput
+            preview={preview}
+            setPreview={setPreview}
             errorMsg="Image is required"
             name="photo"
             label="Image"

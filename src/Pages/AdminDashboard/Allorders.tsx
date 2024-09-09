@@ -1,5 +1,5 @@
 const Allorders = () => {
-  return <div>Allorders</div>;
+  return <div>gg</div>;
 };
 
 export default Allorders;
