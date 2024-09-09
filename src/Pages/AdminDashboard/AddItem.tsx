@@ -13,11 +13,12 @@ import { useAddMenuMutation } from "../../Redux/api/menuApi/menuApi";
 import { IApiResponse } from "../../Redux/interface/global.interface";
 import { toast } from "sonner";
 import { useState } from "react";
-import CheckError from "../../components/Form/CheckError";
 
 const AddItem = () => {
+  const [eMsg, setEmsg] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const [addItem] = useAddMenuMutation();
+
   const onFormSubmit = async (data: IAddItemForm) => {
     console.log(data);
 
@@ -35,7 +36,9 @@ const AddItem = () => {
           // console.log(uploadedImageUrl, "upload");
           if (!uploadedImageUrl) {
             toast.error("Something went wrong. Try again.");
+            setEmsg(false);
           } else {
+            setEmsg(false);
             const newData = { ...data, photo: uploadedImageUrl };
             const res = (await addItem(newData)) as IApiResponse<any>;
             if (res?.data?.success) {
@@ -44,6 +47,8 @@ const AddItem = () => {
           }
         }
       }
+    } else {
+      setEmsg(true);
     }
     setPreview(null);
   };
@@ -103,7 +108,7 @@ const AddItem = () => {
                 type="checkbox"
               ></CInputCheckBox>
             </div>
-            <CheckError></CheckError>
+            {eMsg && <p className="text-red-500">Please check at least one.</p>}
           </div>
 
           <CSelect
