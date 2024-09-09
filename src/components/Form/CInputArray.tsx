@@ -44,7 +44,7 @@ const CInputArray = ({ name, errorMsg, labelStyle }: InputProps) => {
           <Controller
             name={`${name}.${index}.size`}
             control={control}
-            rules={{ required: false }}
+            rules={{ required: errorMsg }}
             render={({ field, fieldState: { error } }) => (
               <>
                 <div className="form-control mt-.5">
@@ -58,8 +58,7 @@ const CInputArray = ({ name, errorMsg, labelStyle }: InputProps) => {
                     {...field}
                     placeholder="example: 1:1,1:2 or 12,10,8 in inch"
                     value={field.value || ""}
-                    type="number"
-                    min="0"
+                    type="string"
                   />
                 </div>
                 {error && <p className="text-red-500">{error.message}</p>}
