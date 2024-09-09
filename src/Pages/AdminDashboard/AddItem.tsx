@@ -21,8 +21,8 @@ const AddItem = () => {
 
   return (
     <div className="w-full">
-      <SectionHeader text="Add New Menu"></SectionHeader>
-      <div className="container mx-auto px-2">
+      <SectionHeader text="Add New Menu "></SectionHeader>
+      <div className="container mx-auto px-2 mt-5">
         <CForm onFormSubmit={onFormSubmit}>
           <CInput
             name="title"
@@ -36,6 +36,7 @@ const AddItem = () => {
             label="Description"
           ></CTextArea>
           <CSelect
+            errorMsg="Category is required"
             options={[{ value: "Rice", label: "Rice" }]}
             name="category"
             label="Category"
@@ -77,7 +78,7 @@ const AddItem = () => {
             </div>
           </div>
           <CSelect
-            errorMsg="Select Cuisine"
+            errorMsg="Cuisine is required"
             options={[{ value: "Thai", label: "Thai" }]}
             name="cuisine"
             label="Cuisine"
