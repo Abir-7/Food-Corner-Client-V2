@@ -2,17 +2,16 @@ import { Controller, useFieldArray, useFormContext } from "react-hook-form";
 
 interface InputProps {
   name: string;
-
   errorMsg?: string | false;
-  type: string;
   labelStyle?: string;
 }
 
 const CInputArray = ({ name, errorMsg, labelStyle }: InputProps) => {
   const { control } = useFormContext();
+
   const { fields, append, remove } = useFieldArray({
     control,
-    name, // name for the FieldArray
+    name,
   });
 
   return (
@@ -22,7 +21,7 @@ const CInputArray = ({ name, errorMsg, labelStyle }: InputProps) => {
           <Controller
             name={`${name}.${index}.price`}
             control={control}
-            rules={{ required: errorMsg }}
+            rules={{ required: !!errorMsg && errorMsg }}
             render={({ field, fieldState: { error } }) => (
               <>
                 <div className="form-control">
@@ -32,7 +31,6 @@ const CInputArray = ({ name, errorMsg, labelStyle }: InputProps) => {
                   <input
                     className="input input-sm input-bordered"
                     {...field}
-                    value={field.value || ""}
                     type="number"
                     min="0"
                   />
@@ -44,10 +42,10 @@ const CInputArray = ({ name, errorMsg, labelStyle }: InputProps) => {
           <Controller
             name={`${name}.${index}.size`}
             control={control}
-            rules={{ required: errorMsg }}
+            rules={{ required: !!errorMsg && errorMsg }}
             render={({ field, fieldState: { error } }) => (
               <>
-                <div className="form-control mt-.5">
+                <div className="form-control mt-0.5">
                   <label className="label">
                     <span className={`label-text ${labelStyle}`}>
                       Size / Quantity
@@ -57,8 +55,7 @@ const CInputArray = ({ name, errorMsg, labelStyle }: InputProps) => {
                     className="input input-sm input-bordered"
                     {...field}
                     placeholder="example: 1:1,1:2 or 12,10,8 in inch"
-                    value={field.value || ""}
-                    type="string"
+                    type="text"
                   />
                 </div>
                 {error && <p className="text-red-500">{error.message}</p>}
@@ -67,7 +64,11 @@ const CInputArray = ({ name, errorMsg, labelStyle }: InputProps) => {
           />
           <button
             className="btn bg-red-500 text-white mt-4 w-44 hover:bg-red-600 btn-sm"
-            onClick={() => remove(index)}
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              remove(index);
+            }}
           >
             Remove
           </button>

@@ -13,6 +13,7 @@ import { useAddMenuMutation } from "../../Redux/api/menuApi/menuApi";
 import { IApiResponse } from "../../Redux/interface/global.interface";
 import { toast } from "sonner";
 import { useState } from "react";
+import CheckError from "../../components/Form/CheckError";
 
 const AddItem = () => {
   const [preview, setPreview] = useState<string | null>(null);
@@ -20,25 +21,31 @@ const AddItem = () => {
   const onFormSubmit = async (data: IAddItemForm) => {
     console.log(data);
 
-    if (data?.price?.length == 0 || !data?.price) {
-      toast.error("Add product price and size.");
-    } else {
-      if (data?.photo) {
-        console.log("sdsds");
-        const uploadedImageUrl = await uploadImageToCloudinary(data.photo);
-        // console.log(uploadedImageUrl, "upload");
-        if (!uploadedImageUrl) {
-          toast.error("Something went wrong. Try again.");
-        } else {
-          const newData = { ...data, photo: uploadedImageUrl };
-          const res = (await addItem(newData)) as IApiResponse<any>;
-          if (res?.data?.success) {
-            toast.success("Item added successfully");
-            setPreview(null);
+    if (
+      data.availableFor.Breakfast ||
+      data.availableFor.Dinner ||
+      data.availableFor.Lunch
+    ) {
+      if (data?.price?.length == 0 || !data?.price) {
+        toast.error("Add product price and size.");
+      } else {
+        if (data?.photo) {
+          console.log("sdsds");
+          const uploadedImageUrl = await uploadImageToCloudinary(data.photo);
+          // console.log(uploadedImageUrl, "upload");
+          if (!uploadedImageUrl) {
+            toast.error("Something went wrong. Try again.");
+          } else {
+            const newData = { ...data, photo: uploadedImageUrl };
+            const res = (await addItem(newData)) as IApiResponse<any>;
+            if (res?.data?.success) {
+              toast.success("Item added successfully");
+            }
           }
         }
       }
     }
+    setPreview(null);
   };
 
   return (
@@ -66,7 +73,6 @@ const AddItem = () => {
 
           <CInputArray
             errorMsg="Price and Size is Requied"
-            type="number"
             name="price"
           ></CInputArray>
           <CInput
@@ -75,7 +81,6 @@ const AddItem = () => {
             errorMsg="Menu quantity is required"
             type="number"
           ></CInput>
-          {/*  */}
 
           <div>
             <label className="label">
@@ -98,7 +103,9 @@ const AddItem = () => {
                 type="checkbox"
               ></CInputCheckBox>
             </div>
+            <CheckError></CheckError>
           </div>
+
           <CSelect
             errorMsg="Cuisine is required"
             options={[{ value: "Thai", label: "Thai" }]}

@@ -23,7 +23,7 @@ const CSelect = ({ name, label, errorMsg, options }: InputProps) => {
               </label>
               {/* Replace input with select */}
               <select
-                className="input input-sm input-bordered"
+                className="select select-sm input-bordered"
                 {...field}
                 value={field.value || ""}
               >

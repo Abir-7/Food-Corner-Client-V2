@@ -1,6 +1,6 @@
-export const uploadImageToCloudinary = async (file: File) => {
+export const uploadImageToCloudinary = async (file: FileList) => {
   const formData = new FormData();
-  formData.append("file", file);
+  formData.append("file", file[0]);
   formData.append("upload_preset", import.meta.env.VITE_PRESET);
   formData.append("cloud_name", import.meta.env.VITE_CLOUDNAME);
 

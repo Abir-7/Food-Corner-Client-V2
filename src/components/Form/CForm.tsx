@@ -16,7 +16,7 @@ export interface IAddItemForm {
     Lunch?: boolean;
   };
   cuisine: string;
-  photo: File; // File input, can be changed to string if using URL after upload
+  photo: FileList; // File input, can be changed to string if using URL after upload
 }
 interface MyFormProps {
   onFormSubmit: (data: IAddItemForm) => Promise<void>;
@@ -50,7 +50,7 @@ const CForm = ({
 
   const submit = (data: IAddItemForm) => {
     onFormSubmit(data);
-    // methods.reset();
+    methods.reset();
   };
 
   return (
