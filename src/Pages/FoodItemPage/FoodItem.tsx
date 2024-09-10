@@ -12,7 +12,7 @@ const FoodItem = () => {
       {menuData ? (
         <div className="grid md:grid-cols-2 my-5 gap-4 xl:grid-cols-3 justify-items-center">
           {menuData.data.map((item: IMenuItem) => (
-            <FoodCard item={item}></FoodCard>
+            <FoodCard key={item._id} item={item}></FoodCard>
           ))}
         </div>
       ) : (

@@ -109,7 +109,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className=" flex flex-col gap-5 dropdown-content z-10 bg-orange-50  rounded-box  mt-3 w-52 py-3 px-5 shadow"
+            className=" flex flex-col gap-3 dropdown-content z-10 bg-orange-50  rounded-box  mt-3 w-52 py-3 px-5 shadow"
           >
             {navLink}
           </ul>

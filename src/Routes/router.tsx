@@ -10,6 +10,7 @@ import { userRouteOption } from "./userRoute/userRoute";
 import DashboardLayout from "../Layouts/DashboardLayout.tsx/DashboardLayout";
 import PrivetRoute from "../Layouts/PrivetRoute";
 import { adminRouteOption } from "./userRoute/adminRoute/adminRoute";
+import FoodDetails from "../Pages/FoodDetailsPage/FoodDetails";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/food-item", element: <FoodItem /> },
+      { path: "/food-item/:id", element: <FoodDetails /> },
     ],
   },
   {

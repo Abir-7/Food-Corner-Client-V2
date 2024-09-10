@@ -3,6 +3,7 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { FaCartPlus } from "react-icons/fa6";
 import { IMenuItem } from "../../interface/menuItem.interface";
+import { Link } from "react-router-dom";
 
 interface IProps {
   item: IMenuItem;
@@ -21,7 +22,13 @@ const FoodCard = ({ item }: IProps) => {
               />
             </div>
             <div>
-              <h1 className="my-2 font-bold text-lg">{item?.title}</h1>
+              <Link to={`/food-item/${item._id}`}>
+                {" "}
+                <h1 className="my-2 duration-200 hover:text-orange-400 font-bold text-lg">
+                  {item?.title}
+                </h1>
+              </Link>
+
               <Rating readOnly style={{ maxWidth: 100 }} value={4}></Rating>
               <p className="font-medium">
                 {" "}

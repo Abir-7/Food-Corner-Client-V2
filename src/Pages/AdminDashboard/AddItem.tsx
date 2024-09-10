@@ -71,7 +71,10 @@ const AddItem = () => {
           ></CTextArea>
           <CSelect
             errorMsg="Category is required"
-            options={[{ value: "Rice", label: "Rice" }]}
+            options={[
+              { value: "Rice", label: "Rice" },
+              { value: "Pizza", label: "Pizza" },
+            ]}
             name="category"
             label="Category"
           ></CSelect>
@@ -113,7 +116,10 @@ const AddItem = () => {
 
           <CSelect
             errorMsg="Cuisine is required"
-            options={[{ value: "Thai", label: "Thai" }]}
+            options={[
+              { value: "Thai", label: "Thai" },
+              { value: "Italian", label: "Italian" },
+            ]}
             name="cuisine"
             label="Cuisine"
           ></CSelect>

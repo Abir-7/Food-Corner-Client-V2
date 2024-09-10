@@ -23,6 +23,19 @@ const menuApi = baseApi.injectEndpoints({
         return res;
       },
     }),
+    getMenuDetails: builder.query({
+      query: (arg: { id: string }) => ({
+        url: `/menu-item/${arg.id}`,
+        method: "GET",
+      }),
+      transformResponse: (res: IApiDataResponse<IMenuItem> & BaseQueryApi) => {
+        return res.data;
+      },
+    }),
   }),
 });
-export const { useAddMenuMutation, useGetAllMenuQuery } = menuApi;
+export const {
+  useAddMenuMutation,
+  useGetAllMenuQuery,
+  useGetMenuDetailsQuery,
+} = menuApi;

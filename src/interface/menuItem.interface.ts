@@ -12,8 +12,8 @@ export interface IMenuItem {
   photo: string;
   price: Array<{
     // Assuming price is an array of objects; specify properties if known
-    size: number;
-    price: string;
+    size: string;
+    price: number;
   }>;
   status: {
     availableQuantity: number;
