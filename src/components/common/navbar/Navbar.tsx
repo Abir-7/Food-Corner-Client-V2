@@ -31,35 +31,6 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        {/* <details>
-          <summary>Parent</summary>
-          <ul className="p-4 md:rounded-md md:absolute flex flex-col md:top-12  md:bg-orange-600 md:bg-opacity-15   gap-3">
-            <li>
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  isActive
-                    ? "bg-slate-100 text-black px-3 py-2 rounded"
-                    : "px-3 py-2 z-10 text-white"
-                } // Apply styles based on active state
-              >
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  isActive
-                    ? "bg-slate-100 text-black px-3 py-2 rounded"
-                    : "px-3 py-2 z-10 text-white"
-                } // Apply styles based on active state
-              >
-                Home
-              </NavLink>
-            </li>
-          </ul>
-        </details> */}
         <NavLink
           to="/food-item"
           className={({ isActive }) =>

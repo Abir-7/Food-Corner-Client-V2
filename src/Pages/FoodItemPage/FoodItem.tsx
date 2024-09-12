@@ -1,4 +1,4 @@
-import FoodCard from "../../components/card/FoodCard";
+import FoodCard from "./FoodCard";
 import SectionHeader from "../../components/common/SectionHeader/SectionHeader";
 import { IMenuItem } from "../../interface/menuItem.interface";
 import { useGetAllMenuQuery } from "../../Redux/api/menuApi/menuApi";

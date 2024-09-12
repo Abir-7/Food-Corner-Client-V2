@@ -8,6 +8,7 @@ import { persistor, store } from "./Redux/store.ts";
 import { Provider } from "react-redux";
 import { Toaster } from "sonner";
 import { PersistGate } from "redux-persist/integration/react";
+
 //import CartFavButton from "./components/cart/CartFavButton.tsx";
 
 createRoot(document.getElementById("root")!).render(
@@ -17,7 +18,6 @@ createRoot(document.getElementById("root")!).render(
         <div>
           <RouterProvider router={router} />
           <Toaster></Toaster>
-          {/* <CartFavButton></CartFavButton> */}
         </div>
       </PersistGate>
     </Provider>
