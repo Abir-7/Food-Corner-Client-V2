@@ -4,11 +4,18 @@ import "@smastrom/react-rating/style.css";
 import { FaCartPlus } from "react-icons/fa6";
 import { IMenuItem } from "../../interface/menuItem.interface";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../Redux/hooks";
+import { addItemToCart } from "../../Redux/feature/cartSlice/cartSlice";
+import { ICartItem } from "../../interface/cartItem.iterface";
 
 interface IProps {
   item: IMenuItem;
 }
 const FoodCard = ({ item }: IProps) => {
+  const dispatch = useAppDispatch();
+  const addToCart = (itemData: ICartItem) => {
+    dispatch(addItemToCart(itemData));
+  };
   return (
     <div className="">
       <div className="p-3  shadow-md rounded-lg max-w-[590px] ">
@@ -47,7 +54,20 @@ const FoodCard = ({ item }: IProps) => {
                   </p>
                 </div>
                 <div>
-                  <button className="me-10">
+                  <button
+                    onClick={() =>
+                      addToCart({
+                        category: item.category,
+                        id: item._id,
+                        price: item.price[0].price,
+                        quantity: 1,
+                        size: item.price[0].size,
+                        title: item.title,
+                        photo: item.photo,
+                      })
+                    }
+                    className="me-10"
+                  >
                     <FaCartPlus className="text-orange-400 text-lg"></FaCartPlus>
                   </button>
                 </div>

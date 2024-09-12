@@ -11,8 +11,8 @@ import DashboardLayout from "../Layouts/DashboardLayout.tsx/DashboardLayout";
 import PrivetRoute from "../Layouts/PrivetRoute";
 import { adminRouteOption } from "./userRoute/adminRoute/adminRoute";
 import FoodDetails from "../Pages/FoodDetailsPage/FoodDetails";
-import CartItems from "../Pages/CartFavPage/CartItems";
-import FavItems from "../Pages/CartFavPage/FavItems";
+import CartItems from "../Pages/CartPage/CartItems";
+import FavItems from "../Pages/FavItemPage/FavItems";
 
 export const router = createBrowserRouter([
   {

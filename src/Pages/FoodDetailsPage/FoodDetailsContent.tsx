@@ -1,7 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { IMenuItem } from "../../interface/menuItem.interface";
 import { FaHeart, FaMinus, FaPlus } from "react-icons/fa6";
+import { useAddFavMenuMutation } from "../../Redux/api/favMenuApi/favMenuApi";
+import { useAppSelector } from "../../Redux/hooks";
+import { IApiResponse } from "../../Redux/interface/global.interface";
+import { toast } from "sonner";
+import { decodeToken } from "../../utils/decodeToken";
 interface FoodDetailsContentProps {
   menuDetails: IMenuItem | undefined;
   index: number;
@@ -12,6 +18,19 @@ export const FoodDetailsContent = ({
   index,
   setIndex,
 }: FoodDetailsContentProps) => {
+  const [addtoFav] = useAddFavMenuMutation();
+  const { user, token } = useAppSelector((state) => state.auth);
+  console.log(decodeToken(token as string));
+  const addItemToFav = async (data: {
+    product: string;
+    customerEmail: string;
+  }) => {
+    const res = (await addtoFav(data)) as IApiResponse<any>;
+    console.log(res);
+    if (res.data?.success) {
+      toast.success(res.data.message);
+    }
+  };
   return (
     <>
       {menuDetails ? (
@@ -83,9 +102,19 @@ export const FoodDetailsContent = ({
                 </button>
               </div>
               <div>
-                <button className="p-2 rounded-full border-orange-400 flex justify-center items-center duration-200 hover:scale-90 text-lg">
-                  <FaHeart></FaHeart>
-                </button>
+                {user?.userEmail && (
+                  <button
+                    onDoubleClick={() =>
+                      addItemToFav({
+                        customerEmail: user?.userEmail,
+                        product: menuDetails._id,
+                      })
+                    }
+                    className="p-2 hover:text-orange-400 rounded-full border-orange-400 flex justify-center items-center duration-200 hover:scale-90 text-lg"
+                  >
+                    <FaHeart></FaHeart>
+                  </button>
+                )}
               </div>
             </div>
             <hr />

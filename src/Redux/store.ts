@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userSliceReducer from "./feature/userSlice/userSlice";
+import cartSliceReducer from "./feature/cartSlice/cartSlice";
 import { baseApi } from "./api/baseApi";
 import {
   persistReducer,
@@ -23,6 +24,7 @@ const persistedAuthReducer = persistReducer(persistConfig, userSliceReducer);
 
 export const store = configureStore({
   reducer: {
+    cart: cartSliceReducer,
     auth: persistedAuthReducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },

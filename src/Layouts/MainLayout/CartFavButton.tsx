@@ -1,13 +1,15 @@
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../Redux/hooks";
 
 const CartFavButton = () => {
+  const { cartItems } = useAppSelector((state) => state.cart);
   return (
     <>
       <div className="top-20 fixed flex flex-col gap-2 bg-orange-400 z-[1] rounded-xl shadow-md ">
         <div className="indicator text-white  ">
           <span className="indicator-item badge badge-warning text-xs font-medium text-white">
-            {"1"}
+            {cartItems.length}
           </span>
           <Link
             to={"/user-cart-items"}
@@ -18,7 +20,7 @@ const CartFavButton = () => {
         </div>
         <div className="indicator text-white ">
           <span className="indicator-item badge badge-success bg-green-600  text-xs font-medium text-white">
-            {"1"}
+            {"12"}
           </span>
           <Link
             to={"/user-fav-items"}
