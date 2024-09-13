@@ -1,18 +1,33 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FaCartPlus, FaTrash } from "react-icons/fa";
 import { IProduct } from "../../interface/favMenu.interface";
 import { useAppDispatch } from "../../Redux/hooks";
 import { addItemToCart } from "../../Redux/feature/cartSlice/cartSlice";
 import { ICartItem } from "../../interface/cartItem.iterface";
+import { useRemoveFavMenuMutation } from "../../Redux/api/favMenuApi/favMenuApi";
+import { IApiResponse } from "../../Redux/interface/global.interface";
+import { toast } from "sonner";
+import { useState } from "react";
 
 const FavCard = ({ itemData }: { itemData: IProduct }) => {
   const dispatch = useAppDispatch();
+  const [pId, setPId] = useState("");
+  const [removeFavItem] = useRemoveFavMenuMutation();
+  const removeItemFromFav = async (pid: string) => {
+    const res = (await removeFavItem({ id: pid })) as IApiResponse<any>;
+    if (res?.data?.success) {
+      toast.success(res?.data?.message);
+    }
+  };
   const addToCart = (itemData: ICartItem) => {
     dispatch(addItemToCart(itemData));
   };
   return (
     <div className="border border-orange-400 rounded-lg flex p-3 gap-5 flex-wrap justify-between items-center relative ">
       <div className=" flex gap-2 items-center ">
-        <div className="w-20 h-20 rounded-lg bg-red-500"></div>
+        <div className="w-20 h-20 rounded-lg bg-red-500">
+          <img className="w-20 h-20 rounded-md" src={itemData?.photo} alt="" />
+        </div>
         <div>
           <div className="font-bold text-nowrap text-orange-400">
             {itemData.title}
@@ -53,10 +68,42 @@ const FavCard = ({ itemData }: { itemData: IProduct }) => {
         >
           <FaCartPlus></FaCartPlus>
         </button>
-        <button className=" w-7  ms-auto h-7 flex justify-center text-sm items-center  text-red-500 bg-white hover:bg-red-500 hover:text-white duration-200 top-[-10px]  border border-red-500 p-1 rounded-full">
+        <button
+          onClick={() => {
+            const modal = document.getElementById(
+              "my_modal_3"
+            ) as HTMLDialogElement | null;
+            if (modal) {
+              modal.showModal(); // Show the modal
+            }
+            setPId(itemData._id); // Remove the item from favorites
+          }}
+          className=" w-7  ms-auto h-7 flex justify-center text-sm items-center  text-red-500 bg-white hover:bg-red-500 hover:text-white duration-200 top-[-10px]  border border-red-500 p-1 rounded-full"
+        >
           <FaTrash></FaTrash>
         </button>
       </div>
+      {/* modal  */}
+      <dialog id="my_modal_3" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <h3 className="font-bold text-lg">Are your sure?</h3>
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => removeItemFromFav(pId)}
+                className="btn btn-sm text-white hover:bg-red-600 bg-red-500 "
+              >
+                yes
+              </button>
+              <button className="btn btn-sm text-white hover:bg-green-600 bg-green-500 ">
+                No
+              </button>
+            </div>
+          </form>
+        </div>
+      </dialog>
+      {/* modal end */}
     </div>
   );
 };

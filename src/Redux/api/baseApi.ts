@@ -13,6 +13,7 @@ import { userLogout } from "../feature/userSlice/userSlice";
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:3000/api/v1",
   credentials: "include",
+
   prepareHeaders: (headers, api) => {
     const { token } = (api.getState() as RootState).auth;
     if (token) {
@@ -57,5 +58,6 @@ const customBaseApiQuery: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: customBaseApiQuery,
+  tagTypes: ["favMenu"],
   endpoints: () => ({}),
 });

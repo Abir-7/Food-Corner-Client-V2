@@ -4,6 +4,7 @@ import { useAppDispatch } from "../../Redux/hooks";
 import {
   decreassItem,
   increassItem,
+  removeItemFromCart,
 } from "../../Redux/feature/cartSlice/cartSlice";
 
 const CartCard = ({ itemData }: { itemData: ICartItem }) => {
@@ -53,7 +54,10 @@ const CartCard = ({ itemData }: { itemData: ICartItem }) => {
           <FaPlus></FaPlus>
         </button>
 
-        <div className=" w-7 ms-5  ms-auto h-7 flex justify-center text-sm items-center  text-red-500 bg-white hover:bg-red-500 hover:text-white duration-200 top-[-10px]  border border-red-500 p-1 rounded-full">
+        <div
+          onClick={() => dispatch(removeItemFromCart(itemData.id))}
+          className=" w-7 ms-5   h-7 flex justify-center text-sm items-center  text-red-500 bg-white hover:bg-red-500 hover:text-white duration-200 top-[-10px]  border border-red-500 p-1 rounded-full"
+        >
           <FaTrash></FaTrash>
         </div>
       </div>

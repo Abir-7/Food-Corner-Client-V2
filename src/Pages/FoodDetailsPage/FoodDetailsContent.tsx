@@ -4,10 +4,13 @@ import "@smastrom/react-rating/style.css";
 import { IMenuItem } from "../../interface/menuItem.interface";
 import { FaHeart, FaMinus, FaPlus } from "react-icons/fa6";
 import { useAddFavMenuMutation } from "../../Redux/api/favMenuApi/favMenuApi";
-import { useAppSelector } from "../../Redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
 import { IApiResponse } from "../../Redux/interface/global.interface";
 import { toast } from "sonner";
 import { decodeToken } from "../../utils/decodeToken";
+import { ICartItem } from "../../interface/cartItem.iterface";
+import { addItemToCart } from "../../Redux/feature/cartSlice/cartSlice";
+import { useState } from "react";
 interface FoodDetailsContentProps {
   menuDetails: IMenuItem | undefined;
   index: number;
@@ -18,6 +21,13 @@ export const FoodDetailsContent = ({
   index,
   setIndex,
 }: FoodDetailsContentProps) => {
+  const [amount, setAmount] = useState(1);
+
+  const dispatch = useAppDispatch();
+  const addToCart = (itemData: ICartItem) => {
+    dispatch(addItemToCart(itemData));
+  };
+
   const [addtoFav] = useAddFavMenuMutation();
   const { user, token } = useAppSelector((state) => state.auth);
   console.log(decodeToken(token as string));
@@ -84,20 +94,49 @@ export const FoodDetailsContent = ({
                 ))}
               </div>
             </div>
+            <p className="mb-5 font-semibold">
+              <span className="text-orange-500"> Status:</span>{" "}
+              {menuDetails.status.inStock ? (
+                <span className="text-green-500">available</span>
+              ) : (
+                <span className="text-red-500">unavailable</span>
+              )}{" "}
+            </p>
             {/* cart section */}
             <hr />
             <div className="my-5 flex items-center justify-between">
               <div className="flex items-center gap-5">
-                <button className="w-10 h-7 text-white flex justify-center items-center bg-red-500 rounded-full">
+                <button
+                  disabled={amount == 0}
+                  onClick={() => setAmount((prev) => prev - 1)}
+                  className="w-10 h-7 text-white flex justify-center items-center bg-red-500 rounded-full btn btn-sm border-none hover:bg-red-600"
+                >
                   <FaMinus></FaMinus>
                 </button>
-                <div>{0}</div>
-                <button className="w-10 h-7 text-white flex justify-center items-center bg-green-500 rounded-full">
+                <div>{amount}</div>
+                <button
+                  onClick={() => setAmount((prev) => prev + 1)}
+                  className="w-10 h-7 btn btn-sm text-white flex justify-center items-center hover:bg-green-600 bg-green-500 rounded-full border-none"
+                >
                   <FaPlus></FaPlus>
                 </button>
               </div>
               <div>
-                <button className="bg-orange-400 hover:bg-orange-500 duration-200 w-40 p-2 font-bold text-white rounded-lg">
+                <button
+                  disabled={amount <= 0}
+                  onClick={() =>
+                    addToCart({
+                      category: menuDetails.category,
+                      id: menuDetails._id,
+                      price: menuDetails.price[index].price,
+                      quantity: amount,
+                      size: menuDetails.price[index].size,
+                      title: menuDetails.title,
+                      photo: menuDetails.photo,
+                    })
+                  }
+                  className="btn btn-sm bg-orange-400 hover:bg-orange-500 duration-200 w-40  font-bold border-none text-white h-10 rounded-lg"
+                >
                   Add Cart
                 </button>
               </div>
@@ -119,7 +158,8 @@ export const FoodDetailsContent = ({
             </div>
             <hr />
             {/* other info */}
-            <li className="list-item mt-2 list-disc">
+
+            <li className="list-item mt-2 mb-3 list-disc">
               Fast and Reliable Delivery
             </li>
           </div>

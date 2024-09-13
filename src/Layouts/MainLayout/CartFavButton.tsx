@@ -1,9 +1,11 @@
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../Redux/hooks";
+import { useGetUserFavMenuQuery } from "../../Redux/api/favMenuApi/favMenuApi";
 
 const CartFavButton = () => {
   const { cartItems } = useAppSelector((state) => state.cart);
+  const { data: favData } = useGetUserFavMenuQuery("");
   return (
     <>
       <div className="top-20 fixed flex flex-col gap-2 bg-orange-400 z-[1] rounded-xl shadow-md ">
@@ -20,7 +22,7 @@ const CartFavButton = () => {
         </div>
         <div className="indicator text-white ">
           <span className="indicator-item badge badge-success bg-green-600  text-xs font-medium text-white">
-            {"12"}
+            {favData?.products ? favData?.products.length : 0}
           </span>
           <Link
             to={"/user-fav-items"}

@@ -46,7 +46,10 @@ const CartItems = () => {
               {subTotal} <span>tk</span>
             </p>{" "}
           </div>
-          <button className=" mt-2 w-full btn btn-sm bg-orange-400 hover:bg-orange-500  border-none text-white duration-200">
+          <button
+            disabled={cartItems?.length == 0}
+            className=" mt-2 w-full btn btn-sm bg-orange-400 hover:bg-orange-500  border-none text-white duration-200"
+          >
             Proseed to Pay
           </button>
           <li className="list mt-4 text-green-500 font-semibold list-disc">

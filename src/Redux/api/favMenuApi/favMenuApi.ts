@@ -11,18 +11,31 @@ const favMenuApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["favMenu"],
     }),
-    getAllFavMenu: builder.query({
+    getUserFavMenu: builder.query({
       query: () => ({
         url: "/favProduct/",
         method: "GET",
       }),
+      providesTags: ["favMenu"],
       transformResponse: (
         res: IApiDataResponse<IFavoriteResponse> & BaseQueryApi
       ) => {
         return res.data;
       },
     }),
+    removeFavMenu: builder.mutation({
+      query: (arg: { id: string }) => ({
+        url: `/favProduct/${arg.id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["favMenu"],
+    }),
   }),
 });
-export const { useAddFavMenuMutation, useGetAllFavMenuQuery } = favMenuApi;
+export const {
+  useAddFavMenuMutation,
+  useGetUserFavMenuQuery,
+  useRemoveFavMenuMutation,
+} = favMenuApi;

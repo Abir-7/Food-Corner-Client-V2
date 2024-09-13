@@ -64,10 +64,17 @@ export const cartSlice = createSlice({
       state.subTotal = priceData.subTotal;
       state.totalPrice = priceData.totalPrice;
     },
+    removeItemFromCart: (state, action: PayloadAction<string>) => {
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload
+      );
+      state.cartItems.splice(itemIndex, 1);
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addItemToCart, increassItem, decreassItem } = cartSlice.actions;
+export const { addItemToCart, increassItem, decreassItem, removeItemFromCart } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

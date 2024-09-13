@@ -20,7 +20,7 @@ const menuApi = baseApi.injectEndpoints({
       transformResponse: (
         res: IApiDataResponse<IMenuItem[]> & BaseQueryApi
       ) => {
-        return res;
+        return res.data;
       },
     }),
     getMenuDetails: builder.query({
