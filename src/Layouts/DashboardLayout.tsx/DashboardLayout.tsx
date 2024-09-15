@@ -7,7 +7,7 @@ import { userRouteOption } from "../../Routes/userRoute/userRoute";
 import { useAppSelector } from "../../Redux/hooks";
 import { decodeToken } from "../../utils/decodeToken";
 import { JwtPayload } from "jwt-decode";
-import { adminRouteOption } from "../../Routes/userRoute/adminRoute/adminRoute";
+import { adminRouteOption } from "../../Routes/adminRoute/adminRoute";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 
 const userRole = {

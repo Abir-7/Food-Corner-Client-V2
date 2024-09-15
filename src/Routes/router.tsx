@@ -9,7 +9,7 @@ import { generatedRoute } from "../utils/routeGenerator";
 import { userRouteOption } from "./userRoute/userRoute";
 import DashboardLayout from "../Layouts/DashboardLayout.tsx/DashboardLayout";
 import PrivetRoute from "../Layouts/PrivetRoute";
-import { adminRouteOption } from "./userRoute/adminRoute/adminRoute";
+import { adminRouteOption } from "./adminRoute/adminRoute";
 import FoodDetails from "../Pages/FoodDetailsPage/FoodDetails";
 import CartItems from "../Pages/CartPage/CartItems";
 import FavItems from "../Pages/FavItemPage/FavItems";

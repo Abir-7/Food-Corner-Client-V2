@@ -16,7 +16,7 @@ export interface IMenuItem {
     price: number;
   }>;
   status: {
-    availableQuantity: number;
+    availableQuantity: number | string;
     inStock: boolean;
   };
   title: string;
