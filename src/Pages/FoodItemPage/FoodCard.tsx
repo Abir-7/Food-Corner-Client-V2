@@ -68,7 +68,7 @@ const FoodCard = ({ item }: IProps) => {
                     }
                     className="me-10"
                   >
-                    <FaCartPlus className="text-orange-400 text-lg"></FaCartPlus>
+                    <FaCartPlus className="text-orange-400 text-lg hover:scale-110 duration-200 active:scale-100"></FaCartPlus>
                   </button>
                 </div>
               </div>

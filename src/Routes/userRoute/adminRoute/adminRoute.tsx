@@ -1,5 +1,5 @@
 import AddItem from "../../../Pages/AdminDashboard/AddItem";
-import AdminDashboard from "../../../Pages/AdminDashboard/AdminDashboard";
+import AdminDashboard from "../../../Pages/AdminDashboard/dashboard/AdminDashboard";
 import Allorders from "../../../Pages/AdminDashboard/Allorders";
 import ManageItem from "../../../Pages/AdminDashboard/ManageItem";
 import PendingOrders from "../../../Pages/AdminDashboard/PendingOrders";

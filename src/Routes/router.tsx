@@ -25,8 +25,18 @@ export const router = createBrowserRouter([
         element: <FoodItem />,
       },
       { path: "/food-item/:id", element: <FoodDetails /> },
-      { path: "/user-cart-items", element: <CartItems /> },
-      { path: "/user-fav-items", element: <FavItems /> },
+      {
+        path: "/user-cart-items",
+        element: <CartItems />,
+      },
+      {
+        path: "/user-fav-items",
+        element: (
+          <PrivetRoute role="customer">
+            <FavItems />
+          </PrivetRoute>
+        ),
+      },
     ],
   },
   {

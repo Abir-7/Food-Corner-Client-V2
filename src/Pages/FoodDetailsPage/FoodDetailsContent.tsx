@@ -7,7 +7,7 @@ import { useAddFavMenuMutation } from "../../Redux/api/favMenuApi/favMenuApi";
 import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
 import { IApiResponse } from "../../Redux/interface/global.interface";
 import { toast } from "sonner";
-import { decodeToken } from "../../utils/decodeToken";
+
 import { ICartItem } from "../../interface/cartItem.iterface";
 import { addItemToCart } from "../../Redux/feature/cartSlice/cartSlice";
 import { useState } from "react";
@@ -29,8 +29,8 @@ export const FoodDetailsContent = ({
   };
 
   const [addtoFav] = useAddFavMenuMutation();
-  const { user, token } = useAppSelector((state) => state.auth);
-  console.log(decodeToken(token as string));
+  const { user } = useAppSelector((state) => state.auth);
+
   const addItemToFav = async (data: {
     product: string;
     customerEmail: string;

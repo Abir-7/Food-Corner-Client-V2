@@ -1,11 +1,15 @@
 import LoadingUi from "../../components/common/LoadingUi/LoadingUi";
 import SectionHeader from "../../components/common/SectionHeader/SectionHeader";
 import { useGetUserFavMenuQuery } from "../../Redux/api/favMenuApi/favMenuApi";
+import { useAppSelector } from "../../Redux/hooks";
 import FavCard from "./FavCard";
 
 const FavItems = () => {
-  const { data, isLoading } = useGetUserFavMenuQuery("");
-  console.log(data?.products);
+  const { user } = useAppSelector((state) => state.auth);
+  const { data, isLoading } = useGetUserFavMenuQuery(undefined, {
+    skip: !user || user?.role == "admin",
+  });
+  console.log(data);
   return (
     <div>
       <SectionHeader text="Your Favourite Items"></SectionHeader>

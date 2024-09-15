@@ -4,8 +4,13 @@ import { useAppSelector } from "../../Redux/hooks";
 import { useGetUserFavMenuQuery } from "../../Redux/api/favMenuApi/favMenuApi";
 
 const CartFavButton = () => {
+  const { user } = useAppSelector((state) => state.auth);
+
   const { cartItems } = useAppSelector((state) => state.cart);
-  const { data: favData } = useGetUserFavMenuQuery("");
+
+  const { data: favData } = useGetUserFavMenuQuery(undefined, {
+    skip: !user || user?.role == "admin",
+  });
   return (
     <>
       <div className="top-20 fixed flex flex-col gap-2 bg-orange-400 z-[1] rounded-xl shadow-md ">

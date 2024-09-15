@@ -85,7 +85,7 @@ const Navbar = () => {
             {navLink}
           </ul>
         </div>
-        <a className="px-2 font-bold cursor-pointer text-xl">daisyUI</a>
+        <a className="px-2 font-bold cursor-pointer text-xl">FOOD-CORNER</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className=" flex gap-5 relative px-1">{navLink}</ul>
