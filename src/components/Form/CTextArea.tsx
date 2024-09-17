@@ -1,37 +1,42 @@
-import { Controller, useFormContext } from "react-hook-form";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useFormContext } from "react-hook-form";
 
 interface TextAreaProps {
   name: string;
   label: string;
   errorMsg?: string | false;
   labelStyle?: string;
+  placeholder?: string;
 }
 
-const CTextArea = ({ name, label, errorMsg, labelStyle }: TextAreaProps) => {
-  const { control } = useFormContext();
+const CTextArea = ({
+  name,
+  label,
+  errorMsg,
+  labelStyle,
+  placeholder = "",
+}: TextAreaProps) => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+
   return (
     <div>
-      <Controller
-        name={name}
-        control={control}
-        rules={{ required: errorMsg }}
-        render={({ field, fieldState: { error } }) => (
-          <>
-            <div className="form-control">
-              <label className="label">
-                <span className={`label-text ${labelStyle}`}>{label}</span>
-              </label>
-              <textarea
-                className="textarea textarea-bordered"
-                {...field}
-                value={field.value || ""}
-              />
-            </div>
+      <div className="form-control">
+        <label className="label">
+          <span className={`label-text ${labelStyle}`}>{label}</span>
+        </label>
+        <textarea
+          placeholder={placeholder}
+          className="textarea textarea-bordered"
+          {...register(name, { required: errorMsg })}
+        />
+      </div>
 
-            {error && <p className="text-red-500">{error.message}</p>}
-          </>
-        )}
-      />
+      {errors[name] && (
+        <p className="text-red-500 text-sm">{(errors[name] as any).message}</p>
+      )}
     </div>
   );
 };

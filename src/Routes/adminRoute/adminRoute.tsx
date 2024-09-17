@@ -1,4 +1,4 @@
-import AddItem from "../../Pages/AdminDashboard/AddItem";
+import AddItem from "../../Pages/AdminDashboard/AddItem/AddItem";
 import AdminDashboard from "../../Pages/AdminDashboard/dashboard/AdminDashboard";
 import Allorders from "../../Pages/AdminDashboard/Allorders";
 import ManageItem from "../../Pages/AdminDashboard/ManageItems/ManageItem";

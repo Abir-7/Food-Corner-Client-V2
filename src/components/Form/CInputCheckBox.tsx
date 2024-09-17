@@ -1,46 +1,41 @@
-import { Controller, useFormContext } from "react-hook-form";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useFormContext } from "react-hook-form";
 
 interface InputProps {
   name: string;
-  availableFor: string;
+  status: string;
   errorMsg?: string | false;
-  type: string;
+
   defaultChecked?: boolean; // Add this prop for default value
 }
 
 const CInputCheckBox = ({
   name,
-  availableFor,
+  status,
   errorMsg,
   defaultChecked = false,
 }: InputProps) => {
-  const { control } = useFormContext();
-
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   return (
     <div>
-      <Controller
-        name={name}
-        control={control}
-        defaultValue={defaultChecked} // Set default value here
-        rules={{ required: errorMsg }}
-        render={({ field, fieldState: { error } }) => (
-          <>
-            <div className="form-control flex flex-row items-center gap-2">
-              <input
-                {...field}
-                type="checkbox"
-                checked={field.value} // Use field.value for controlled checkbox
-                className="checkbox checkbox-warning checkbox-sm"
-              />
-              <label className="cursor-pointer label">
-                <span className="label-text">{availableFor}</span>
-              </label>
-            </div>
+      <div className="form-control flex flex-row items-center gap-2">
+        <input
+          type="checkbox"
+          {...register(name, { required: errorMsg })}
+          defaultChecked={defaultChecked}
+          className="checkbox checkbox-warning checkbox-sm"
+        />
+        <label className="cursor-pointer label">
+          <span className="label-text">{status}</span>
+        </label>
+      </div>
 
-            {error && <p className="text-red-500">{error.message}</p>}
-          </>
-        )}
-      />
+      {errors[name] && (
+        <p className="text-red-500 text-sm">{(errors[name] as any).message}</p>
+      )}
     </div>
   );
 };

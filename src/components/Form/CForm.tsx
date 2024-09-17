@@ -2,22 +2,8 @@
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ReactNode } from "react";
-export interface IAddItemForm {
-  title: string;
-  description: string;
-  category: string;
-  price: { size: string; amount: number }[]; // Assuming it's an array for sizes and prices
-  status: {
-    availableQuantity: number;
-  };
-  availableFor: {
-    Breakfast?: boolean;
-    Dinner?: boolean;
-    Lunch?: boolean;
-  };
-  cuisine: string;
-  photo: FileList; // File input, can be changed to string if using URL after upload
-}
+import { IAddItemForm } from "../../interface/formData.interface";
+
 interface MyFormProps {
   onFormSubmit: (data: IAddItemForm) => Promise<void>;
   children: ReactNode;
@@ -48,8 +34,8 @@ const CForm = ({
 
   const methods = useForm<IAddItemForm>(formConfig);
 
-  const submit = (data: IAddItemForm) => {
-    onFormSubmit(data);
+  const submit = async (data: IAddItemForm) => {
+    await onFormSubmit(data);
     methods.reset();
   };
 

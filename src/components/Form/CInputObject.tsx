@@ -8,15 +8,17 @@ interface InputProps {
   type: string;
   labelStyle?: string;
   placeholder?: string;
+  option: string;
 }
 
-const CInput = ({
+const CInputObject = ({
   name,
   label,
   errorMsg,
   type,
   labelStyle,
   placeholder = "",
+  option,
 }: InputProps) => {
   const {
     register,
@@ -35,13 +37,14 @@ const CInput = ({
             className="input input-sm input-bordered"
             type={type}
             min={0}
-            {...register(name, { required: errorMsg })}
+            {...register(`${name}.${option}`, { required: errorMsg })}
           />
         </div>
 
-        {errors[name] && (
+        {/* Display error message for the specific option */}
+        {(errors as any)[name]?.[option] && (
           <p className="text-red-500 text-sm">
-            {(errors[name] as any).message}
+            {(errors[name] as any)[option]?.message}
           </p>
         )}
       </>
@@ -49,4 +52,4 @@ const CInput = ({
   );
 };
 
-export default CInput;
+export default CInputObject;

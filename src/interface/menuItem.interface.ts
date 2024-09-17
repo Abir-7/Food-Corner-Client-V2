@@ -15,10 +15,13 @@ export interface IMenuItem {
     size: string;
     price: number;
   }>;
-  status: {
-    availableQuantity: number | string;
-    inStock: boolean;
+
+  inStock: boolean;
+  limitedStatus: {
+    quantity: number | null;
+    isLimited: boolean;
   };
+
   title: string;
   updatedAt: string; // Use Date type if you prefer to work with actual Date objects
   __v: number;

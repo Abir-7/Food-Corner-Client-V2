@@ -6,6 +6,7 @@ interface ImageInputProps {
   errorMsg?: string | false;
   setPreview: (srg: string) => void;
   preview: string | null;
+  labelStyle?: string;
 }
 
 const CImageInput = ({
@@ -14,6 +15,7 @@ const CImageInput = ({
   label,
   preview,
   errorMsg,
+  labelStyle,
 }: ImageInputProps) => {
   const {
     register,
@@ -32,7 +34,7 @@ const CImageInput = ({
     <div>
       <div className="form-control">
         <label className="label">
-          <span className="label-text">{label}</span>
+          <span className={`label-text ${labelStyle}`}>{label}</span>
         </label>
         <input
           className="file-input file-input-orange file-input-sm w-full file-input-bordered"
@@ -56,8 +58,10 @@ const CImageInput = ({
           </div>
         )}
       </div>
-      {errors[name] && (
-        <p className="text-red-500">{errors[name]?.message as string}</p>
+      {errors[name] && !preview && (
+        <p className="text-red-500 text-sm">
+          {errors[name]?.message as string}
+        </p>
       )}
     </div>
   );
