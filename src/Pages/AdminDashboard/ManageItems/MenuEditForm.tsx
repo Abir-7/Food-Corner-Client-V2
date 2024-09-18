@@ -4,7 +4,10 @@ import { useState } from "react";
 
 import CForm from "../../../components/Form/CForm";
 
-import { useGetMenuDetailsQuery } from "../../../Redux/api/menuApi/menuApi";
+import {
+  useGetMenuDetailsQuery,
+  useUpdateMenuMutation,
+} from "../../../Redux/api/menuApi/menuApi";
 
 import CImageInput from "../../../components/Form/CImageInput";
 import CInputArray from "../../../components/Form/CInputArray";
@@ -12,6 +15,8 @@ import CMultipleCheckBox from "../../../components/Form/CMultipleCheckBox";
 import CInputCheckBox from "../../../components/Form/CInputCheckBox";
 import CInputObject from "../../../components/Form/CInputObject";
 import { IAddItemForm } from "../../../interface/formData.interface";
+import { toast } from "sonner";
+import { IApiResponse } from "../../../Redux/interface/global.interface";
 
 const MenuEditForm = ({
   id,
@@ -38,21 +43,27 @@ const MenuEditForm = ({
   >;
 }) => {
   const [preview, setPreview] = useState<string | null>(null);
-
+  const [updateMenu] = useUpdateMenuMutation();
   const { data: menuDetails, isFetching } = useGetMenuDetailsQuery(
     { id: id! },
     { skip: !id, refetchOnMountOrArgChange: true }
   );
 
   const onFormSubmit = async (data: Partial<IAddItemForm>) => {
-    let sanitizedData = {} as Record<string, unknown>;
+    let sanitizedData = {};
 
     // Check which fields are set to true in isNeedToUpdate
     if (isNeedToUpdate.photo && data.photo && data.photo.length > 0) {
       sanitizedData = { ...sanitizedData, photo: data.photo };
     }
     if (isNeedToUpdate.price && data.price) {
-      sanitizedData = { ...sanitizedData, price: data.price };
+      sanitizedData = {
+        ...sanitizedData,
+        price: data.price.map((list) => ({
+          price: Number(list.price),
+          size: list.size,
+        })),
+      };
     }
     if (isNeedToUpdate.availableTime && data.availableFor) {
       sanitizedData = { ...sanitizedData, availableFor: data.availableFor };
@@ -66,19 +77,37 @@ const MenuEditForm = ({
     ) {
       sanitizedData = {
         ...sanitizedData,
-        limitedStatus: { quantity: data.limitedStatus?.quantity },
+        limitedStatus: { quantity: Number(data.limitedStatus?.quantity) },
       };
     }
 
-    console.log(sanitizedData, "gg");
-    setPreview(null);
-    setIsNeedToUpdate({
-      photo: false,
-      availableTime: false,
-      stockStatus: false,
-      price: false,
-      limitedStatus: false,
-    });
+    console.log(sanitizedData);
+
+    if (Object.keys(sanitizedData).length == 0) {
+      toast.error("Select at least one field.");
+    } else {
+      if (id) {
+        const res = (await updateMenu({
+          id: id!,
+          data: sanitizedData,
+        })) as IApiResponse<any>;
+        console.log(res);
+        if (res.data?.success) {
+          console.log("ggggg");
+          toast.success(res.data.message);
+        }
+        setPreview(null);
+        setIsNeedToUpdate({
+          photo: false,
+          availableTime: false,
+          stockStatus: false,
+          price: false,
+          limitedStatus: false,
+        });
+      } else {
+        toast.error("Id not found. Reload the page");
+      }
+    }
   };
 
   const handleCheckboxChange =
@@ -93,55 +122,57 @@ const MenuEditForm = ({
     <div className="w-full">
       <div className="mt-3">
         <p className="mb-2 font-semibold">Select Field to Update</p>
-        <div className="grid grid-cols-2   gap-2 ">
-          <div className=" flex items-center gap-2">
-            <input
-              checked={isNeedToUpdate.price}
-              onChange={handleCheckboxChange("price")}
-              className="checkbox checkbox-warning checkbox-sm"
-              type="checkbox"
-            />
-            <p>Price</p>
-          </div>
-          <div className=" flex items-center gap-2">
-            <input
-              checked={isNeedToUpdate.availableTime}
-              onChange={handleCheckboxChange("availableTime")}
-              className="checkbox checkbox-warning checkbox-sm"
-              type="checkbox"
-            />
-            <p>Available Time</p>
-          </div>
-          <div className=" flex items-center gap-2">
-            <input
-              checked={isNeedToUpdate.photo}
-              onChange={handleCheckboxChange("photo")}
-              className="checkbox checkbox-warning checkbox-sm"
-              type="checkbox"
-            />{" "}
-            <p>Photo</p>
-          </div>
-          <div className=" flex items-center gap-2">
-            <input
-              checked={isNeedToUpdate.stockStatus}
-              onChange={handleCheckboxChange("stockStatus")}
-              className="checkbox checkbox-warning checkbox-sm"
-              type="checkbox"
-            />{" "}
-            <p>Stock Status</p>
-          </div>
-          {menuDetails?.limitedStatus.isLimited && !isFetching && (
+        {!isFetching && (
+          <div className="grid grid-cols-2   gap-2 ">
             <div className=" flex items-center gap-2">
               <input
-                checked={isNeedToUpdate.limitedStatus}
-                onChange={handleCheckboxChange("limitedStatus")}
+                checked={isNeedToUpdate.price}
+                onChange={handleCheckboxChange("price")}
+                className="checkbox checkbox-warning checkbox-sm"
+                type="checkbox"
+              />
+              <p>Price</p>
+            </div>
+            <div className=" flex items-center gap-2">
+              <input
+                checked={isNeedToUpdate.availableTime}
+                onChange={handleCheckboxChange("availableTime")}
+                className="checkbox checkbox-warning checkbox-sm"
+                type="checkbox"
+              />
+              <p>Available Time</p>
+            </div>
+            <div className=" flex items-center gap-2">
+              <input
+                checked={isNeedToUpdate.photo}
+                onChange={handleCheckboxChange("photo")}
                 className="checkbox checkbox-warning checkbox-sm"
                 type="checkbox"
               />{" "}
-              <p>Quantity</p>
+              <p>Photo</p>
             </div>
-          )}
-        </div>
+            <div className=" flex items-center gap-2">
+              <input
+                checked={isNeedToUpdate.stockStatus}
+                onChange={handleCheckboxChange("stockStatus")}
+                className="checkbox checkbox-warning checkbox-sm"
+                type="checkbox"
+              />{" "}
+              <p>Stock Status</p>
+            </div>
+            {menuDetails?.limitedStatus.isLimited && (
+              <div className=" flex items-center gap-2">
+                <input
+                  checked={isNeedToUpdate.limitedStatus}
+                  onChange={handleCheckboxChange("limitedStatus")}
+                  className="checkbox checkbox-warning checkbox-sm"
+                  type="checkbox"
+                />{" "}
+                <p>Quantity</p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
       <div className="container mx-auto px-2 mt-5">
         {menuDetails && !isFetching ? (

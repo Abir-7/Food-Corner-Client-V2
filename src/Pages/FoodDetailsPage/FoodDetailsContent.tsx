@@ -96,7 +96,7 @@ export const FoodDetailsContent = ({
             </div>
             <p className="mb-5 font-semibold">
               <span className="text-orange-500"> Status:</span>{" "}
-              {menuDetails.status.inStock ? (
+              {menuDetails.inStock ? (
                 <span className="text-green-500">available</span>
               ) : (
                 <span className="text-red-500">unavailable</span>
@@ -107,7 +107,7 @@ export const FoodDetailsContent = ({
             <div className="my-5 flex items-center justify-between">
               <div className="flex items-center gap-5">
                 <button
-                  disabled={amount == 0}
+                  disabled={amount == 0 || !menuDetails.inStock}
                   onClick={() => setAmount((prev) => prev - 1)}
                   className="w-10 h-7 text-white flex justify-center items-center bg-red-500 rounded-full btn btn-sm border-none hover:bg-red-600"
                 >
@@ -115,6 +115,12 @@ export const FoodDetailsContent = ({
                 </button>
                 <div>{amount}</div>
                 <button
+                  disabled={
+                    (menuDetails.limitedStatus.isLimited &&
+                      (menuDetails.limitedStatus.quantity as number) >
+                        amount) ||
+                    !menuDetails.inStock
+                  }
                   onClick={() => setAmount((prev) => prev + 1)}
                   className="w-10 h-7 btn btn-sm text-white flex justify-center items-center hover:bg-green-600 bg-green-500 rounded-full border-none"
                 >
@@ -123,7 +129,12 @@ export const FoodDetailsContent = ({
               </div>
               <div>
                 <button
-                  disabled={amount <= 0}
+                  disabled={
+                    (menuDetails.limitedStatus.isLimited &&
+                      (menuDetails.limitedStatus.quantity as number) >
+                        amount) ||
+                    !menuDetails.inStock
+                  }
                   onClick={() =>
                     addToCart({
                       category: menuDetails.category,

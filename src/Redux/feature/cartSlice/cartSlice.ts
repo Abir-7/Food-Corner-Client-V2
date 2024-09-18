@@ -1,6 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ICartItem } from "../../../interface/cartItem.iterface";
+//import { ICartItem } from "../../../interface/cartItem.iterface";
 import { cartItemCalculation } from "../../../utils/cartPriceCalculation";
+
+export interface ICartItem {
+  title: string;
+  id: string;
+  category: string;
+  size: string;
+  price: number;
+  quantity: number;
+  photo: string;
+}
 
 interface ICartState {
   cartItems: ICartItem[];
@@ -21,23 +31,33 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addItemToCart: (state, action: PayloadAction<ICartItem>) => {
+      const { id, size, quantity } = action.payload;
       const itemIndex = state.cartItems.findIndex(
-        (item) => item.id === action.payload.id
+        (item) => item.id === id && item.size === size
       );
+
       if (itemIndex !== -1) {
-        state.cartItems[itemIndex].quantity += action.payload.quantity;
+        // Item with the same ID and size exists, increment the quantity
+        state.cartItems[itemIndex].quantity += quantity;
       } else {
+        // Item with the same ID but different size, add as a new entry
         state.cartItems.push(action.payload);
       }
+
+      // Update prices after adding item
       const priceData = cartItemCalculation(state.cartItems);
       state.discount = priceData.discount;
       state.subTotal = priceData.subTotal;
       state.totalPrice = priceData.totalPrice;
     },
 
-    increassItem: (state, action: PayloadAction<string>) => {
+    increassItem: (
+      state,
+      action: PayloadAction<{ id: string; size: string }>
+    ) => {
       const itemIndex = state.cartItems.findIndex(
-        (item) => item.id === action.payload
+        (item) =>
+          item.id === action.payload.id && item.size === action.payload.size
       );
       if (itemIndex !== -1) {
         state.cartItems[itemIndex].quantity += 1;
@@ -47,14 +67,18 @@ export const cartSlice = createSlice({
       state.subTotal = priceData.subTotal;
       state.totalPrice = priceData.totalPrice;
     },
-    decreassItem: (state, action: PayloadAction<string>) => {
+    decreassItem: (
+      state,
+      action: PayloadAction<{ id: string; size: string }>
+    ) => {
       const itemIndex = state.cartItems.findIndex(
-        (item) => item.id === action.payload
+        (item) =>
+          item.id === action.payload.id && item.size === action.payload.size
       );
 
       if (itemIndex !== -1) {
         const isItemExist = state.cartItems[itemIndex];
-        isItemExist.quantity = isItemExist.quantity - 1;
+        isItemExist.quantity -= 1;
         if (isItemExist.quantity === 0) {
           state.cartItems.splice(itemIndex, 1);
         }

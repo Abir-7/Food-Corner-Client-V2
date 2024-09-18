@@ -5,7 +5,7 @@ export interface IAddItemForm {
   price: { size: string; price: string }[];
   inStock?: boolean;
   limitedStatus: {
-    isLimited: boolean;
+    isLimited?: boolean;
     quantity: string;
   };
 

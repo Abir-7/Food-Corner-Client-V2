@@ -39,7 +39,9 @@ const CartCard = ({ itemData }: { itemData: ICartItem }) => {
 
       <div className="flex justify-end ms-auto lg:ms-0  items-center   gap-5 ">
         <button
-          onClick={() => dispatch(decreassItem(itemData.id))}
+          onClick={() =>
+            dispatch(decreassItem({ id: itemData.id, size: itemData.size }))
+          }
           className="font-semibold w-6 h-6 text-white flex justify-center items-center text-sm rounded-full bg-red-500"
         >
           <FaMinus></FaMinus>
@@ -48,7 +50,9 @@ const CartCard = ({ itemData }: { itemData: ICartItem }) => {
           {itemData.quantity}
         </div>
         <button
-          onClick={() => dispatch(increassItem(itemData.id))}
+          onClick={() =>
+            dispatch(increassItem({ id: itemData.id, size: itemData.size }))
+          }
           className="font-semibold w-6 h-6 text-white flex justify-center items-center text-sm rounded-full bg-green-500"
         >
           <FaPlus></FaPlus>

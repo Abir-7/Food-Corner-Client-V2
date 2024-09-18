@@ -58,6 +58,6 @@ const customBaseApiQuery: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: customBaseApiQuery,
-  tagTypes: ["favMenu"],
+  tagTypes: ["favMenu", "menu", "order"],
   endpoints: () => ({}),
 });

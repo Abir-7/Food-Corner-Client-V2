@@ -1,11 +1,32 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import CartCard from "./CartCard";
 import SectionHeader from "../../components/common/SectionHeader/SectionHeader";
 import { useAppSelector } from "../../Redux/hooks";
+import { ICartItem } from "../../interface/cartItem.iterface";
+import { useCreateOrderMutation } from "../../Redux/api/orderApi/orderApi";
+import { IOrderDetailsData } from "../../interface/order.interface";
+import { IApiResponse } from "../../Redux/interface/global.interface";
+import { toast } from "sonner";
 
 const CartItems = () => {
   const { cartItems, totalPrice, discount, subTotal } = useAppSelector(
     (state) => state.cart
   );
+  console.log("gg");
+  const [makePayment] = useCreateOrderMutation();
+  const createPayment = async (data: IOrderDetailsData) => {
+    console.log(data);
+    if (data) {
+      const res = (await makePayment(data)) as IApiResponse<any>;
+      if (res.data?.success) {
+        toast.success(res.data.message);
+
+        window.location.href = res.data?.data?.payLink;
+      }
+    } else {
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
   return (
     <div>
       <SectionHeader text="Your Cart"></SectionHeader>
@@ -17,8 +38,8 @@ const CartItems = () => {
                 You have no item in cart
               </p>
             )}
-            {cartItems?.map((itemData) => (
-              <CartCard key={itemData.id} itemData={itemData}></CartCard>
+            {cartItems?.map((itemData, i) => (
+              <CartCard key={i} itemData={itemData}></CartCard>
             ))}
           </div>
         </div>
@@ -47,6 +68,16 @@ const CartItems = () => {
             </p>{" "}
           </div>
           <button
+            onClick={() =>
+              createPayment({
+                total: { totalPrice, discount, subTotal },
+                items: cartItems.map((item: ICartItem) => ({
+                  productId: item.id,
+                  quantity: item.quantity,
+                  size: item.size,
+                })),
+              })
+            }
             disabled={cartItems?.length == 0}
             className=" mt-2 w-full btn btn-sm bg-orange-400 hover:bg-orange-500  border-none text-white duration-200"
           >
