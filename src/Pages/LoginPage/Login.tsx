@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import bg1 from "../../assets/login.jpg";
 import { FaArrowLeft } from "react-icons/fa";
 import loginImage from "../../assets/login3.jpg";
@@ -13,8 +13,11 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../Redux/feature/userSlice/userSlice";
 import { decodeToken } from "../../utils/decodeToken";
 import { JwtPayload } from "jwt-decode";
+import { useAppSelector } from "../../Redux/hooks";
 
 const Login = () => {
+  const userData = useAppSelector((state) => state.auth.user);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [userLogin] = useLoginUserMutation();
@@ -33,6 +36,11 @@ const Login = () => {
       navigate("/");
     }
   };
+
+  if (userData?.userEmail) {
+    return <Navigate to="/" replace />; // Redirect to home page or any other route
+  }
+
   return (
     <div
       className="min-w-full"

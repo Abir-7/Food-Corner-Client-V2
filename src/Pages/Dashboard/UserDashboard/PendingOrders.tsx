@@ -1,5 +1,5 @@
 const PendingOrders = () => {
-  return <div>PendingOrders</div>;
+  return <div></div>;
 };
 
 export default PendingOrders;

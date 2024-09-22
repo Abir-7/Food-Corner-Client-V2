@@ -1,8 +1,8 @@
-import AddItem from "../../Pages/AdminDashboard/AddItem/AddItem";
-import AdminDashboard from "../../Pages/AdminDashboard/dashboard/AdminDashboard";
-import Allorders from "../../Pages/AdminDashboard/Allorders";
-import ManageItem from "../../Pages/AdminDashboard/ManageItems/ManageItem";
-import PendingOrders from "../../Pages/AdminDashboard/PendingOrders";
+import PendingOrders from "../../Pages/Dashboard/AdminDashboard/PendingOrders/PendingOrders";
+import AdminDashboard from "../../Pages/Dashboard/AdminDashboard/AdminDashboard";
+import AddItem from "../../Pages/Dashboard/AdminDashboard/AddItem/AddItem";
+import ManageItem from "../../Pages/Dashboard/AdminDashboard/ManageItems/ManageItem";
+import Allorders from "../../Pages/Dashboard/AdminDashboard/AllOrders/Allorders";
 
 export const adminRouteOption = [
   {
@@ -30,7 +30,7 @@ export const adminRouteOption = [
     children: [
       {
         name: "All Orders",
-        path: "all-oders",
+        path: "all-orders",
         element: <Allorders />,
       },
       {

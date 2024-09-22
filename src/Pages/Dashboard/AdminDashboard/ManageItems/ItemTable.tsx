@@ -3,10 +3,10 @@ import { FaEdit } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa6";
 import MenuEditForm from "./MenuEditForm";
 import { useState } from "react";
-import { IMenuItem } from "../../../interface/menuItem.interface";
+import { IMenuItem } from "../../../../interface/menuItem.interface";
 import { toast } from "sonner";
-import { useDeleteMenuMutation } from "../../../Redux/api/menuApi/menuApi";
-import { IApiResponse } from "../../../Redux/interface/global.interface";
+import { useDeleteMenuMutation } from "../../../../Redux/api/menuApi/menuApi";
+import { IApiResponse } from "../../../../Redux/interface/global.interface";
 
 const ItemTable = ({ menuItems }: { menuItems: IMenuItem[] }) => {
   const [deleteMenu] = useDeleteMenuMutation();

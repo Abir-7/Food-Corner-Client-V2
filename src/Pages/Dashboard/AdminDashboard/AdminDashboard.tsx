@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import SectionHeader from "../../../components/common/SectionHeader/SectionHeader";
+
 import LineChart from "./LineChart";
 import PieChart from "./PieChart";
 
@@ -12,7 +14,12 @@ const AdminDashboard = () => {
       >
         <div className="w-80 h-32 border-2 rounded-lg  border-orange-400 flex justify-center items-center">
           <div className="flex justify-center flex-col gap-1">
-            <p className="text-xl  font-bold text-red-500">Pending Orders</p>
+            <Link
+              to={"/admin/all-orders"}
+              className="text-xl  font-bold text-red-500"
+            >
+              All Orders
+            </Link>
             <p className="text-orange-400 text-center font-bold text-3xl">
               200
             </p>
@@ -20,7 +27,7 @@ const AdminDashboard = () => {
         </div>
         <div className="w-80 h-32 border-2 rounded-lg  border-orange-400 flex justify-center items-center">
           <div className="flex justify-center flex-col gap-1">
-            <p className="text-xl  font-bold text-red-500">Cenceled Orders</p>
+            <p className="text-xl  font-bold text-red-500">Pending Orders</p>
             <p className="text-orange-400 text-center font-bold text-3xl">
               200
             </p>

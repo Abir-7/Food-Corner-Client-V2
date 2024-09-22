@@ -1,22 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useState } from "react";
-
-import CForm from "../../../components/Form/CForm";
-
 import {
   useGetMenuDetailsQuery,
   useUpdateMenuMutation,
-} from "../../../Redux/api/menuApi/menuApi";
-
-import CImageInput from "../../../components/Form/CImageInput";
-import CInputArray from "../../../components/Form/CInputArray";
-import CMultipleCheckBox from "../../../components/Form/CMultipleCheckBox";
-import CInputCheckBox from "../../../components/Form/CInputCheckBox";
-import CInputObject from "../../../components/Form/CInputObject";
-import { IAddItemForm } from "../../../interface/formData.interface";
+} from "../../../../Redux/api/menuApi/menuApi";
+import { IAddItemForm } from "../../../../interface/formData.interface";
+import { IApiResponse } from "../../../../Redux/interface/global.interface";
 import { toast } from "sonner";
-import { IApiResponse } from "../../../Redux/interface/global.interface";
+import CForm from "../../../../components/Form/CForm";
+import CMultipleCheckBox from "../../../../components/Form/CMultipleCheckBox";
+import CInputArray from "../../../../components/Form/CInputArray";
+import CImageInput from "../../../../components/Form/CImageInput";
+import CInputCheckBox from "../../../../components/Form/CInputCheckBox";
+import CInputObject from "../../../../components/Form/CInputObject";
 
 const MenuEditForm = ({
   id,

@@ -102,6 +102,20 @@ export const FoodDetailsContent = ({
                 <span className="text-red-500">unavailable</span>
               )}{" "}
             </p>
+
+            {menuDetails?.limitedStatus?.isLimited && (
+              <p className="mt-2 mb-3 list-disc">
+                {" "}
+                <span className="text-red-500 font-bold">
+                  Available Quantity:
+                </span>{" "}
+                <span className="text-green-500 font-semibold">
+                  {" "}
+                  {menuDetails?.limitedStatus?.quantity}
+                </span>
+              </p>
+            )}
+
             {/* cart section */}
             <hr />
             <div className="my-5 flex items-center justify-between">
@@ -117,7 +131,7 @@ export const FoodDetailsContent = ({
                 <button
                   disabled={
                     (menuDetails.limitedStatus.isLimited &&
-                      (menuDetails.limitedStatus.quantity as number) >
+                      (menuDetails.limitedStatus.quantity as number) <
                         amount) ||
                     !menuDetails.inStock
                   }
@@ -131,7 +145,7 @@ export const FoodDetailsContent = ({
                 <button
                   disabled={
                     (menuDetails.limitedStatus.isLimited &&
-                      (menuDetails.limitedStatus.quantity as number) >
+                      (menuDetails.limitedStatus.quantity as number) <
                         amount) ||
                     !menuDetails.inStock
                   }

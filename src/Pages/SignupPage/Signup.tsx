@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import bg1 from "../../assets/login.jpg";
 import { FaArrowLeft } from "react-icons/fa";
 import loginImage from "../../assets/signup.jpg";
@@ -9,8 +9,10 @@ import { FieldValues } from "react-hook-form";
 import { useCreateUserMutation } from "../../Redux/api/authApi/authApi";
 import { IApiResponse } from "../../Redux/interface/global.interface";
 import { toast } from "sonner";
+import { useAppSelector } from "../../Redux/hooks";
 
 const Signup = () => {
+  const userData = useAppSelector((state) => state.auth.user);
   const [createUser] = useCreateUserMutation();
   const onFormSubmit = async (data: FieldValues) => {
     const { name, email, contactNo, address, password } = data;
@@ -28,6 +30,10 @@ const Signup = () => {
       toast.success(res.data.message);
     }
   };
+  if (userData?.userEmail) {
+    return <Navigate to="/" replace />; // Redirect to home page or any other route
+  }
+
   return (
     <div
       className="min-w-full"

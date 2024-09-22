@@ -1,23 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import SectionHeader from "../../../components/common/SectionHeader/SectionHeader";
-
-import { uploadImageToCloudinary } from "../../../utils/uploadImage";
-
-import { useAddMenuMutation } from "../../../Redux/api/menuApi/menuApi";
-import { IApiResponse } from "../../../Redux/interface/global.interface";
-import { toast } from "sonner";
 import { useState } from "react";
-
-import CForm from "../../../components/Form/CForm";
-
-import CInput from "../../../components/Form/CInput";
-import CTextArea from "../../../components/Form/CTextArea";
-import CSelect from "../../../components/Form/CSelect";
-import CInputArray from "../../../components/Form/CInputArray";
-import CMultipleCheckBox from "../../../components/Form/CMultipleCheckBox";
-import CImageInput from "../../../components/Form/CImageInput";
-import CInputObject from "../../../components/Form/CInputObject";
-import { IAddItemForm } from "../../../interface/formData.interface";
+import { IAddItemForm } from "../../../../interface/formData.interface";
+import { useAddMenuMutation } from "../../../../Redux/api/menuApi/menuApi";
+import { uploadImageToCloudinary } from "../../../../utils/uploadImage";
+import { IApiResponse } from "../../../../Redux/interface/global.interface";
+import { toast } from "sonner";
+import SectionHeader from "../../../../components/common/SectionHeader/SectionHeader";
+import CForm from "../../../../components/Form/CForm";
+import CInput from "../../../../components/Form/CInput";
+import CTextArea from "../../../../components/Form/CTextArea";
+import CSelect from "../../../../components/Form/CSelect";
+import CInputArray from "../../../../components/Form/CInputArray";
+import CMultipleCheckBox from "../../../../components/Form/CMultipleCheckBox";
+import CImageInput from "../../../../components/Form/CImageInput";
+import CInputObject from "../../../../components/Form/CInputObject";
 
 const AddItem = () => {
   const [isItemLimited, setIsItemLimited] = useState(false);

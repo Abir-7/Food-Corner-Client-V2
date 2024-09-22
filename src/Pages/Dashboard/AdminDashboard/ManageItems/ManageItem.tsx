@@ -1,6 +1,6 @@
-import LoadingUi from "../../../components/common/LoadingUi/LoadingUi";
-import SectionHeader from "../../../components/common/SectionHeader/SectionHeader";
-import { useGetAllMenuQuery } from "../../../Redux/api/menuApi/menuApi";
+import LoadingUi from "../../../../components/common/LoadingUi/LoadingUi";
+import SectionHeader from "../../../../components/common/SectionHeader/SectionHeader";
+import { useGetAllMenuQuery } from "../../../../Redux/api/menuApi/menuApi";
 import ItemTable from "./ItemTable";
 
 const ManageItem = () => {
