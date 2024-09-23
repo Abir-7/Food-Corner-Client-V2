@@ -78,8 +78,6 @@ const MenuEditForm = ({
       };
     }
 
-    console.log(sanitizedData);
-
     if (Object.keys(sanitizedData).length == 0) {
       toast.error("Select at least one field.");
     } else {
@@ -88,9 +86,7 @@ const MenuEditForm = ({
           id: id!,
           data: sanitizedData,
         })) as IApiResponse<any>;
-        console.log(res);
         if (res.data?.success) {
-          console.log("ggggg");
           toast.success(res.data.message);
         }
         setPreview(null);

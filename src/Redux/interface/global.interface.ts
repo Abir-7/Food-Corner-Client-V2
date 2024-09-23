@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IApiDataResponse<T> {
   success: boolean;
   message: string;
   data: T;
+  meta?: any;
 }
 
 export interface IApiErrorResponse {

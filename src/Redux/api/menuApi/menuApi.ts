@@ -15,14 +15,24 @@ const menuApi = baseApi.injectEndpoints({
       invalidatesTags: ["menu"],
     }),
     getAllMenu: builder.query({
-      query: () => ({
-        url: "/menu-item",
-        method: "GET",
-      }),
+      query: (queries) => {
+        const params = new URLSearchParams();
+        Object.keys(queries).forEach((key) => {
+          const value = queries[key];
+          if (value !== "" && value !== undefined) {
+            params.append(key, value.toString());
+          }
+        });
+        return {
+          url: "/menu-item",
+          method: "GET",
+          params: params,
+        };
+      },
       transformResponse: (
         res: IApiDataResponse<IMenuItem[]> & BaseQueryApi
       ) => {
-        return res.data;
+        return { data: res.data, meta: res.meta };
       },
       providesTags: ["menu"],
     }),

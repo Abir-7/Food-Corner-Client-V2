@@ -33,11 +33,10 @@ const AddItem = () => {
         },
       }),
     };
-    console.log(formatdata, "gg");
+
     if (data?.photo) {
-      console.log("sdsds");
       const uploadedImageUrl = await uploadImageToCloudinary(data.photo);
-      // console.log(uploadedImageUrl, "upload");
+
       if (!uploadedImageUrl) {
         toast.error("Something went wrong. Try again.");
       } else {

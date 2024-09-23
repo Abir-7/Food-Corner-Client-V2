@@ -12,10 +12,9 @@ const CartItems = () => {
   const { cartItems, totalPrice, discount, subTotal } = useAppSelector(
     (state) => state.cart
   );
-  console.log("gg");
+
   const [makePayment] = useCreateOrderMutation();
   const createPayment = async (data: IOrderDetailsData) => {
-    console.log(data);
     if (data) {
       const res = (await makePayment(data)) as IApiResponse<any>;
       if (res.data?.success) {

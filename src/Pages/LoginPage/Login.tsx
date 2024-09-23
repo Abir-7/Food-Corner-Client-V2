@@ -22,16 +22,15 @@ const Login = () => {
   const dispatch = useDispatch();
   const [userLogin] = useLoginUserMutation();
   const onFormSubmit = async (data: FieldValues) => {
-    console.log(data);
     const res = (await userLogin(data)) as IApiResponse<any>;
-    console.log(res);
+
     if (res.data?.success) {
       toast.success(res.data.message);
       const userData = decodeToken(res.data.data?.token) as JwtPayload & {
         role: string;
         userEmail: string;
       };
-      console.log(userData);
+
       dispatch(setUser({ user: userData, token: res.data.data?.token }));
       navigate("/");
     }

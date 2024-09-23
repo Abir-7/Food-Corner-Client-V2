@@ -36,7 +36,6 @@ export const FoodDetailsContent = ({
     customerEmail: string;
   }) => {
     const res = (await addtoFav(data)) as IApiResponse<any>;
-    console.log(res);
     if (res.data?.success) {
       toast.success(res.data.message);
     }

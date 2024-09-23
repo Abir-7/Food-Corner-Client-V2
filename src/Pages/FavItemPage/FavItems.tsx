@@ -9,7 +9,7 @@ const FavItems = () => {
   const { data, isLoading } = useGetUserFavMenuQuery(undefined, {
     skip: !user || user?.role == "admin",
   });
-  console.log(data);
+
   return (
     <div>
       <SectionHeader text="Your Favourite Items"></SectionHeader>

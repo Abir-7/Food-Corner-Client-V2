@@ -17,7 +17,6 @@ const menuApi = baseApi.injectEndpoints({
     getAllUserOrders: builder.query({
       query: (queryOptions: {
         searchTerm?: string;
-        sort: string;
         filters: { name: string; value: string }[];
       }) => {
         const params = new URLSearchParams();
@@ -45,7 +44,7 @@ const menuApi = baseApi.injectEndpoints({
       transformResponse: (
         res: IApiDataResponse<IOrderResponse[]> & BaseQueryApi
       ) => {
-        return res.data;
+        return { data: res.data, meta: res.meta };
       },
     }),
     // all users Pending order

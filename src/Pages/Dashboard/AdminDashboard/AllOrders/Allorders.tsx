@@ -9,18 +9,15 @@ const Allorders = () => {
     { name: string; value: string }[]
   >([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortOption, setSortOption] = useState<string>("");
 
   const queryOptions = {
     searchTerm,
-    sort: sortOption,
     filters: filterOptions,
   };
 
-  console.log(Object.keys(queryOptions));
-
   const { data, isLoading } = useGetAllUserOrdersQuery(queryOptions);
-
+  const orderData = data?.data || [];
+  console.log(data);
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
     const [name, filterValue] = value.split(":");
@@ -40,7 +37,7 @@ const Allorders = () => {
     <div>
       <SectionHeader text="All users order"></SectionHeader>
       <div>
-        <div className="flex gap-2 mt-2 mx-2">
+        <div className="flex gap-2 my-5 mx-2">
           <input
             type="text"
             placeholder="Search by Transaction ID"
@@ -50,20 +47,10 @@ const Allorders = () => {
           />
           <div className="flex space-x-4">
             <select
-              onChange={(e) => setSortOption(e.target.value)}
-              value={sortOption}
-              className="select  select-sm select-bordered w-full max-w-xs"
-            >
-              <option value="">Sort By</option>
-              <option value="createdAt">Date (Newest First)</option>
-              <option value="-createdAt">Date (Oldest First)</option>
-            </select>
-
-            <select
               onChange={handleFilterChange}
               className="select select-sm select-bordered w-full max-w-xs"
             >
-              <option value="">Select Filter</option>
+              <option value="">Filter by Order Status</option>
               <option value="deliveryStatus:pending">Pending</option>
               <option value="deliveryStatus:onGoing">Ongoing</option>
               {/* Add more filters as needed */}
@@ -71,7 +58,7 @@ const Allorders = () => {
           </div>
         </div>
 
-        {isLoading ? <LoadingUi /> : <OrderTable orders={data!} />}
+        {isLoading ? <LoadingUi /> : <OrderTable orders={orderData} />}
       </div>
     </div>
   );
