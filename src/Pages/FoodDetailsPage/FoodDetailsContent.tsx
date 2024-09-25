@@ -11,6 +11,8 @@ import { toast } from "sonner";
 import { ICartItem } from "../../interface/cartItem.iterface";
 import { addItemToCart } from "../../Redux/feature/cartSlice/cartSlice";
 import { useState } from "react";
+import { decodeToken } from "../../utils/decodeToken";
+import { JwtPayload } from "jwt-decode";
 interface FoodDetailsContentProps {
   menuDetails: IMenuItem | undefined;
   index: number;
@@ -21,6 +23,12 @@ export const FoodDetailsContent = ({
   index,
   setIndex,
 }: FoodDetailsContentProps) => {
+  const { token } = useAppSelector((state) => state.auth);
+  const user = decodeToken(token) as JwtPayload & {
+    userEmail: string;
+    role: string;
+  };
+
   const [amount, setAmount] = useState(1);
 
   const dispatch = useAppDispatch();
@@ -29,7 +37,6 @@ export const FoodDetailsContent = ({
   };
 
   const [addtoFav] = useAddFavMenuMutation();
-  const { user } = useAppSelector((state) => state.auth);
 
   const addItemToFav = async (data: {
     product: string;
@@ -116,70 +123,75 @@ export const FoodDetailsContent = ({
             )}
 
             {/* cart section */}
-            <hr />
-            <div className="my-5 flex items-center justify-between">
-              <div className="flex items-center gap-5">
-                <button
-                  disabled={amount == 0 || !menuDetails.inStock}
-                  onClick={() => setAmount((prev) => prev - 1)}
-                  className="w-10 h-7 text-white flex justify-center items-center bg-red-500 rounded-full btn btn-sm border-none hover:bg-red-600"
-                >
-                  <FaMinus></FaMinus>
-                </button>
-                <div>{amount}</div>
-                <button
-                  disabled={
-                    (menuDetails.limitedStatus.isLimited &&
-                      (menuDetails.limitedStatus.quantity as number) <
-                        amount) ||
-                    !menuDetails.inStock
-                  }
-                  onClick={() => setAmount((prev) => prev + 1)}
-                  className="w-10 h-7 btn btn-sm text-white flex justify-center items-center hover:bg-green-600 bg-green-500 rounded-full border-none"
-                >
-                  <FaPlus></FaPlus>
-                </button>
-              </div>
-              <div>
-                <button
-                  disabled={
-                    (menuDetails.limitedStatus.isLimited &&
-                      (menuDetails.limitedStatus.quantity as number) <
-                        amount) ||
-                    !menuDetails.inStock
-                  }
-                  onClick={() =>
-                    addToCart({
-                      category: menuDetails.category,
-                      id: menuDetails._id,
-                      price: menuDetails.price[index].price,
-                      quantity: amount,
-                      size: menuDetails.price[index].size,
-                      title: menuDetails.title,
-                      photo: menuDetails.photo,
-                    })
-                  }
-                  className="btn btn-sm bg-orange-400 hover:bg-orange-500 duration-200 w-40  font-bold border-none text-white h-10 rounded-lg"
-                >
-                  Add Cart
-                </button>
-              </div>
-              <div>
-                {user?.userEmail && (
-                  <button
-                    onDoubleClick={() =>
-                      addItemToFav({
-                        customerEmail: user?.userEmail,
-                        product: menuDetails._id,
-                      })
-                    }
-                    className="p-2 hover:text-orange-400 rounded-full border-orange-400 flex justify-center items-center duration-200 hover:scale-90 text-lg"
-                  >
-                    <FaHeart></FaHeart>
-                  </button>
-                )}
-              </div>
-            </div>
+            {user?.role !== "admin" && (
+              <>
+                {" "}
+                <hr />
+                <div className="my-5 flex items-center justify-between">
+                  <div className="flex items-center gap-5">
+                    <button
+                      disabled={amount == 0 || !menuDetails.inStock}
+                      onClick={() => setAmount((prev) => prev - 1)}
+                      className="w-10 h-7 text-white flex justify-center items-center bg-red-500 rounded-full btn btn-sm border-none hover:bg-red-600"
+                    >
+                      <FaMinus></FaMinus>
+                    </button>
+                    <div>{amount}</div>
+                    <button
+                      disabled={
+                        (menuDetails.limitedStatus.isLimited &&
+                          (menuDetails.limitedStatus.quantity as number) <
+                            amount) ||
+                        !menuDetails.inStock
+                      }
+                      onClick={() => setAmount((prev) => prev + 1)}
+                      className="w-10 h-7 btn btn-sm text-white flex justify-center items-center hover:bg-green-600 bg-green-500 rounded-full border-none"
+                    >
+                      <FaPlus></FaPlus>
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      disabled={
+                        (menuDetails.limitedStatus.isLimited &&
+                          (menuDetails.limitedStatus.quantity as number) <
+                            amount) ||
+                        !menuDetails.inStock
+                      }
+                      onClick={() =>
+                        addToCart({
+                          category: menuDetails.category,
+                          id: menuDetails._id,
+                          price: menuDetails.price[index].price,
+                          quantity: amount,
+                          size: menuDetails.price[index].size,
+                          title: menuDetails.title,
+                          photo: menuDetails.photo,
+                        })
+                      }
+                      className="btn btn-sm bg-orange-400 hover:bg-orange-500 duration-200 w-40  font-bold border-none text-white h-10 rounded-lg"
+                    >
+                      Add Cart
+                    </button>
+                  </div>
+                  <div>
+                    {user?.userEmail && (
+                      <button
+                        onDoubleClick={() =>
+                          addItemToFav({
+                            customerEmail: user?.userEmail,
+                            product: menuDetails._id,
+                          })
+                        }
+                        className="p-2 hover:text-orange-400 rounded-full border-orange-400 flex justify-center items-center duration-200 hover:scale-90 text-lg"
+                      >
+                        <FaHeart></FaHeart>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
             <hr />
             {/* other info */}
 

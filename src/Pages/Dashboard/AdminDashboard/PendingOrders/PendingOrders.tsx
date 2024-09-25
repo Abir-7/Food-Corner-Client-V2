@@ -10,7 +10,9 @@ import {
 import { IApiResponse } from "../../../../Redux/interface/global.interface";
 
 const PendingOrders = () => {
-  const { data, isLoading } = useGetAllPendingOrdersQuery("");
+  const { data, isLoading } = useGetAllPendingOrdersQuery("", {
+    pollingInterval: 40000,
+  });
   const [updateOrder] = useUpdateOrderMutation();
 
   const handleDeliveryStatus = async (orderId: string, status: string) => {
@@ -25,9 +27,9 @@ const PendingOrders = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="">
       <SectionHeader text="Pending Orders" />
-      <div className="flex flex-col space-y-4 mt-4">
+      <div className="flex flex-col space-y-4 mt-4 mx-2">
         {isLoading ? (
           <LoadingUi />
         ) : (

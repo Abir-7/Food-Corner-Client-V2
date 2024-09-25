@@ -15,7 +15,8 @@ const Allorders = () => {
     filters: filterOptions,
   };
 
-  const { data, isLoading } = useGetAllUserOrdersQuery(queryOptions);
+  const { data, isLoading, isFetching } =
+    useGetAllUserOrdersQuery(queryOptions);
   const orderData = data?.data || [];
   console.log(data);
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -50,15 +51,21 @@ const Allorders = () => {
               onChange={handleFilterChange}
               className="select select-sm select-bordered w-full max-w-xs"
             >
-              <option value="">Filter by Order Status</option>
+              <option value="deliveryStatus:">All Orders</option>
               <option value="deliveryStatus:pending">Pending</option>
+
               <option value="deliveryStatus:onGoing">Ongoing</option>
+              <option value="deliveryStatus:delivered">Delivered</option>
               {/* Add more filters as needed */}
             </select>
           </div>
         </div>
 
-        {isLoading ? <LoadingUi /> : <OrderTable orders={orderData} />}
+        {isLoading ? (
+          <LoadingUi />
+        ) : (
+          <OrderTable isFetching={isFetching} orders={orderData} />
+        )}
       </div>
     </div>
   );

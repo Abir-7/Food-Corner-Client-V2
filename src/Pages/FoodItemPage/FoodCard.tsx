@@ -4,14 +4,22 @@ import "@smastrom/react-rating/style.css";
 import { FaCartPlus } from "react-icons/fa6";
 import { IMenuItem } from "../../interface/menuItem.interface";
 import { Link } from "react-router-dom";
-import { useAppDispatch } from "../../Redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
 import { addItemToCart } from "../../Redux/feature/cartSlice/cartSlice";
 import { ICartItem } from "../../interface/cartItem.iterface";
+import { decodeToken } from "../../utils/decodeToken";
+import { JwtPayload } from "jwt-decode";
 
 interface IProps {
   item: IMenuItem;
 }
 const FoodCard = ({ item }: IProps) => {
+  const { token } = useAppSelector((state) => state.auth);
+  const user = decodeToken(token) as JwtPayload & {
+    userEmail: string;
+    role: string;
+  };
+  console.log(user.role);
   const dispatch = useAppDispatch();
   const addToCart = (itemData: ICartItem) => {
     dispatch(addItemToCart(itemData));
@@ -55,6 +63,7 @@ const FoodCard = ({ item }: IProps) => {
                 </div>
                 <div>
                   <button
+                    disabled={user.role === "admin"}
                     onClick={() =>
                       addToCart({
                         category: item.category,
@@ -66,9 +75,15 @@ const FoodCard = ({ item }: IProps) => {
                         photo: item.photo,
                       })
                     }
-                    className="me-10"
+                    className="me-10  "
                   >
-                    <FaCartPlus className="text-orange-400 text-lg hover:scale-110 duration-200 active:scale-100"></FaCartPlus>
+                    <FaCartPlus
+                      className={
+                        user.role === "admin"
+                          ? "text-gray-400"
+                          : "text-orange-400 text-lg hover:scale-110 duration-200 active:scale-100"
+                      }
+                    ></FaCartPlus>
                   </button>
                 </div>
               </div>

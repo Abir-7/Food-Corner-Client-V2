@@ -1,4 +1,5 @@
 import AllOrderbyUser from "../../Pages/Dashboard/UserDashboard/AllOrders/AllOrderbyUser";
+import PendingUserOrders from "../../Pages/Dashboard/UserDashboard/PendingOrders/PendingUserOrders";
 import UserDashboard from "../../Pages/Dashboard/UserDashboard/UserDashboard";
 
 export const userRouteOption = [
@@ -11,5 +12,10 @@ export const userRouteOption = [
     name: "All Orders",
     path: "orders-users",
     element: <AllOrderbyUser />,
+  },
+  {
+    name: "Pending Orders",
+    path: "pending-orders-users",
+    element: <PendingUserOrders />,
   },
 ];

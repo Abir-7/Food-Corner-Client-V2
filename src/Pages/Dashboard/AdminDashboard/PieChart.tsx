@@ -3,12 +3,26 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
-const PieChart = () => {
+const PieChart = ({
+  topItem,
+}: {
+  topItem: {
+    _id: string;
+    totalQuantity: number;
+    title: string;
+  }[];
+}) => {
+  console.log(
+    topItem?.map((item) => item.title),
+    topItem
+  );
   const data = {
-    labels: ["Red", "Blue", "Yellow"],
+    labels: topItem?.map((item) => item.title),
+    topItem,
     datasets: [
       {
-        data: [300, 50, 100],
+        data: topItem?.map((item) => item.totalQuantity),
+        topItem,
         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
       },

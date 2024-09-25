@@ -1,13 +1,18 @@
-export interface IOrderDetailsData {
-  total: {
-    totalPrice: number;
-    discount: number;
-    subTotal: number;
+export interface IOrderProduct {
+  productId: {
+    photo: string;
+    _id: string;
+    title: string;
+    category: string;
+    price: {
+      price: number;
+      size: string;
+      _id: string;
+    }[];
   };
-  items: {
-    productId: string;
-    quantity: number;
-  }[];
+  quantity: number;
+  size: string;
+  _id: string;
 }
 
 export interface IOrderResponse {
@@ -23,22 +28,7 @@ export interface IOrderResponse {
     contactNo: number;
     address: string;
   };
-  items: {
-    productId: {
-      photo: string;
-      _id: string;
-      title: string;
-      category: string;
-      price: {
-        price: number;
-        size: string;
-        _id: string;
-      }[];
-    };
-    quantity: number;
-    size: string;
-    _id: string;
-  }[];
+  items: IOrderProduct[];
   transectionId: string;
   total: {
     totalPrice: number;

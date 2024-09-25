@@ -18,36 +18,49 @@ ChartJS.register(
   Legend
 );
 
-const LineChart = () => {
+const allMonths = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const LineChart = ({
+  monthlyIncome,
+}: {
+  monthlyIncome: { month: string; monthlyIncome: number }[];
+}) => {
+  // Create an array to hold monthly income values for each month
+  const incomeData = allMonths.map((month) => {
+    const entry = monthlyIncome?.find((item) => item.month === month);
+    return entry ? entry.monthlyIncome : 0; // Use 0 if no data for that month
+  });
+
   const data = {
-    labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ],
+    labels: allMonths,
     datasets: [
       {
         label: "Monthly Income",
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: incomeData,
         fill: false,
-
         borderColor: "#fb923c",
+
+        tension: 0.1,
+        pointRadius: 5, // Size of the dot points
+        pointHoverRadius: 7, // Size of the dot points when hovered
       },
     ],
   };
-  const options = {
-    responsive: true,
-  };
-  return <Line className="" data={data} options={options} />;
+
+  return <Line data={data} />;
 };
 
 export default LineChart;

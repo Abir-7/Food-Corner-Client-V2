@@ -4,7 +4,8 @@ import { useGetAllMenuQuery } from "../../../../Redux/api/menuApi/menuApi";
 import ItemTable from "./ItemTable";
 
 const ManageItem = () => {
-  const { data: menuItems, isLoading } = useGetAllMenuQuery("");
+  const { data, isLoading } = useGetAllMenuQuery("");
+  const menuItems = data?.data || [];
   return (
     <div>
       <SectionHeader text="Manage Items"></SectionHeader>

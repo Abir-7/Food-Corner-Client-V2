@@ -49,7 +49,7 @@ const ItemTable = ({ menuItems }: { menuItems: IMenuItem[] }) => {
           <tr>
             <th>Name</th>
             <th className="min-w-96">Description</th>
-            <th>Price & Size</th>
+            <th className="min-w-36">Price & Size</th>
             <th>Is Limited?</th>
             <th>Available Time</th>
             <th>Action</th>
@@ -69,10 +69,10 @@ const ItemTable = ({ menuItems }: { menuItems: IMenuItem[] }) => {
                   <div>
                     <div className="font-bold text-xl mb-1">{item.title}</div>
                     <div className="flex gap-2">
-                      <span className="badge bg-green-400">
+                      <span className="badge bg-green-400 text-white">
                         {item.category}
                       </span>
-                      <span className="badge bg-orange-400">
+                      <span className="badge bg-orange-400 text-white">
                         {item.cuisine}
                       </span>
                     </div>

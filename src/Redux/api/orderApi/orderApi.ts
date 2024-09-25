@@ -26,7 +26,9 @@ const menuApi = baseApi.injectEndpoints({
           if (value !== "" && value !== undefined) {
             if (Array.isArray(value)) {
               value.forEach((filter) => {
-                params.append(filter.name, filter.value);
+                if (filter.value) {
+                  params.append(filter.name, filter.value);
+                }
               });
             } else {
               params.append(key, value.toString());
@@ -38,6 +40,58 @@ const menuApi = baseApi.injectEndpoints({
           url: "/order",
           method: "GET",
           params: params,
+        };
+      },
+      providesTags: ["order"],
+      transformResponse: (
+        res: IApiDataResponse<IOrderResponse[]> & BaseQueryApi
+      ) => {
+        return { data: res.data, meta: res.meta };
+      },
+    }),
+
+    // user all order
+    userAllOrders: builder.query({
+      query: (queryOptions: {
+        searchTerm?: string;
+        filters: { name: string; value: string }[];
+      }) => {
+        const params = new URLSearchParams();
+
+        Object.keys(queryOptions).forEach((key) => {
+          const value = queryOptions[key as keyof typeof queryOptions];
+          if (value !== "" && value !== undefined) {
+            if (Array.isArray(value)) {
+              value.forEach((filter) => {
+                if (filter.value) {
+                  params.append(filter.name, filter.value);
+                }
+              });
+            } else {
+              params.append(key, value.toString());
+            }
+          }
+        });
+
+        return {
+          url: "/order/myOrder",
+          method: "GET",
+          params: params,
+        };
+      },
+      providesTags: ["order"],
+      transformResponse: (
+        res: IApiDataResponse<IOrderResponse[]> & BaseQueryApi
+      ) => {
+        return { data: res.data, meta: res.meta };
+      },
+    }),
+    // user all pending order
+    userAllPendingOrders: builder.query({
+      query: () => {
+        return {
+          url: "/order/myOrder-pending",
+          method: "GET",
         };
       },
       providesTags: ["order"],
@@ -77,4 +131,6 @@ export const {
   useGetAllUserOrdersQuery,
   useGetAllPendingOrdersQuery,
   useUpdateOrderMutation,
+  useUserAllOrdersQuery,
+  useUserAllPendingOrdersQuery,
 } = menuApi;
