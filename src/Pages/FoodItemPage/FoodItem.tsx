@@ -5,8 +5,15 @@ import { IMenuItem } from "../../interface/menuItem.interface";
 import { useGetAllMenuQuery } from "../../Redux/api/menuApi/menuApi";
 import LoadingUi from "../../components/common/LoadingUi/LoadingUi";
 import PaginationUi from "../../components/common/pagination/PaginationUi";
+import { useAppSelector } from "../../Redux/hooks";
+import { useDispatch } from "react-redux";
+import { filterMenuAvailable } from "../../Redux/feature/menuFiltterSlice/menuFilterSlice";
 
 const FoodItem = () => {
+  const dispatch = useDispatch();
+  const menuAvailableTime = useAppSelector(
+    (state) => state.menuFilter.menuAvailableTime
+  );
   const [filters, setFilters] = useState({
     searchTerm: "",
     category: "",
@@ -15,6 +22,7 @@ const FoodItem = () => {
     maxPrice: "",
     page: 1,
     limit: 1,
+    availableFor: menuAvailableTime || "",
   });
 
   const { data: menuData, isLoading } = useGetAllMenuQuery(filters, {
@@ -28,6 +36,9 @@ const FoodItem = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+    if (name == "availableFor") {
+      dispatch(filterMenuAvailable(value));
+    }
     setFilters((prev) => ({ ...prev, [name]: value, page: 1 })); // Reset page to 1 on filter change
   };
 
@@ -41,20 +52,20 @@ const FoodItem = () => {
       <SectionHeader text="Food Menu" />
 
       {/* Search and Filter Section */}
-      <div className="flex mx-2 flex-col sm:flex-row items-center my-5">
+      <div className="flex mx-2 gap-2 flex-col sm:flex-row items-center my-5">
         <input
           type="text"
           name="searchTerm"
           placeholder="Search by title"
           value={filters.searchTerm}
           onChange={handleFilterChange}
-          className="input input-sm input-bordered w-full sm:w-1/3 mr-2"
+          className="input input-sm input-bordered w-full sm:w-1/3 "
         />
         <select
           name="category"
           value={filters.category}
           onChange={handleFilterChange}
-          className="select select-sm select-bordered w-full sm:w-1/3 mr-2"
+          className="select select-sm select-bordered w-full sm:w-1/3 "
         >
           <option value="">Filter by Category</option>
           <option value="Rice">Rice</option>
@@ -62,10 +73,21 @@ const FoodItem = () => {
           {/* Add more categories as needed */}
         </select>
         <select
+          name="availableFor"
+          value={menuAvailableTime}
+          onChange={handleFilterChange}
+          className="select select-sm select-bordered w-full sm:w-1/3 "
+        >
+          <option value="">Filter by Available Time</option>
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+        </select>
+        <select
           name="sort"
           value={filters.sort}
           onChange={handleFilterChange}
-          className="select select-sm select-bordered w-full sm:w-1/3"
+          className="select select-sm select-bordered w-full sm:w-1/3 "
         >
           <option value="">Sort by price</option>
           <option value="price">Price: Low to High</option>

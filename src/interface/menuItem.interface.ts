@@ -27,3 +27,12 @@ export interface IMenuItem {
   __v: number;
   _id: string;
 }
+
+export interface ITimeBasedMenuData {
+  result: IMenuItem[];
+  availableTime: {
+    breakfast: boolean;
+    dinner: boolean;
+    lunch: boolean;
+  };
+}

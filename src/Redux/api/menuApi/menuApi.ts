@@ -1,5 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BaseQueryApi } from "@reduxjs/toolkit/query";
-import { IMenuItem } from "../../../interface/menuItem.interface";
+import {
+  IMenuItem,
+  ITimeBasedMenuData,
+} from "../../../interface/menuItem.interface";
 import { IApiDataResponse } from "../../interface/global.interface";
 import { baseApi } from "../baseApi";
 import { IAddItemForm } from "../../../interface/formData.interface";
@@ -20,7 +24,11 @@ const menuApi = baseApi.injectEndpoints({
         Object.keys(queries).forEach((key) => {
           const value = queries[key];
           if (value !== "" && value !== undefined) {
-            params.append(key, value.toString());
+            if (value == "lunch" || value == "breakfast" || value == "dinner") {
+              params.append(`${key}.${value}`, "true");
+            } else {
+              params.append(key, value.toString());
+            }
           }
         });
         return {
@@ -61,6 +69,18 @@ const menuApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["menu"],
     }),
+    timeBasedMenu: builder.query({
+      query: () => ({
+        url: "/menu-item/time-based",
+        method: "GET",
+      }),
+      providesTags: ["menu"],
+      transformResponse: (
+        res: IApiDataResponse<ITimeBasedMenuData> & BaseQueryApi
+      ) => {
+        return { data: res.data.result, availableTime: res.data.availableTime };
+      },
+    }),
   }),
 });
 export const {
@@ -69,4 +89,5 @@ export const {
   useGetMenuDetailsQuery,
   useUpdateMenuMutation,
   useDeleteMenuMutation,
+  useTimeBasedMenuQuery,
 } = menuApi;
