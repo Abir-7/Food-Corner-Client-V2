@@ -1,11 +1,11 @@
-import img1 from "../../assets/services/bg3.jpg";
-import img2 from "../../assets/services/food.png";
+import img1 from "../../../assets/services/bg3.jpg";
+import img2 from "../../../assets/services/food.png";
 
-import img3 from "../../assets/services/chef.png";
-import img4 from "../../assets/services/clean.png";
-import img5 from "../../assets/services/order.png";
-import img6 from "../../assets/services/place.png";
-import img7 from "../../assets/services/time.png";
+import img3 from "../../../assets/services/chef.png";
+import img4 from "../../../assets/services/clean.png";
+import img5 from "../../../assets/services/order.png";
+import img6 from "../../../assets/services/place.png";
+import img7 from "../../../assets/services/time.png";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 const OurServices = () => {
   const parallax = {

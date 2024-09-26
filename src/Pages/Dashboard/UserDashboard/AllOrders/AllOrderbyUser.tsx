@@ -1,10 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { OrderTable } from "../../../../components/common/Order/OrderTable";
 import SectionHeader from "../../../../components/common/SectionHeader/SectionHeader";
 import { useUserAllOrdersQuery } from "../../../../Redux/api/orderApi/orderApi";
 import LoadingUi from "../../../../components/common/LoadingUi/LoadingUi";
+import Modal from "../../../../components/common/modal/Modal";
+import CForm from "../../../../components/Form/CForm";
+import { FieldValues } from "react-hook-form";
+import CSelect from "../../../../components/Form/CSelect";
+import { CRating } from "../../../../components/Form/CRating";
+import CTextArea from "../../../../components/Form/CTextArea";
+import { useAddRatingMutation } from "../../../../Redux/api/ratingApi/ratingApi";
+import { IApiResponse } from "../../../../Redux/interface/global.interface";
+import { toast } from "sonner";
 
 const AllOrderbyUser = () => {
+  const [addRating] = useAddRatingMutation();
   const [filterOptions, setFilterOptions] = useState<
     { name: string; value: string }[]
   >([]);
@@ -37,6 +48,29 @@ const AllOrderbyUser = () => {
     });
   };
 
+  //modal data
+  const [items, setItems] = useState<{ id: string; name: string }[]>([]);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [orderId, setOrderId] = useState("");
+
+  const openModal = (data: {
+    menuData: { id: string; name: string }[];
+    orderId: string;
+  }) => {
+    setOrderId(data.orderId);
+    setItems(data.menuData);
+    setModalOpen(true);
+  };
+  const closeModal = () => setModalOpen(false);
+
+  const onFormSubmit = async (data: FieldValues) => {
+    console.log({ ...data, orderId });
+    const res = (await addRating({ ...data, orderId })) as IApiResponse<any>;
+    if (res?.data?.success) {
+      toast.success(res.data.message);
+    }
+  };
+  console.log(items);
   return (
     <div>
       <SectionHeader text="Your Orders"></SectionHeader>
@@ -64,9 +98,46 @@ const AllOrderbyUser = () => {
               </select>
             </div>
           </div>
-          <OrderTable isFetching={isFetching} orders={orders!}></OrderTable>
+          <OrderTable
+            openModal={openModal}
+            canReview={true}
+            isFetching={isFetching}
+            orders={orders!}
+          ></OrderTable>
         </div>
       )}
+      <Modal isOpen={isModalOpen}>
+        <div>
+          <p className="text-xl font-bold text-orange-400">Give Review</p>
+          <div>
+            <CForm onFormSubmit={onFormSubmit}>
+              <CSelect
+                defaultOption="Select a item."
+                name="product"
+                label="Select menu"
+                errorMsg="Please select a item"
+                options={items?.map((item) => ({
+                  label: item.name,
+                  value: item.id,
+                }))}
+              ></CSelect>
+              <CRating></CRating>
+              <CTextArea label="Comment" name="comment"></CTextArea>
+              <div className="flex mt-4  justify-between items-center">
+                <button className="btn bg-orange-400 text-white hover:bg-orange-500 duration-300 btn-sm  ">
+                  Submit
+                </button>
+                <button
+                  className="btn btn-sm bg-red-500 text-white hover:bg-red-600 duration-300 "
+                  onClick={closeModal}
+                >
+                  close
+                </button>
+              </div>
+            </CForm>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

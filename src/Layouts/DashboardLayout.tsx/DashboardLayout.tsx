@@ -60,7 +60,7 @@ const DashboardLayout = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="menu  bg-orange-400 flex flex-col gap-3 text-base-content min-h-full w-72 p-4">
+        <div className="menu   bg-orange-400 flex flex-col gap-3 text-base-content min-h-full w-72 p-4">
           <NavLink
             className={({ isActive }) =>
               isActive

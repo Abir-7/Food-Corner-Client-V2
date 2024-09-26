@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import SectionHeader from "../../components/common/SectionHeader/SectionHeader";
 import { useGetMenuDetailsQuery } from "../../Redux/api/menuApi/menuApi";
-import "@smastrom/react-rating/style.css";
+
 import { useState } from "react";
 
 import { FoodDetailsContent } from "./FoodDetailsContent";

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IOrderResponse } from "../../../interface/order.interface";
 
 interface OrderTableProps {
@@ -5,13 +6,17 @@ interface OrderTableProps {
   isAction?: boolean;
   handleDeliveryStatus?: (orderId: string, status: string) => Promise<void>;
   isFetching?: boolean;
+  canReview?: boolean;
+  openModal?: (itemData: any) => void;
 }
 
 export const OrderTable = ({
+  canReview = false,
   orders,
   isAction = false,
   handleDeliveryStatus,
   isFetching = false,
+  openModal,
 }: OrderTableProps) => {
   return (
     <div className="overflow-x-auto">
@@ -75,7 +80,37 @@ export const OrderTable = ({
                         <option value="delivered">Delivered</option>
                       </select>
                     ) : (
-                      <p>{order.deliveryStatus}</p>
+                      <p className="my-1 font-bold">
+                        {order.deliveryStatus.toUpperCase()}
+                      </p>
+                    )}
+                    {canReview && (
+                      <button
+                        onClick={() =>
+                          openModal &&
+                          openModal({
+                            menuData: order?.items
+                              ?.filter((item, index, self) => {
+                                return (
+                                  index ==
+                                  self.findIndex(
+                                    (t) =>
+                                      t.productId._id === item.productId._id
+                                  )
+                                );
+                              })
+                              .map((item) => ({
+                                name: item.productId.title,
+                                id: item.productId._id,
+                              })),
+                            orderId: order._id,
+                          })
+                        }
+                        className="btn
+                    btn-sm bg-orange-400 hover:bg-orange-500 text-white duration-300"
+                      >
+                        Give Review
+                      </button>
                     )}
                   </td>
                 </tr>

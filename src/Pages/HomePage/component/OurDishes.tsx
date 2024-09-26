@@ -1,10 +1,10 @@
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-import { useTimeBasedMenuQuery } from "../../Redux/api/menuApi/menuApi";
-import { Link } from "react-router-dom";
 
-import { useAppDispatch } from "../../Redux/hooks";
-import { filterMenuAvailable } from "../../Redux/feature/menuFiltterSlice/menuFilterSlice";
+import { Link } from "react-router-dom";
+import { useTimeBasedMenuQuery } from "../../../Redux/api/menuApi/menuApi";
+import { useAppDispatch } from "../../../Redux/hooks";
+import { filterMenuAvailable } from "../../../Redux/feature/menuFiltterSlice/menuFilterSlice";
 
 const OurDishes = () => {
   const { data } = useTimeBasedMenuQuery("");

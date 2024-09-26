@@ -1,7 +1,7 @@
-import img1 from "../../assets/newsletter/news.png";
-import img2 from "../../assets/newsletter/salad.png";
-import img3 from "../../assets/newsletter/pizza.png";
-import styles from "../../css/homepage/NewsLetter.module.css";
+import img1 from "../../../assets/newsletter/news.png";
+import img2 from "../../../assets/newsletter/salad.png";
+import img3 from "../../../assets/newsletter/pizza.png";
+import styles from "../../../css/homepage/NewsLetter.module.css";
 const NewsLetter = () => {
   return (
     <div className="flex justify-between ">

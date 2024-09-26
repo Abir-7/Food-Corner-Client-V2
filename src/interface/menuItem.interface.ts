@@ -22,6 +22,7 @@ export interface IMenuItem {
     isLimited: boolean;
   };
 
+  rating: { averageRating: number; ratingCount: number };
   title: string;
   updatedAt: string; // Use Date type if you prefer to work with actual Date objects
   __v: number;

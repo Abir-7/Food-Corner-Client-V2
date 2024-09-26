@@ -44,7 +44,11 @@ const FoodCard = ({ item }: IProps) => {
                 </h1>
               </Link>
 
-              <Rating readOnly style={{ maxWidth: 100 }} value={4}></Rating>
+              <Rating
+                readOnly
+                style={{ maxWidth: 100 }}
+                value={item.rating.averageRating}
+              ></Rating>
               <p className="font-medium">
                 {" "}
                 {item?.description.length > 45

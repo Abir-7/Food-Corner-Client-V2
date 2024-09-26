@@ -63,8 +63,12 @@ export const FoodDetailsContent = ({
             <h1 className="text-xl font-bold">{menuDetails?.title}</h1>
             {/* rating section */}
             <div className="flex gap-2 my-2">
-              <Rating readOnly style={{ maxWidth: 100 }} value={4}></Rating>
-              <span className="font-medium">{`(${0} Customer Review)`}</span>
+              <Rating
+                readOnly
+                style={{ maxWidth: 100 }}
+                value={menuDetails?.rating.averageRating}
+              ></Rating>
+              <span className="font-medium">{`(${menuDetails?.rating.ratingCount} Customer Review)`}</span>
             </div>
             {/* description section */}
             <p className="font-medium">{menuDetails?.description}</p>

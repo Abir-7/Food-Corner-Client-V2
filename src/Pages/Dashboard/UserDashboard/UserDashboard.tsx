@@ -17,7 +17,7 @@ const UserDashboard = () => {
 
       <div className="relative min-h-[calc(100vh-15.3vh)] ">
         {isLoading && (
-          <div className="absolute z-10 backdrop-blur-sm bg-opacity-10 bg-white inset-0 w-full h-full flex justify-center   ">
+          <div className="absolute  backdrop-blur-sm bg-opacity-10 bg-white inset-0 w-full h-full flex justify-center   ">
             <div className="mt-20">
               <LoadingUi></LoadingUi>
             </div>
@@ -54,7 +54,7 @@ const UserDashboard = () => {
             {data?.data?.presentOrders?.map((item: Partial<IOrderResponse>) => (
               <div
                 key={item._id}
-                className="mx-2 grid border grid-cols-1 mt-10 card z-0 shadow p-5  "
+                className="mx-2 grid border grid-cols-1 mt-10 rounded-2xl  shadow p-5  "
               >
                 <div className="text-lg font-semibold flex-col">
                   <ul>
@@ -91,7 +91,7 @@ const UserDashboard = () => {
               Last Order
             </p>
 
-            <div className="mx-2 grid border grid-cols-1 mt-10 card shadow p-5  ">
+            <div className="mx-2 grid border grid-cols-1 mt-10 rounded-2xl shadow p-5  ">
               <div className="text-lg   font-semibold flex-col">
                 <div className="">
                   {data?.data.lastOrders?.items?.map(
