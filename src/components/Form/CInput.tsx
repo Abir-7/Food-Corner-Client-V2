@@ -5,7 +5,7 @@ interface InputProps {
   name: string;
   label: string;
   errorMsg?: string | false;
-  type: string;
+  type?: string;
   labelStyle?: string;
   placeholder?: string;
 }
@@ -14,7 +14,7 @@ const CInput = ({
   name,
   label,
   errorMsg,
-  type,
+  type = "text",
   labelStyle,
   placeholder = "",
 }: InputProps) => {

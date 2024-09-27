@@ -43,6 +43,18 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
+        <NavLink
+          to="/contact-us"
+          className={({ isActive }) =>
+            isActive
+              ? "bg-orange-400 text-white  px-3 py-1 rounded"
+              : "px-3 py-1 relative hover:bg-orange-400 hover:text-white rounded-md duration-300 z-10 text-black"
+          } // Apply styles based on active state
+        >
+          Contuct Us
+        </NavLink>
+      </li>
+      <li>
         {token && (
           <NavLink
             to={`/${user?.role}/dashboard`}

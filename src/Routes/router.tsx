@@ -13,6 +13,7 @@ import { adminRouteOption } from "./adminRoute/adminRoute";
 import FoodDetails from "../Pages/FoodDetailsPage/FoodDetails";
 import CartItems from "../Pages/CartPage/CartItems";
 import FavItems from "../Pages/FavItemPage/FavItems";
+import { ContactUs } from "../Pages/ContactUs/ContactUs";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
             <FavItems />
           </PrivetRoute>
         ),
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs />,
       },
     ],
   },

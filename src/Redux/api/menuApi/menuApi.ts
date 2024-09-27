@@ -54,6 +54,18 @@ const menuApi = baseApi.injectEndpoints({
         return res.data;
       },
     }),
+    getTopRatedMenu: builder.query({
+      query: () => ({
+        url: `/menu-item/rating-based`,
+        method: "GET",
+      }),
+      providesTags: ["menu"],
+      transformResponse: (
+        res: IApiDataResponse<IMenuItem[]> & BaseQueryApi
+      ) => {
+        return res.data;
+      },
+    }),
     updateMenu: builder.mutation({
       query: (arg: { id: string; data: Partial<IAddItemForm> }) => ({
         url: `/menu-item/${arg.id}`,
@@ -90,4 +102,5 @@ export const {
   useUpdateMenuMutation,
   useDeleteMenuMutation,
   useTimeBasedMenuQuery,
+  useGetTopRatedMenuQuery,
 } = menuApi;
