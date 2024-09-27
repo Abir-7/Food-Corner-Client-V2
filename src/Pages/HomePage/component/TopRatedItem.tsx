@@ -19,7 +19,7 @@ export const TopRatedItem = () => {
               <div className="w-full h-2/3 relative flex justify-center items-center rounded-xl overflow-hidden">
                 <div className="w-full absolute h-1/2  rounded-b-xl bg-orange-400 bg-opacity-90 bottom-0 group-hover:h-full duration-500"></div>
 
-                <div className="w-[200px] group-hover:rotate-[360deg] duration-500 rounded-3xl h-[200px] hover: bg-red-500 relative">
+                <div className="w-[200px]  rounded-3xl h-[200px] hover: bg-red-500 relative">
                   <img className="rounded-3xl" src={item.photo} alt="" />
                 </div>
               </div>

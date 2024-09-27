@@ -14,8 +14,17 @@ import CInputArray from "../../../../components/Form/CInputArray";
 import CMultipleCheckBox from "../../../../components/Form/CMultipleCheckBox";
 import CImageInput from "../../../../components/Form/CImageInput";
 import CInputObject from "../../../../components/Form/CInputObject";
+import {
+  useGetAllCategoryQuery,
+  useGetAllCuisineQuery,
+} from "../../../../Redux/api/categoryCuisineApi/categoryCuisineApi";
 
 const AddItem = () => {
+  const { data: categories, isLoading: isCategoryLoading } =
+    useGetAllCategoryQuery("");
+  const { data: cuisines, isLoading: isCuisineLoading } =
+    useGetAllCuisineQuery("");
+  console.log(categories);
   const [isItemLimited, setIsItemLimited] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const [addItem] = useAddMenuMutation();
@@ -33,7 +42,7 @@ const AddItem = () => {
         },
       }),
     };
-
+    console.log(formatdata);
     if (data?.photo) {
       const uploadedImageUrl = await uploadImageToCloudinary(data.photo);
 
@@ -45,6 +54,7 @@ const AddItem = () => {
           photo: uploadedImageUrl,
         };
         const res = (await addItem(newData)) as IApiResponse<any>;
+        console.log(res);
         if (res?.data?.success) {
           toast.success("Item added successfully");
         }
@@ -75,25 +85,31 @@ const AddItem = () => {
             placeholder="Menu Description"
           ></CTextArea>
           <CSelect
+            disabled={!categories || isCategoryLoading}
             labelStyle="font-semibold"
             defaultOption="Select Category"
             errorMsg="Category is required."
             name="category"
-            options={[
-              { label: "Rice", value: "Rice" },
-              { label: "Drink", value: "Drink" },
-            ]}
+            options={
+              categories?.map((option) => ({
+                value: option._id,
+                label: option.category,
+              })) || []
+            }
             label="Select Category"
           ></CSelect>
           <CSelect
+            disabled={!cuisines || isCuisineLoading}
             labelStyle="font-semibold"
             defaultOption="Select Cuisine"
             errorMsg="Cuisine is required."
             name="cuisine"
-            options={[
-              { label: "Thai", value: "Thai" },
-              { label: "Bengali", value: "Bengali" },
-            ]}
+            options={
+              cuisines?.map((option) => ({
+                value: option._id,
+                label: option.cuisine,
+              })) || []
+            }
             label="Select Cuisine"
           ></CSelect>
           <CInputArray

@@ -4,9 +4,9 @@ export interface IMenuItem {
     Dinner: boolean;
     Lunch: boolean;
   };
-  category: string;
+  category: { _id: string; category: string };
   createdAt: string; // Use Date type if you prefer to work with actual Date objects
-  cuisine: string;
+  cuisine: { _id: string; cuisine: string };
   description: string;
   isDeleted: boolean;
   photo: string;

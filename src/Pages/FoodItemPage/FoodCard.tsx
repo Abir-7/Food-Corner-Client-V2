@@ -70,7 +70,7 @@ const FoodCard = ({ item }: IProps) => {
                     disabled={user.role === "admin"}
                     onClick={() =>
                       addToCart({
-                        category: item.category,
+                        category: item.category.category,
                         id: item._id,
                         price: item.price[0].price,
                         quantity: 1,

@@ -8,9 +8,11 @@ interface InputProps {
   options: { value: string; label: string }[]; // Add options for select input
   labelStyle?: string;
   defaultOption: string;
+  disabled?: boolean;
 }
 
 const CSelect = ({
+  disabled = false,
   name,
   label,
   errorMsg,
@@ -31,6 +33,7 @@ const CSelect = ({
         </label>
         {/* Select input */}
         <select
+          disabled={disabled}
           className="select select-sm input-bordered"
           {...register(name, { required: errorMsg })}
         >

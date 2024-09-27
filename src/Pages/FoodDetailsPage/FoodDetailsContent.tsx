@@ -78,7 +78,7 @@ export const FoodDetailsContent = ({
                 Category:
               </span>{" "}
               <span className="text-orange-400 text-lg font-semibold ">
-                {menuDetails?.category}
+                {menuDetails?.category.category}
               </span>
             </p>
             {/* price & size section */}
@@ -164,7 +164,7 @@ export const FoodDetailsContent = ({
                       }
                       onClick={() =>
                         addToCart({
-                          category: menuDetails.category,
+                          category: menuDetails.category.category,
                           id: menuDetails._id,
                           price: menuDetails.price[index].price,
                           quantity: amount,

@@ -8,6 +8,7 @@ const favMenuApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["rating"],
     }),
   }),
 });
