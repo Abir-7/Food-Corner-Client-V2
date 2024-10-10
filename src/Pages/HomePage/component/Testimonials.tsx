@@ -5,7 +5,11 @@ import "@smastrom/react-rating/style.css";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import { useGetRatingUsQuery } from "../../../Redux/api/ratingApi/ratingApi";
+import { IRateUs } from "../../../interface/rateUs.interface";
 export const Testimonials = () => {
+  const { data } = useGetRatingUsQuery("");
+  console.log(data);
   return (
     <div className="grid grid-cols-1  md:grid-cols-3 gap-5 items-center container mx-auto my-10">
       <div className="col-span-1 mx-2">
@@ -55,25 +59,23 @@ export const Testimonials = () => {
           }}
           className="mySwiper"
         >
-          {Array(9)
-            .fill(null)
-            .map((i, n) => {
-              return (
-                <SwiperSlide key={n}>
-                  <div className=" flex items-center flex-col ">
-                    <div className="w-14 rounded-full bg-orange-400 h-14"></div>
-                    <div className="text-center my-2">
-                      askdal ksjdaskld asdasd djlk sjkljdsklajd
-                    </div>
-                    <Rating
-                      readOnly
-                      style={{ maxWidth: 100 }}
-                      value={4}
-                    ></Rating>
+          {(data?.data as IRateUs[])?.map((cmt, n: number) => {
+            return (
+              <SwiperSlide key={n}>
+                <div className=" flex items-center flex-col ">
+                  <div className="w-14 rounded-full bg-orange-400 h-14">
+                    <img src={cmt?.customer?.photo} alt="" />
                   </div>
-                </SwiperSlide>
-              );
-            })}
+                  <div className="text-center my-2">{cmt?.comment}</div>
+                  <Rating
+                    readOnly
+                    style={{ maxWidth: 100 }}
+                    value={cmt?.rating}
+                  ></Rating>
+                </div>
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </div>
     </div>

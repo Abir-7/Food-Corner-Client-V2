@@ -19,7 +19,7 @@ const FoodCard = ({ item }: IProps) => {
     userEmail: string;
     role: string;
   };
-  console.log(user.role);
+
   const dispatch = useAppDispatch();
   const addToCart = (itemData: ICartItem) => {
     dispatch(addItemToCart(itemData));
@@ -32,12 +32,12 @@ const FoodCard = ({ item }: IProps) => {
             <div className="w-40 rounded-lg h-40 bg-red-400 m-4 ">
               <img
                 className="w-40 rounded-lg h-40 object-cover"
-                src={item.photo}
+                src={item?.photo}
                 alt=""
               />
             </div>
             <div>
-              <Link to={`/food-item/${item._id}`}>
+              <Link to={`/food-item/${item?._id}`}>
                 {" "}
                 <h1 className="my-2 duration-200 hover:text-orange-400 font-bold text-lg">
                   {item?.title}
@@ -47,7 +47,7 @@ const FoodCard = ({ item }: IProps) => {
               <Rating
                 readOnly
                 style={{ maxWidth: 100 }}
-                value={item.rating.averageRating}
+                value={item?.rating.averageRating}
               ></Rating>
               <p className="font-medium">
                 {" "}
@@ -58,32 +58,32 @@ const FoodCard = ({ item }: IProps) => {
               <div className="flex justify-between my-1">
                 <div className="flex gap-5">
                   <p className="font-bold text-green-500 ">
-                    {item.price[0].price}{" "}
+                    {item?.price[0].price}{" "}
                     <span className="text-orange-400">Tk</span>
                   </p>
                   <p className="font-bold text-green-500 ">
-                    {item.price[0].size}{" "}
+                    {item?.price[0].size}{" "}
                   </p>
                 </div>
                 <div>
                   <button
-                    disabled={user.role === "admin"}
+                    disabled={user?.role === "admin"}
                     onClick={() =>
                       addToCart({
                         category: item.category.category,
-                        id: item._id,
-                        price: item.price[0].price,
+                        id: item?._id,
+                        price: item?.price[0].price,
                         quantity: 1,
                         size: item.price[0].size,
-                        title: item.title,
-                        photo: item.photo,
+                        title: item?.title,
+                        photo: item?.photo,
                       })
                     }
                     className="me-10  "
                   >
                     <FaCartPlus
                       className={
-                        user.role === "admin"
+                        user?.role === "admin"
                           ? "text-gray-400"
                           : "text-orange-400 text-lg hover:scale-110 duration-200 active:scale-100"
                       }

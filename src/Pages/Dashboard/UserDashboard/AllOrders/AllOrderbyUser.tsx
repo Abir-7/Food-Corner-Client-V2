@@ -124,10 +124,14 @@ const AllOrderbyUser = () => {
               <CRating></CRating>
               <CTextArea label="Comment" name="comment"></CTextArea>
               <div className="flex mt-4  justify-between items-center">
-                <button className="btn bg-orange-400 text-white hover:bg-orange-500 duration-300 btn-sm  ">
+                <button
+                  type="submit"
+                  className="btn bg-orange-400 text-white hover:bg-orange-500 duration-300 btn-sm  "
+                >
                   Submit
                 </button>
                 <button
+                  type="button"
                   className="btn btn-sm bg-red-500 text-white hover:bg-red-600 duration-300 "
                   onClick={closeModal}
                 >

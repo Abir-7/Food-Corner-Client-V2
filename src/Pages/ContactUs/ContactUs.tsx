@@ -5,6 +5,7 @@ import CInput from "../../components/Form/CInput";
 import CTextArea from "../../components/Form/CTextArea";
 import { FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
+import Reviews from "./Reviews";
 
 export const ContactUs = () => {
   const onFormSubmit = async (data: FieldValues) => {
@@ -53,6 +54,7 @@ export const ContactUs = () => {
           </div>
         </div>
       </div>
+      <Reviews></Reviews>
     </div>
   );
 };

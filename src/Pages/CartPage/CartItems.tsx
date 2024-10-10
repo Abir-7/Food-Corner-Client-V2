@@ -4,7 +4,7 @@ import SectionHeader from "../../components/common/SectionHeader/SectionHeader";
 import { useAppSelector } from "../../Redux/hooks";
 import { ICartItem } from "../../interface/cartItem.iterface";
 import { useCreateOrderMutation } from "../../Redux/api/orderApi/orderApi";
-import { IOrderDetailsData } from "../../interface/order.interface";
+
 import { IApiResponse } from "../../Redux/interface/global.interface";
 import { toast } from "sonner";
 
@@ -14,7 +14,7 @@ const CartItems = () => {
   );
 
   const [makePayment] = useCreateOrderMutation();
-  const createPayment = async (data: IOrderDetailsData) => {
+  const createPayment = async (data: any) => {
     if (data) {
       const res = (await makePayment(data)) as IApiResponse<any>;
       if (res.data?.success) {

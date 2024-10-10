@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FoodCard from "./FoodCard";
 import SectionHeader from "../../components/common/SectionHeader/SectionHeader";
 import { IMenuItem } from "../../interface/menuItem.interface";
@@ -8,9 +8,14 @@ import PaginationUi from "../../components/common/pagination/PaginationUi";
 import { useAppSelector } from "../../Redux/hooks";
 import { useDispatch } from "react-redux";
 import { filterMenuAvailable } from "../../Redux/feature/menuFiltterSlice/menuFilterSlice";
+import { useDebounce } from "../../hook/useDebounce";
+import { useGetAllCategoryQuery } from "../../Redux/api/categoryCuisineApi/categoryCuisineApi";
 
 const FoodItem = () => {
+  const { data: categories } = useGetAllCategoryQuery("");
+
   const dispatch = useDispatch();
+
   const menuAvailableTime = useAppSelector(
     (state) => state.menuFilter.menuAvailableTime
   );
@@ -25,27 +30,40 @@ const FoodItem = () => {
     availableFor: menuAvailableTime || "",
   });
 
+  const [searchValue, setSearchValue] = useState(filters.searchTerm);
+
   const { data: menuData, isLoading } = useGetAllMenuQuery(filters, {
     refetchOnMountOrArgChange: true,
   });
 
-  console.log(menuData);
-
-  // Handle filter changes
   const handleFilterChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    if (name == "availableFor") {
+
+    if (name === "availableFor") {
       dispatch(filterMenuAvailable(value));
     }
-    setFilters((prev) => ({ ...prev, [name]: value, page: 1 })); // Reset page to 1 on filter change
+
+    if (name === "searchTerm") {
+      setSearchValue(value);
+    } else {
+      setFilters((prev) => ({ ...prev, [name]: value, page: 1 })); // Reset page to 1 on filter change
+    }
   };
 
-  // Handle page change
   const handlePageChange = (newPage: number) => {
     setFilters((prev) => ({ ...prev, page: newPage }));
   };
+
+  const debouncedSearchTerm = useDebounce(searchValue, 500);
+
+  useEffect(() => {
+    setFilters((prev) => ({
+      ...prev,
+      searchTerm: debouncedSearchTerm,
+    }));
+  }, [debouncedSearchTerm]);
 
   return (
     <>
@@ -57,7 +75,7 @@ const FoodItem = () => {
           type="text"
           name="searchTerm"
           placeholder="Search by title"
-          value={filters.searchTerm}
+          value={searchValue}
           onChange={handleFilterChange}
           className="input input-sm input-bordered w-full sm:w-1/3 "
         />
@@ -68,8 +86,9 @@ const FoodItem = () => {
           className="select select-sm select-bordered w-full sm:w-1/3 "
         >
           <option value="">Filter by Category</option>
-          <option value="Rice">Rice</option>
-          <option value="Italian">Italian</option>
+          {categories?.map((category) => (
+            <option value={category._id}>{category.category}</option>
+          ))}
           {/* Add more categories as needed */}
         </select>
         <select

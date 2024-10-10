@@ -33,6 +33,8 @@ const customBaseApiQuery: BaseQueryFn<
     toast.error(result.error?.data?.message);
   }
   if (result.error?.status === 401) {
+    api.dispatch(userLogout());
+
     // const res = await fetch("http://localhost:3000/api/v1/auth/refresh-token", {
     //   method: "POST",
     //   credentials: "include",
@@ -57,6 +59,14 @@ const customBaseApiQuery: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: customBaseApiQuery,
-  tagTypes: ["favMenu", "menu", "order", "rating", "category", "cuisine"],
+  tagTypes: [
+    "favMenu",
+    "menu",
+    "order",
+    "rating",
+    "category",
+    "cuisine",
+    "ratingus",
+  ],
   endpoints: () => ({}),
 });
