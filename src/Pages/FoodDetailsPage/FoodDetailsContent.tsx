@@ -13,7 +13,7 @@ import { addItemToCart } from "../../Redux/feature/cartSlice/cartSlice";
 import { useState } from "react";
 import { decodeToken } from "../../utils/decodeToken";
 import { JwtPayload } from "jwt-decode";
-import { DiVim } from "react-icons/di";
+
 interface FoodDetailsContentProps {
   menuDetails: IMenuItem | undefined;
   index: number;
@@ -54,7 +54,7 @@ export const FoodDetailsContent = ({
     <>
       {menuDetails ? (
         <div className="grid my-10 justify-items-center md:justify-items-stretch md:grid-cols-2 max-w-6xl mx-auto px-2">
-          <div>
+          <div className="w-80 ">
             <div className="w-80 h-80 rounded-lg bg-red-400">
               <img
                 className="w-80 h-80 rounded-lg object-cover"
@@ -62,7 +62,7 @@ export const FoodDetailsContent = ({
                 alt=""
               />
             </div>
-            <div className="mt-5 mb-3 flex justify-center">
+            <div className="mt-5 mb-3 flex justify-center md:justify-end">
               <button
                 onClick={() => setIsCommentOpen(!isCommentOpen)}
                 className="btn btn-sm bg-orange-400 border-none outline-none text-white hover:bg-orange-500"
@@ -73,20 +73,32 @@ export const FoodDetailsContent = ({
           </div>
 
           {isCommentOpen ? (
-            <div className="border border-orange-400 w-full text-xs md:text-sm  p-2 rounded-lg grid gap-3">
-              {menuDetails?.productFeedback?.map((cmt) => (
-                <div key={cmt?._id} className=" pb-2 border-b rounded-lg px-2 ">
-                  <div>
-                    <p className="font-bold">
-                      <span>{cmt?.customer?.email}</span>
-                    </p>
+            <div className="border-orange-400 border rounded-lg">
+              <div className="ms-4 mt-2 font-bold text-orange-400">
+                All Comments
+              </div>
+              <div className=" w-full text-xs md:text-sm  p-2  gap-3 max-h-[21rem] overflow-x-auto">
+                {menuDetails?.productFeedback?.map((cmt) => (
+                  <div
+                    key={cmt?._id}
+                    className=" pb-2 border-b rounded-lg px-2 "
+                  >
+                    <div>
+                      <p className="font-bold">
+                        <span>{cmt?.customer?.email}</span>
+                      </p>
+                    </div>
+                    <div className="flex gap-3">
+                      <p>{cmt?.comment}</p>
+
+                      <Rating
+                        style={{ maxWidth: "60px" }}
+                        value={cmt?.rating}
+                      ></Rating>
+                    </div>
                   </div>
-                  <div className="flex gap-3">
-                    <p>{cmt?.comment}</p>
-                    <p>{cmt?.rating}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           ) : (
             <div>
