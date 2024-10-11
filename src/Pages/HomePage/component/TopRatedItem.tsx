@@ -32,7 +32,11 @@ export const TopRatedItem = () => {
 
               {/* Rating and text section */}
               <div className=" p-4">
-                <Rating readOnly style={{ maxWidth: 100 }} value={4}></Rating>
+                <Rating
+                  readOnly
+                  style={{ maxWidth: 100 }}
+                  value={item?.rating?.averageRating}
+                ></Rating>
                 <Link
                   to={`/food-item/${item._id}`}
                   className="text-xl font-semibold hover:text-orange-400 duration-300"

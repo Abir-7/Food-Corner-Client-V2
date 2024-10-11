@@ -53,7 +53,7 @@ export const OrderTable = ({
                           <img
                             src={item.productId.photo}
                             alt={item.productId.title}
-                            className="w-16 h-16 mr-2 my-0.5"
+                            className="w-16 h-16 object-cover mr-2 my-0.5"
                           />
                           <span>
                             {item.productId.title} (Size: {item.size}, Quantity:{" "}
