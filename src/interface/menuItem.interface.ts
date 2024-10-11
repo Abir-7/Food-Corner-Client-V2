@@ -1,3 +1,28 @@
+interface IProductFeedback {
+  _id: string;
+  product: string;
+  rating: number;
+  comment: string;
+  customer: {
+    _id: string;
+    id: string;
+    email: string;
+    name: {
+      firstName: string;
+      lastName: string;
+      middleName?: string; // optional middleName
+    };
+    contactNo: number;
+    address: string;
+    user: string;
+    __v: number;
+  };
+  orderId: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
 export interface IMenuItem {
   availableFor: {
     Breakfast: boolean;
@@ -27,6 +52,8 @@ export interface IMenuItem {
   updatedAt: string; // Use Date type if you prefer to work with actual Date objects
   __v: number;
   _id: string;
+
+  productFeedback: IProductFeedback[];
 }
 
 export interface ITimeBasedMenuData {

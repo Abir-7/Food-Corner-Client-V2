@@ -14,6 +14,8 @@ const FoodDetails = () => {
     { id: id as string },
     { skip: !id }
   );
+
+  console.log(menuDetails);
   return (
     <div>
       <SectionHeader text="Menu Details" />
