@@ -107,7 +107,7 @@ const Navbar = () => {
           <details className="dropdown p-0 m-0 dropdown-end">
             <summary className="avatar m-1">
               <div className="w-10 rounded-full">
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                <img src="https://png.pngtree.com/png-vector/20190130/ourmid/pngtree-characters-enjoy-food-cartoon-characters-gourmet-hand-painted-character-cuisine-enjoy-png-image_606799.jpg" />
               </div>
             </summary>
             <ul className="menu grid gap-2 dropdown-content bg-base-100 rounded-box z-[1] w-32 p-2 shadow">
