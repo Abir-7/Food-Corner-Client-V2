@@ -112,7 +112,7 @@ const Navbar = () => {
             </summary>
             <ul className="menu grid gap-2 dropdown-content bg-base-100 rounded-box z-[1] w-32 p-2 shadow">
               <li>
-                <a>Item 1</a>
+                <Link to="/user-profile">Manage Profile</Link>
               </li>
               <li
                 onClick={() => dispatch(userLogout())}

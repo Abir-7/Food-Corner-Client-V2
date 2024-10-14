@@ -15,6 +15,7 @@ import CartItems from "../Pages/CartPage/CartItems";
 import FavItems from "../Pages/FavItemPage/FavItems";
 import { ContactUs } from "../Pages/ContactUs/ContactUs";
 import AboutUs from "../Pages/AboutUs/AboutUs";
+import UserProfile from "../Pages/UserProfile/UserProfile";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: "/about-us",
         element: <AboutUs />,
+      },
+      {
+        path: "/user-profile",
+        element: <UserProfile />,
       },
       { path: "/food-item/:id", element: <FoodDetails /> },
       {
