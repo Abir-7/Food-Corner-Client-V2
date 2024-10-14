@@ -26,10 +26,10 @@ const FoodCard = ({ item }: IProps) => {
   };
   return (
     <div className="">
-      <div className="p-3  shadow-md rounded-lg max-w-[590px] ">
-        <div className=" bg-[#ffefd2] rounded-lg">
+      <div className="p-3 shadow-md rounded-lg max-w-[590px] ">
+        <div className="shadow-inner  rounded-lg">
           <div className="grid grid-cols-2 items-center">
-            <div className="w-40 rounded-lg h-40 bg-red-400 m-4 ">
+            <div className="w-40 rounded-lg h-40 bg-orange-400 m-4 ">
               <img
                 className="w-40 rounded-lg h-40 object-cover"
                 src={item?.photo}
@@ -39,7 +39,7 @@ const FoodCard = ({ item }: IProps) => {
             <div>
               <Link to={`/food-item/${item?._id}`}>
                 {" "}
-                <h1 className="my-2 duration-200 hover:text-orange-400 font-bold text-lg">
+                <h1 className="my-2 duration-200 text-green-500 hover:text-orange-400 font-bold text-lg">
                   {item?.title}
                 </h1>
               </Link>

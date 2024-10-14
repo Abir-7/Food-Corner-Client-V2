@@ -14,6 +14,7 @@ import FoodDetails from "../Pages/FoodDetailsPage/FoodDetails";
 import CartItems from "../Pages/CartPage/CartItems";
 import FavItems from "../Pages/FavItemPage/FavItems";
 import { ContactUs } from "../Pages/ContactUs/ContactUs";
+import AboutUs from "../Pages/AboutUs/AboutUs";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: "/food-item",
         element: <FoodItem />,
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs />,
       },
       { path: "/food-item/:id", element: <FoodDetails /> },
       {

@@ -14,6 +14,7 @@ import { setUser } from "../../Redux/feature/userSlice/userSlice";
 import { decodeToken } from "../../utils/decodeToken";
 import { JwtPayload } from "jwt-decode";
 import { useAppSelector } from "../../Redux/hooks";
+import ReactHelemt from "../../components/common/ReactHelmet/ReactHelemt";
 
 const Login = () => {
   const userData = useAppSelector((state) => state.auth.user);
@@ -45,6 +46,7 @@ const Login = () => {
       className="min-w-full"
       style={{ backgroundImage: `url(${bg1})`, minHeight: "100vh" }}
     >
+      <ReactHelemt title=": Login"></ReactHelemt>
       <div className="backdrop-blur-sm   w-[100%] min-h-screen p-5 ">
         {" "}
         <Link className="flex  items-center gap-1 text-orange-400" to="/">

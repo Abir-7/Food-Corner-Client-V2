@@ -11,6 +11,7 @@ import {
   useAddCuisineMutation,
 } from "../../../../Redux/api/categoryCuisineApi/categoryCuisineApi";
 import { IApiResponse } from "../../../../Redux/interface/global.interface";
+import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
 
 const AddCusineCategory = () => {
   const [addCategory] = useAddCategoryMutation();
@@ -42,6 +43,7 @@ const AddCusineCategory = () => {
 
   return (
     <div>
+      <ReactHelemt title=": Add-Cuisine/Category"></ReactHelemt>
       <SectionHeader text="Add Cuisine/Category"></SectionHeader>
 
       <div className="container mx-auto px-2">

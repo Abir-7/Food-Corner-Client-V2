@@ -5,6 +5,7 @@ import LineChart from "./LineChart";
 import PieChart from "./PieChart";
 import { useAdminDashboardInfoQuery } from "../../../Redux/api/dashboardDataApi/dashboardDataApi";
 import LoadingUi from "../../../components/common/LoadingUi/LoadingUi";
+import ReactHelemt from "../../../components/common/ReactHelmet/ReactHelemt";
 
 const AdminDashboard = () => {
   const { data, isLoading } = useAdminDashboardInfoQuery("", {
@@ -13,6 +14,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-[calc(100vh-15vh)]">
+      <ReactHelemt title=": Admin-Dashboard"></ReactHelemt>
       <SectionHeader text="Admin Dashboard"></SectionHeader>
 
       <div className="  h-full  relative">
@@ -31,7 +33,7 @@ const AdminDashboard = () => {
             <div className="flex justify-center flex-col gap-1">
               <Link
                 to={"/admin/all-orders"}
-                className="text-xl  font-bold text-red-500"
+                className="text-xl  font-bold text-orange-400"
               >
                 All Orders
               </Link>
@@ -44,7 +46,7 @@ const AdminDashboard = () => {
             <div className="flex justify-center flex-col gap-1">
               <Link
                 to={"/admin/pending-orders"}
-                className="text-xl  font-bold text-red-500"
+                className="text-xl  font-bold text-orange-400"
               >
                 Pending Orders
               </Link>

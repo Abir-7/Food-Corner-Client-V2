@@ -1,4 +1,5 @@
 import LoadingUi from "../../components/common/LoadingUi/LoadingUi";
+import ReactHelemt from "../../components/common/ReactHelmet/ReactHelemt";
 import SectionHeader from "../../components/common/SectionHeader/SectionHeader";
 import { useGetUserFavMenuQuery } from "../../Redux/api/favMenuApi/favMenuApi";
 import { useAppSelector } from "../../Redux/hooks";
@@ -12,6 +13,7 @@ const FavItems = () => {
 
   return (
     <div>
+      <ReactHelemt title=": Fav-Items"></ReactHelemt>
       <SectionHeader text="Your Favourite Items"></SectionHeader>
       {isLoading ? (
         <LoadingUi />

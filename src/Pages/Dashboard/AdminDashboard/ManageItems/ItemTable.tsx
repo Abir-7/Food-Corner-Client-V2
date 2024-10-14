@@ -70,10 +70,10 @@ const ItemTable = ({ menuItems }: { menuItems: IMenuItem[] }) => {
                     <div className="font-bold text-xl mb-1">{item.title}</div>
                     <div className="flex gap-2">
                       <span className="badge bg-green-400 text-white">
-                        {item.category}
+                        {item.category.category}
                       </span>
                       <span className="badge bg-orange-400 text-white">
-                        {item.cuisine}
+                        {item?.cuisine?.cuisine}
                       </span>
                     </div>
                   </div>
@@ -111,7 +111,9 @@ const ItemTable = ({ menuItems }: { menuItems: IMenuItem[] }) => {
                 {Object.entries(item.availableFor).map(([key, value]) => (
                   <div key={key} className="text-nowrap">
                     {key}:{" "}
-                    <span className={value ? "text-green-500" : "text-red-500"}>
+                    <span
+                      className={value ? "text-green-500" : "text-orange-400"}
+                    >
                       {value ? "Available" : "Not Available"}
                     </span>
                   </div>
@@ -134,7 +136,7 @@ const ItemTable = ({ menuItems }: { menuItems: IMenuItem[] }) => {
                   <label
                     onClick={() => setDeleteId(item._id)}
                     htmlFor="my_modal_1"
-                    className="bg-red-500 text-sm w-9 h-7 flex justify-center items-center rounded-lg text-white hover:bg-red-600 duration-300"
+                    className="bg-orange-400 text-sm w-9 h-7 flex justify-center items-center rounded-lg text-white hover:bg-orange-400 duration-300"
                   >
                     <FaTrash />
                   </label>

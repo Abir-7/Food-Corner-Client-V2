@@ -12,8 +12,12 @@ const CartCard = ({ itemData }: { itemData: ICartItem }) => {
   return (
     <div className="border border-orange-400 rounded-lg flex p-3 gap-5 flex-wrap justify-between items-center  ">
       <div className=" flex gap-2 items-center ">
-        <div className="w-20 h-20 rounded-lg bg-red-500">
-          <img className="w-20 h-20 rounded-md" src={itemData?.photo} alt="" />
+        <div className="w-20 h-20 rounded-lg bg-orange-400">
+          <img
+            className="w-20 h-20 object-cover rounded-md"
+            src={itemData?.photo}
+            alt=""
+          />
         </div>
         <div>
           <div className="font-bold text-nowrap text-orange-400">
@@ -42,7 +46,7 @@ const CartCard = ({ itemData }: { itemData: ICartItem }) => {
           onClick={() =>
             dispatch(decreassItem({ id: itemData.id, size: itemData.size }))
           }
-          className="font-semibold w-6 h-6 text-white flex justify-center items-center text-sm rounded-full bg-red-500"
+          className="font-semibold w-6 h-6 text-white flex justify-center items-center text-sm rounded-full bg-orange-400"
         >
           <FaMinus></FaMinus>
         </button>
@@ -60,7 +64,7 @@ const CartCard = ({ itemData }: { itemData: ICartItem }) => {
 
         <div
           onClick={() => dispatch(removeItemFromCart(itemData.id))}
-          className=" w-7 ms-5   h-7 flex justify-center text-sm items-center  text-red-500 bg-white hover:bg-red-500 hover:text-white duration-200 top-[-10px]  border border-red-500 p-1 rounded-full"
+          className=" w-7 ms-5   h-7 flex justify-center text-sm items-center  text-orange-400 bg-white hover:bg-orange-400 hover:text-white duration-200 top-[-10px]  border border-red-500 p-1 rounded-full"
         >
           <FaTrash></FaTrash>
         </div>

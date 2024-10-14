@@ -5,6 +5,7 @@ import ManageItem from "../../Pages/Dashboard/AdminDashboard/ManageItems/ManageI
 import Allorders from "../../Pages/Dashboard/AdminDashboard/AllOrders/Allorders";
 import AddCusineCategory from "../../Pages/Dashboard/AdminDashboard/AddCuisineCategory/AddCusineCategory";
 import { ManageCuisineCategory } from "../../Pages/Dashboard/AdminDashboard/EditCategoryCuisine/ManageCuisineCategory";
+import UserMessage from "../../Pages/Dashboard/AdminDashboard/UserMessage/UserMessage";
 
 export const adminRouteOption = [
   {
@@ -52,5 +53,10 @@ export const adminRouteOption = [
         element: <PendingOrders />,
       },
     ],
+  },
+  {
+    name: "User Queries",
+    path: "user-msg",
+    element: <UserMessage />,
   },
 ];

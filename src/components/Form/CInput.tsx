@@ -40,7 +40,7 @@ const CInput = ({
         </div>
 
         {errors[name] && (
-          <p className="text-red-500 text-sm">
+          <p className="text-orange-400 text-sm">
             {(errors[name] as any).message}
           </p>
         )}

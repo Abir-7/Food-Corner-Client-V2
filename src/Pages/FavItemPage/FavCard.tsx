@@ -25,8 +25,12 @@ const FavCard = ({ itemData }: { itemData: IProduct }) => {
   return (
     <div className="border border-orange-400 rounded-lg flex p-3 gap-5 flex-wrap justify-between items-center relative ">
       <div className=" flex gap-2 items-center ">
-        <div className="w-20 h-20 rounded-lg bg-red-500">
-          <img className="w-20 h-20 rounded-md" src={itemData?.photo} alt="" />
+        <div className="w-20 h-20 rounded-lg bg-orange-400">
+          <img
+            className="w-20 object-cover h-20 rounded-md"
+            src={itemData?.photo}
+            alt=""
+          />
         </div>
         <div>
           <div className="font-bold text-nowrap text-orange-400">
@@ -64,7 +68,7 @@ const FavCard = ({ itemData }: { itemData: IProduct }) => {
               photo: itemData.photo,
             })
           }
-          className="btn border-none hover:bg-orange-500 text-white bg-orange-400 w-20 btn-sm"
+          className="btn border-none hover:bg-orange-400 text-white bg-orange-400 w-20 btn-sm"
         >
           <FaCartPlus></FaCartPlus>
         </button>
@@ -78,7 +82,7 @@ const FavCard = ({ itemData }: { itemData: IProduct }) => {
             }
             setPId(itemData._id); // Remove the item from favorites
           }}
-          className=" w-7  ms-auto h-7 flex justify-center text-sm items-center  text-red-500 bg-white hover:bg-red-500 hover:text-white duration-200 top-[-10px]  border border-red-500 p-1 rounded-full"
+          className=" w-7  ms-auto h-7 flex justify-center text-sm items-center  text-orange-400 bg-white hover:bg-orange-400 hover:text-white duration-200 top-[-10px]  border border-red-500 p-1 rounded-full"
         >
           <FaTrash></FaTrash>
         </button>
@@ -92,7 +96,7 @@ const FavCard = ({ itemData }: { itemData: IProduct }) => {
             <div className="flex justify-end gap-3">
               <button
                 onClick={() => removeItemFromFav(pId)}
-                className="btn btn-sm text-white hover:bg-red-600 bg-red-500 "
+                className="btn btn-sm text-white hover:bg-orange-400 bg-orange-400 "
               >
                 yes
               </button>

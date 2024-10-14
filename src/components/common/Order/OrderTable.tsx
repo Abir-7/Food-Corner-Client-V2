@@ -19,7 +19,7 @@ export const OrderTable = ({
   openModal,
 }: OrderTableProps) => {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto custom-scrollbar">
       <table className="table w-full">
         <thead>
           <tr>
@@ -107,7 +107,7 @@ export const OrderTable = ({
                           })
                         }
                         className="btn
-                    btn-sm bg-orange-400 hover:bg-orange-500 text-white duration-300"
+                    btn-sm bg-orange-400 hover:bg-orange-400 text-white duration-300"
                       >
                         Give Review
                       </button>

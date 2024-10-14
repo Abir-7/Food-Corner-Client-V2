@@ -10,6 +10,7 @@ import { useCreateUserMutation } from "../../Redux/api/authApi/authApi";
 import { IApiResponse } from "../../Redux/interface/global.interface";
 import { toast } from "sonner";
 import { useAppSelector } from "../../Redux/hooks";
+import ReactHelemt from "../../components/common/ReactHelmet/ReactHelemt";
 
 const Signup = () => {
   const userData = useAppSelector((state) => state.auth.user);
@@ -39,6 +40,7 @@ const Signup = () => {
       className="min-w-full"
       style={{ backgroundImage: `url(${bg1})`, minHeight: "100vh" }}
     >
+      <ReactHelemt title=": Signup"></ReactHelemt>
       <div className="backdrop-blur-sm   w-[100%] min-h-screen p-5 ">
         {" "}
         <Link className="flex  items-center gap-1 text-orange-400" to="/">

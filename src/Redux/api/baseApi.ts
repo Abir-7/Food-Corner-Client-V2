@@ -12,6 +12,7 @@ import { userLogout } from "../feature/userSlice/userSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:3000/api/v1",
+  // baseUrl: "https://food-corner-back-end-mern.vercel.app/api/v1",
   credentials: "include",
 
   prepareHeaders: (headers, api) => {
@@ -33,8 +34,6 @@ const customBaseApiQuery: BaseQueryFn<
     toast.error(result.error?.data?.message);
   }
   if (result.error?.status === 401) {
-    api.dispatch(userLogout());
-
     // const res = await fetch("http://localhost:3000/api/v1/auth/refresh-token", {
     //   method: "POST",
     //   credentials: "include",
@@ -67,6 +66,7 @@ export const baseApi = createApi({
     "category",
     "cuisine",
     "ratingus",
+    "msg",
   ],
   endpoints: () => ({}),
 });

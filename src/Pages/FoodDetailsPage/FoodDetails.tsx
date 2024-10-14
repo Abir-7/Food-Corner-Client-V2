@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import { FoodDetailsContent } from "./FoodDetailsContent";
 import LoadingUi from "../../components/common/LoadingUi/LoadingUi";
+import ReactHelemt from "../../components/common/ReactHelmet/ReactHelemt";
 
 const FoodDetails = () => {
   const [index, setIndex] = useState(0);
@@ -18,6 +19,7 @@ const FoodDetails = () => {
   console.log(menuDetails);
   return (
     <div>
+      <ReactHelemt title=": Menu-Details"></ReactHelemt>
       <SectionHeader text="Menu Details" />
       {isLoading ? (
         <LoadingUi />

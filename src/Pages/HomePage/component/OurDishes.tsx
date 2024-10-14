@@ -43,9 +43,9 @@ const OurDishes = () => {
               )
             }
             to={"/food-item"}
-            className="text-green-500 font-semibold"
+            className="text-green-500 text-sm me-1 md:me-0 font-semibold"
           >
-            VIEW MORE
+            VIEW MORE {"->"}
           </Link>
         </div>
       </div>

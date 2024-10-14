@@ -42,12 +42,12 @@ const DashboardLayout = () => {
   }
 
   return (
-    <div className="drawer lg:drawer-open ">
+    <div className="drawer   lg:drawer-open  ">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content relative  ">
         <label
           htmlFor="my-drawer-2"
-          className=" flex justify-center items-center text-white text-xl rounded-md absolute top-12 left-1 z-[1] bg-orange-400 shadow-md  w-12 h-10 drawer-button lg:hidden"
+          className=" flex justify-center items-center text-white text-xl rounded-md absolute top-6 left-1 z-[1] bg-orange-300 shadow-md  w-12 h-10 drawer-button lg:hidden"
         >
           <FaArrowAltCircleRight></FaArrowAltCircleRight>
         </label>
@@ -60,12 +60,13 @@ const DashboardLayout = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="menu   bg-orange-400 flex flex-col gap-3 text-base-content min-h-full w-72 p-4">
+
+        <div className="menu bg-orange-400 border-r-2 border-white-400   flex flex-col gap-3 text-base-content h-full w-72 p-4">
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "bg-slate-100 text-orange-400 font-semibold px-3 py-2 rounded"
-                : "px-3 py-2 hover:bg-orange-300  bg-orange-400 text-white font-semibold border border-white rounded  shadow"
+                ? "bg-orange-400 border-2 border-white rounded-md p-2 text-white "
+                : "  bg-white  text-orange-400  border-2 border-white hover:bg-orange-400 hover:text-white p-2 rounded-md duration-300 z-10 "
             } // Apply styles based on active state
             to="/"
           >
@@ -78,8 +79,8 @@ const DashboardLayout = () => {
                   key={item.key}
                   className={({ isActive }) =>
                     isActive
-                      ? "bg-slate-100 text-orange-400 font-semibold px-3 py-2 rounded"
-                      : "px-3 py-2 hover:bg-orange-300  bg-orange-400 text-white font-semibold border border-white rounded  shadow"
+                      ? "bg-orange-400 border-2 border-white rounded-md p-2 text-white "
+                      : "  bg-white  text-orange-400  border-2 border-white hover:bg-orange-400 hover:text-white p-2 rounded-md duration-300 z-10 "
                   } // Apply styles based on active state
                   to={item.label}
                 >
@@ -100,8 +101,8 @@ const DashboardLayout = () => {
                           key={item.key}
                           className={({ isActive }) =>
                             isActive
-                              ? "bg-slate-100 text-orange-400 font-semibold px-3 py-2 rounded"
-                              : "px-3 py-2 hover:bg-orange-300  bg-orange-400 text-white font-semibold border border-white rounded  shadow"
+                              ? "bg-orange-400 border-2 border-white rounded-md p-2 text-white "
+                              : "  bg-white  text-orange-400  border-2 border-white hover:bg-orange-400 hover:text-white p-2 rounded-md duration-300 z-10 "
                           }
                           to={item.label}
                         >

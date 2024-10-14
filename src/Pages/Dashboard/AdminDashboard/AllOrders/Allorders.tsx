@@ -3,6 +3,7 @@ import LoadingUi from "../../../../components/common/LoadingUi/LoadingUi";
 import { OrderTable } from "../../../../components/common/Order/OrderTable";
 import SectionHeader from "../../../../components/common/SectionHeader/SectionHeader";
 import { useGetAllUserOrdersQuery } from "../../../../Redux/api/orderApi/orderApi";
+import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
 
 const Allorders = () => {
   const [filterOptions, setFilterOptions] = useState<
@@ -36,6 +37,7 @@ const Allorders = () => {
 
   return (
     <div>
+      <ReactHelemt title=": All-Orders"></ReactHelemt>
       <SectionHeader text="All users order"></SectionHeader>
       <div>
         <div className="flex gap-2 my-5 mx-2">

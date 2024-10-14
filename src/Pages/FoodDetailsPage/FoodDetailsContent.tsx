@@ -55,7 +55,7 @@ export const FoodDetailsContent = ({
       {menuDetails ? (
         <div className="grid my-10 justify-items-center md:justify-items-stretch md:grid-cols-2 max-w-6xl mx-auto px-2">
           <div className="w-80 ">
-            <div className="w-80 h-80 rounded-lg bg-red-400">
+            <div className="w-80 h-80 rounded-lg bg-orange-400">
               <img
                 className="w-80 h-80 rounded-lg object-cover"
                 src={menuDetails?.photo}
@@ -65,7 +65,7 @@ export const FoodDetailsContent = ({
             <div className="mt-5 mb-3 flex justify-center md:justify-end">
               <button
                 onClick={() => setIsCommentOpen(!isCommentOpen)}
-                className="btn btn-sm bg-orange-400 border-none outline-none text-white hover:bg-orange-500"
+                className="btn btn-sm bg-orange-400 border-none outline-none text-white hover:bg-orange-400"
               >
                 See Reviews
               </button>
@@ -152,14 +152,14 @@ export const FoodDetailsContent = ({
                 {menuDetails.inStock ? (
                   <span className="text-green-500">available</span>
                 ) : (
-                  <span className="text-red-500">unavailable</span>
+                  <span className="text-orange-400">unavailable</span>
                 )}{" "}
               </p>
 
               {menuDetails?.limitedStatus?.isLimited && (
                 <p className="mt-2 mb-3 list-disc">
                   {" "}
-                  <span className="text-red-500 font-bold">
+                  <span className="text-orange-400 font-bold">
                     Available Quantity:
                   </span>{" "}
                   <span className="text-green-500 font-semibold">
@@ -179,7 +179,7 @@ export const FoodDetailsContent = ({
                       <button
                         disabled={amount == 0 || !menuDetails.inStock}
                         onClick={() => setAmount((prev) => prev - 1)}
-                        className="w-10 h-7 text-white flex justify-center items-center bg-red-500 rounded-full btn btn-sm border-none hover:bg-red-600"
+                        className="w-10 h-7 text-white flex justify-center items-center bg-orange-400 rounded-full btn btn-sm border-none hover:bg-orange-400"
                       >
                         <FaMinus></FaMinus>
                       </button>
@@ -216,7 +216,7 @@ export const FoodDetailsContent = ({
                             photo: menuDetails.photo,
                           })
                         }
-                        className="btn btn-sm bg-orange-400 hover:bg-orange-500 duration-200 w-40  font-bold border-none text-white h-10 rounded-lg"
+                        className="btn btn-sm bg-orange-400 hover:bg-orange-400 duration-200 w-40  font-bold border-none text-white h-10 rounded-lg"
                       >
                         Add Cart
                       </button>

@@ -15,6 +15,7 @@ import { CFormButton } from "../../../../components/Form/CFormButton";
 import { FieldValues } from "react-hook-form";
 import { IApiResponse } from "../../../../Redux/interface/global.interface";
 import { toast } from "sonner";
+import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
 
 export const ManageCuisineCategory = () => {
   const { data: categories } = useGetAllCategoryQuery("");
@@ -57,6 +58,7 @@ export const ManageCuisineCategory = () => {
 
   return (
     <div>
+      <ReactHelemt title=": Edit-Category/cuisine"></ReactHelemt>
       <SectionHeader text="Manage Category/Cuisine"></SectionHeader>
       <div className=" grid sm:grid-cols-2 gap-5 my-10 px-2">
         <div className=" ">

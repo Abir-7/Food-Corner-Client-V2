@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { filterMenuAvailable } from "../../Redux/feature/menuFiltterSlice/menuFilterSlice";
 import { useDebounce } from "../../hook/useDebounce";
 import { useGetAllCategoryQuery } from "../../Redux/api/categoryCuisineApi/categoryCuisineApi";
+import ReactHelemt from "../../components/common/ReactHelmet/ReactHelemt";
 
 const FoodItem = () => {
   const { data: categories } = useGetAllCategoryQuery("");
@@ -26,7 +27,7 @@ const FoodItem = () => {
     minPrice: "",
     maxPrice: "",
     page: 1,
-    limit: 1,
+    limit: 6,
     availableFor: menuAvailableTime || "",
   });
 
@@ -67,6 +68,7 @@ const FoodItem = () => {
 
   return (
     <>
+      <ReactHelemt title=": All-Menu"></ReactHelemt>
       <SectionHeader text="Food Menu" />
 
       {/* Search and Filter Section */}

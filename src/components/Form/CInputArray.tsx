@@ -63,7 +63,7 @@ const CInputArray = ({ name, errorMsg, labelStyle, options }: InputProps) => {
                 type={option.type} // Use dynamic type
               />
               {(errors as any)[name]?.[index]?.[option.name] && (
-                <p className="text-red-500 text-sm">
+                <p className="text-orange-400 text-sm">
                   {(errors as any)[name][index][option.name].message}
                 </p>
               )}
@@ -73,7 +73,7 @@ const CInputArray = ({ name, errorMsg, labelStyle, options }: InputProps) => {
           {/* Remove Button */}
           {fields.length > 1 && (
             <button
-              className="btn bg-red-500 text-white mt-4 w-44 hover:bg-red-600 btn-sm"
+              className="btn bg-orange-400 text-white mt-4 w-44 hover:bg-orange-400 btn-sm"
               type="button"
               onClick={(e) => {
                 e.preventDefault();

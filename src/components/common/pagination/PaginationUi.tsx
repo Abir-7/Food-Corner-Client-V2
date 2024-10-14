@@ -46,7 +46,7 @@ const PaginationUi = ({
   return (
     <div className="join">
       <button
-        className="join-item btn btn-sm bg-orange-400 hover:bg-orange-500 text-white "
+        className="join-item btn btn-sm bg-orange-400 hover:bg-orange-400 text-white "
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
@@ -55,9 +55,9 @@ const PaginationUi = ({
       {pageNumbers.map((pageNum, index) => (
         <button
           key={index}
-          className={`join-item btn btn-sm bg-orange-400 hover:bg-orange-500 text-white ${
+          className={`join-item btn btn-sm bg-orange-400 hover:bg-orange-400 text-white ${
             pageNum === "..." ? "btn-disabled" : ""
-          } ${pageNum === currentPage ? "bg-orange-500 text-white" : ""}`}
+          } ${pageNum === currentPage ? "bg-orange-400 text-white" : ""}`}
           disabled={pageNum === "..."}
           onClick={() => typeof pageNum === "number" && onPageChange(pageNum)}
         >
@@ -65,7 +65,7 @@ const PaginationUi = ({
         </button>
       ))}
       <button
-        className="join-item btn btn-sm bg-orange-400 hover:bg-orange-500 text-white"
+        className="join-item btn btn-sm bg-orange-400 hover:bg-orange-400 text-white"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >

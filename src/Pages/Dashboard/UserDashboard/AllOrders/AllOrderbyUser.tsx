@@ -13,6 +13,7 @@ import CTextArea from "../../../../components/Form/CTextArea";
 import { useAddRatingMutation } from "../../../../Redux/api/ratingApi/ratingApi";
 import { IApiResponse } from "../../../../Redux/interface/global.interface";
 import { toast } from "sonner";
+import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
 
 const AllOrderbyUser = () => {
   const [addRating] = useAddRatingMutation();
@@ -73,6 +74,7 @@ const AllOrderbyUser = () => {
   console.log(items);
   return (
     <div>
+      <ReactHelemt title=": All-Orders"></ReactHelemt>
       <SectionHeader text="Your Orders"></SectionHeader>
       {isLoading ? (
         <LoadingUi></LoadingUi>
@@ -126,13 +128,13 @@ const AllOrderbyUser = () => {
               <div className="flex mt-4  justify-between items-center">
                 <button
                   type="submit"
-                  className="btn bg-orange-400 text-white hover:bg-orange-500 duration-300 btn-sm  "
+                  className="btn bg-orange-400 text-white hover:bg-orange-400 duration-300 btn-sm  "
                 >
                   Submit
                 </button>
                 <button
                   type="button"
-                  className="btn btn-sm bg-red-500 text-white hover:bg-red-600 duration-300 "
+                  className="btn btn-sm bg-orange-400 text-white hover:bg-orange-400 duration-300 "
                   onClick={closeModal}
                 >
                   close

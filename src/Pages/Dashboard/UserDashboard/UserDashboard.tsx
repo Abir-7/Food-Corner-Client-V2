@@ -1,4 +1,5 @@
 import LoadingUi from "../../../components/common/LoadingUi/LoadingUi";
+import ReactHelemt from "../../../components/common/ReactHelmet/ReactHelemt";
 import SectionHeader from "../../../components/common/SectionHeader/SectionHeader";
 import {
   IOrderProduct,
@@ -12,7 +13,8 @@ const UserDashboard = () => {
   });
   console.log(data);
   return (
-    <div className="border min-h-[100vh]">
+    <div className=" min-h-[100vh]">
+      <ReactHelemt title=": User-Dashboard"></ReactHelemt>
       <SectionHeader text="User Dashboard"></SectionHeader>
 
       <div className="relative min-h-[calc(100vh-15.3vh)] ">
@@ -31,7 +33,7 @@ const UserDashboard = () => {
             <div className="w-80 h-32  border-2 rounded-lg  border-orange-400 flex justify-center items-center">
               <div className="flex justify-center flex-col gap-1">
                 <p className="text-xl  font-bold ">Pending Orders</p>
-                <p className="text-red-500 text-center font-bold text-3xl">
+                <p className="text-orange-400 text-center font-bold text-3xl">
                   {data?.data?.pendingOrderCount}
                 </p>
               </div>

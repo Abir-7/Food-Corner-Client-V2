@@ -237,7 +237,7 @@ const MenuEditForm = ({
                   ></CInputObject>
                 )}
               <button
-                className="btn my-4 btn-sm border-none hover:bg-orange-500 w-full text-white bg-orange-400"
+                className="btn my-4 btn-sm border-none hover:bg-orange-400 w-full text-white bg-orange-400"
                 type="submit"
               >
                 Update

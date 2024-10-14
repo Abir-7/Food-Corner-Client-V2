@@ -8,6 +8,7 @@ import {
   useUpdateOrderMutation,
 } from "../../../../Redux/api/orderApi/orderApi";
 import { IApiResponse } from "../../../../Redux/interface/global.interface";
+import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
 
 const PendingOrders = () => {
   const { data, isLoading } = useGetAllPendingOrdersQuery("", {
@@ -28,6 +29,7 @@ const PendingOrders = () => {
 
   return (
     <div className="">
+      <ReactHelemt title=": Pending-Orders"></ReactHelemt>
       <SectionHeader text="Pending Orders" />
       <div className="flex flex-col space-y-4 mt-4 mx-2">
         {isLoading ? (

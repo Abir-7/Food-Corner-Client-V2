@@ -21,7 +21,7 @@ export const CRating = () => {
           <>
             <Rating {...field} style={{ maxWidth: 100 }}></Rating>
             {fieldState.error && (
-              <span className="text-red-500 text-sm">
+              <span className="text-orange-400 text-sm">
                 {fieldState.error.message}
               </span>
             )}

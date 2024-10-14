@@ -1,5 +1,6 @@
 import LoadingUi from "../../../../components/common/LoadingUi/LoadingUi";
 import { OrderTable } from "../../../../components/common/Order/OrderTable";
+import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
 import SectionHeader from "../../../../components/common/SectionHeader/SectionHeader";
 import { useUserAllPendingOrdersQuery } from "../../../../Redux/api/orderApi/orderApi";
 
@@ -12,6 +13,7 @@ const PendingUserOrders = () => {
 
   return (
     <div>
+      <ReactHelemt title=": Pending-Orders"></ReactHelemt>
       <SectionHeader text="Pending Orders"></SectionHeader>
       {isLoading ? (
         <LoadingUi></LoadingUi>

@@ -1,47 +1,48 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import Modal from "../../components/common/modal/Modal";
-import CForm from "../../components/Form/CForm";
-import { CRating } from "../../components/Form/CRating";
-import CTextArea from "../../components/Form/CTextArea";
-import { FieldValues } from "react-hook-form";
-import { useAddRatingUsMutation } from "../../Redux/api/ratingApi/ratingApi";
-import { IApiResponse } from "../../Redux/interface/global.interface";
-import { toast } from "sonner";
 
-const Reviews = () => {
+import { FieldValues } from "react-hook-form";
+
+import { toast } from "sonner";
+import Modal from "../../../../components/common/modal/Modal";
+import CForm from "../../../../components/Form/CForm";
+import CTextArea from "../../../../components/Form/CTextArea";
+import { useReplyMsgMutation } from "../../../../Redux/api/contactUsApi/contactUsApi";
+import SectionHeader from "../../../../components/common/SectionHeader/SectionHeader";
+import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
+
+const ReplyModal = ({ id }: { id: string }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [addRaringUs] = useAddRatingUsMutation();
+  const [replyMsg] = useReplyMsgMutation();
   const onFormSubmit = async (data: FieldValues) => {
-    const res = (await addRaringUs(data)) as IApiResponse<any>;
+    console.log(data);
+    const res = await replyMsg({ data, id });
     if (res?.data?.success) {
-      toast.success(res.data.message);
+      toast.success(res?.data?.message);
     }
   };
   return (
     <div>
-      {" "}
+      <ReactHelemt title=": User-Queries"></ReactHelemt>
+      <SectionHeader text="User Queries"></SectionHeader>{" "}
       <div className="flex justify-center my-10  ">
         <button
           onClick={() => setIsOpen(true)}
           className="btn btn-sm bg-orange-400 text-white hover:bg-orange-400"
         >
-          Give Review
+          Reply
         </button>
       </div>
       <div>
         <Modal isOpen={isOpen}>
           <div>
-            <p className="text-xl font-bold text-orange-400">
-              Give Review About Us
-            </p>
+            <p className="text-xl font-bold text-orange-400">Give Reply</p>
             <div>
               <CForm onFormSubmit={onFormSubmit}>
-                <CRating></CRating>
                 <CTextArea
-                  errorMsg="Comment is required"
-                  label="Comment"
-                  name="comment"
+                  errorMsg="This field is required"
+                  label=""
+                  name="repliedMsg"
                 ></CTextArea>
                 <div className="flex mt-4  justify-between items-center">
                   <button
@@ -67,4 +68,4 @@ const Reviews = () => {
   );
 };
 
-export default Reviews;
+export default ReplyModal;

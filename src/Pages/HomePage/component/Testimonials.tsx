@@ -27,11 +27,15 @@ export const Testimonials = () => {
         </p>
         <div className="flex gap-5 mt-2">
           <div>
-            <h1 className="text-5xl font-bold text-green-600">15k+</h1>
+            <h1 className="text-5xl font-bold text-green-600">
+              {data?.data?.totalCustomer}+
+            </h1>
             <p className="font-bold">Happy Customers</p>
           </div>
           <div>
-            <h1 className="text-5xl font-bold text-green-600">30+</h1>
+            <h1 className="text-5xl font-bold text-green-600">
+              {data?.data?.totalMenu}+
+            </h1>
             <p className="font-bold">Food Menu</p>
           </div>
         </div>
@@ -59,7 +63,7 @@ export const Testimonials = () => {
           }}
           className="mySwiper"
         >
-          {(data?.data as IRateUs[])?.map((cmt, n: number) => {
+          {(data?.data?.result as IRateUs[])?.map((cmt, n: number) => {
             return (
               <SwiperSlide key={n}>
                 <div className=" flex items-center flex-col ">

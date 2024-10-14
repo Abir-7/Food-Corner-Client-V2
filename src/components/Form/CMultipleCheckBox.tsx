@@ -56,7 +56,7 @@ const CMultipleCheckBox = ({
         ))}
       </div>
       {errors[name] && (
-        <p className="text-red-500">{(errors as any)[name]?.message}</p>
+        <p className="text-orange-400">{(errors as any)[name]?.message}</p>
       )}
     </div>
   );

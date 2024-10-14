@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues } from "react-hook-form";
 import SectionHeader from "../../components/common/SectionHeader/SectionHeader";
 import CForm from "../../components/Form/CForm";
@@ -6,15 +7,26 @@ import CTextArea from "../../components/Form/CTextArea";
 import { FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import Reviews from "./Reviews";
+import { useSaveMsgMutation } from "../../Redux/api/contactUsApi/contactUsApi";
+import { IApiResponse } from "../../Redux/interface/global.interface";
+import { toast } from "sonner";
+import { CFormButton } from "../../components/Form/CFormButton";
+import ReactHelemt from "../../components/common/ReactHelmet/ReactHelemt";
 
 export const ContactUs = () => {
+  const [saveMsg, { isLoading }] = useSaveMsgMutation();
   const onFormSubmit = async (data: FieldValues) => {
     console.log(data);
+    const res = (await saveMsg(data)) as IApiResponse<any>;
+    if (res?.data?.success) {
+      toast.success(res?.data?.message);
+    }
   };
 
   return (
     <div className="">
-      <SectionHeader text="Contact Us"></SectionHeader>
+      <ReactHelemt title=": Contact us"></ReactHelemt>
+      <SectionHeader text="Contact-Us"></SectionHeader>
 
       <div className="container mx-auto px-5 mt-10 grid md:grid-cols-2 items-center gap-10 md:gap-20 ">
         <div className="w-full">
@@ -23,15 +35,14 @@ export const ContactUs = () => {
             <CInput
               label="Email"
               errorMsg="Email is Required"
-              name="userEmail"
+              name="email"
             ></CInput>
             <CTextArea name="message" label="Message"></CTextArea>
-            <button
-              type="submit"
-              className="btn w-full btn-sm text-white bg-orange-400 my-4 hover:bg-orange-500"
-            >
-              Send
-            </button>
+            <CFormButton
+              isLoading={isLoading}
+              btnStyle="w-full"
+              text="Send"
+            ></CFormButton>
           </CForm>
         </div>
         <div className="space-y-5 md:mx-auto  mb-10">

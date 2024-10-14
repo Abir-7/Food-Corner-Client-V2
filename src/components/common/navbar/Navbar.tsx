@@ -4,6 +4,7 @@ import { decodeToken } from "../../../utils/decodeToken";
 import { JwtPayload } from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { userLogout } from "../../../Redux/feature/userSlice/userSlice";
+import logo from "../../../assets/logo.png";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -23,8 +24,8 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? "bg-orange-400 text-white  px-3 py-1 rounded"
-              : "px-3 py-1  relative hover:bg-orange-400 hover:text-white rounded-md duration-300 z-10 text-black"
+              ? "bg-orange-400 hover:bg-orange-400  border-none shadow-none outline-none btn btn-sm text-white  px-3 py-1 "
+              : "   bg-transparent hover:text-white hover:bg-orange-400 outline-none shadow-none text-orange-400 border-none  btn btn-sm  duration-300 z-10 "
           } // Apply styles based on active state
         >
           Home
@@ -35,33 +36,22 @@ const Navbar = () => {
           to="/food-item"
           className={({ isActive }) =>
             isActive
-              ? "bg-orange-400 text-white  px-3 py-1 rounded"
-              : "px-3 py-1 relative hover:bg-orange-400 hover:text-white rounded-md duration-300 z-10 text-black"
+              ? "bg-orange-400 hover:bg-orange-400  border-none shadow-none outline-none btn btn-sm text-white  px-3 py-1 "
+              : "   bg-transparent hover:text-white hover:bg-orange-400 outline-none shadow-none text-orange-400 border-none  btn btn-sm  duration-300 z-10 "
           } // Apply styles based on active state
         >
           Food Item
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/contact-us"
-          className={({ isActive }) =>
-            isActive
-              ? "bg-orange-400 text-white  px-3 py-1 rounded"
-              : "px-3 py-1 relative hover:bg-orange-400 hover:text-white rounded-md duration-300 z-10 text-black"
-          } // Apply styles based on active state
-        >
-          Contuct Us
-        </NavLink>
-      </li>
+
       <li>
         {token && (
           <NavLink
             to={`/${user?.role}/dashboard`}
             className={({ isActive }) =>
               isActive
-                ? "bg-orange-400 text-white  px-3 py-1 rounded"
-                : "px-3 py-1  relative hover:bg-orange-400 hover:text-white rounded-md duration-300 z-10 text-black"
+                ? "bg-orange-400 hover:bg-orange-400  border-none shadow-none outline-none btn btn-sm text-white  px-3 py-1 "
+                : "   bg-transparent hover:text-white hover:bg-orange-400 outline-none shadow-none text-orange-400 border-none  btn btn-sm  duration-300 z-10 "
             } // Apply styles based on active state
           >
             Dashboard
@@ -71,10 +61,14 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar  bg-orange-400 font-medium ">
+    <div className="navbar   font-medium ">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div
+            tabIndex={0}
+            role="button"
+            className="ms-1 bg-none text-orange-400 lg:hidden"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -92,28 +86,46 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className=" flex flex-col gap-3 dropdown-content z-10 bg-orange-50  rounded-box  mt-3 w-52 py-3 px-5 shadow"
+            className=" flex flex-col gap-3 dropdown-content z-10 bg-white rounded-box  mt-3 w-52 py-3 px-5 shadow"
           >
             {navLink}
           </ul>
         </div>
-        <a className="px-2 font-bold cursor-pointer text-xl">FOOD-CORNER</a>
+        <Link
+          to={"/"}
+          className="px-2 flex items-center font-bold cursor-pointer text-xl text-orange-400"
+        >
+          <img width={50} src={logo} alt="" />
+          <p>FOOD-CORNER</p>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className=" flex gap-5 relative px-1">{navLink}</ul>
       </div>
       <div className="navbar-end">
         {user?.userEmail ? (
-          <button
-            onClick={() => dispatch(userLogout())}
-            className="btn btn-sm text-white bg-orange-400 border-none "
-          >
-            Logout
-          </button>
+          <details className="dropdown p-0 m-0 dropdown-end">
+            <summary className="avatar m-1">
+              <div className="w-10 rounded-full">
+                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+              </div>
+            </summary>
+            <ul className="menu grid gap-2 dropdown-content bg-base-100 rounded-box z-[1] w-32 p-2 shadow">
+              <li>
+                <a>Item 1</a>
+              </li>
+              <li
+                onClick={() => dispatch(userLogout())}
+                className="btn hover:bg-orange-500 btn-sm text-white bg-orange-400 border-none "
+              >
+                Logout
+              </li>
+            </ul>
+          </details>
         ) : (
           <Link
             to="/user-login"
-            className="btn btn-sm text-white bg-orange-400 border-none "
+            className="btn btn-sm hover:bg-orange-500 text-white bg-orange-400 border-none "
           >
             Login
           </Link>

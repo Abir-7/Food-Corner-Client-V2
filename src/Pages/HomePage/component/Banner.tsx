@@ -3,7 +3,7 @@ import img2 from "../../../assets/BgImage/bg.jpg";
 const Banner = () => {
   return (
     <div
-      className="  hero relative min-h-[60vh] md:min-h-[80vh] px-3 py-5 "
+      className="  hero relative min-h-[590px] xl:min-h-[700px] px-3 py-5 "
       style={{ backgroundImage: `url(${img2})` }}
     >
       <div className="lg:absolute lg:left-[150px] lg:bottom-1/2 md:left-[100px] md:top-25 lg:top-28 text-center lg:text-left">
@@ -14,7 +14,7 @@ const Banner = () => {
           Satisfy Your Cravings
         </p>
         <div className="">
-          <button className="btn outline-none bg-orange-400 border-none hover:bg-orange-500 text-white  duration-500 ">
+          <button className="btn  hover:bg-orange-500  outline-none bg-orange-400 border-none  text-white  duration-500 ">
             <Link to="/food-item">Explore Now</Link>
           </button>
         </div>

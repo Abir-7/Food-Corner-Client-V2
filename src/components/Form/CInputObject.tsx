@@ -43,7 +43,7 @@ const CInputObject = ({
 
         {/* Display error message for the specific option */}
         {(errors as any)[name]?.[option] && (
-          <p className="text-red-500 text-sm">
+          <p className="text-orange-400 text-sm">
             {(errors[name] as any)[option]?.message}
           </p>
         )}

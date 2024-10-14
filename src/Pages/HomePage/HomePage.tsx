@@ -1,3 +1,4 @@
+import ReactHelemt from "../../components/common/ReactHelmet/ReactHelemt";
 import Banner from "./component/Banner";
 import NewsLetter from "./component/NewsLetter";
 import OurDishes from "./component/OurDishes";
@@ -8,6 +9,7 @@ import { TopRatedItem } from "./component/TopRatedItem";
 const HomePage = () => {
   return (
     <div>
+      <ReactHelemt title=""></ReactHelemt>
       <Banner></Banner>
       <OurDishes></OurDishes>
       <OurServices></OurServices>

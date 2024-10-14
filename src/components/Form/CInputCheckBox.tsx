@@ -34,7 +34,9 @@ const CInputCheckBox = ({
       </div>
 
       {errors[name] && (
-        <p className="text-red-500 text-sm">{(errors[name] as any).message}</p>
+        <p className="text-orange-400 text-sm">
+          {(errors[name] as any).message}
+        </p>
       )}
     </div>
   );

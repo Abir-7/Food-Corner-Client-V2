@@ -18,6 +18,7 @@ import {
   useGetAllCategoryQuery,
   useGetAllCuisineQuery,
 } from "../../../../Redux/api/categoryCuisineApi/categoryCuisineApi";
+import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
 
 const AddItem = () => {
   const { data: categories, isLoading: isCategoryLoading } =
@@ -66,6 +67,7 @@ const AddItem = () => {
 
   return (
     <div className="w-full">
+      <ReactHelemt title=": Add-Menu"></ReactHelemt>
       <SectionHeader text="Add New Menu "></SectionHeader>
       <div className="container mx-auto px-2 mt-5">
         <CForm onFormSubmit={onFormSubmit}>
@@ -164,7 +166,7 @@ const AddItem = () => {
             ></CInputObject>
           )}
           <button
-            className="btn my-4 btn-sm border-none hover:bg-orange-500 w-full text-white bg-orange-400"
+            className="btn my-4 btn-sm border-none hover:bg-orange-400 w-full text-white bg-orange-400"
             type="submit"
           >
             Add Item
