@@ -5,6 +5,7 @@ import { JwtPayload } from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { userLogout } from "../../../Redux/feature/userSlice/userSlice";
 import logo from "../../../assets/logo.png";
+import { useGetCustomerInfoQuery } from "../../../Redux/api/userApi/userApi";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,11 @@ const Navbar = () => {
       userEmail: string;
     };
   }
+
+  const { data } = useGetCustomerInfoQuery("", {
+    skip: !user || user?.role === "superAdmin",
+  });
+  console.log(data);
   const navLink = (
     <>
       <li>
@@ -47,7 +53,11 @@ const Navbar = () => {
       <li>
         {token && (
           <NavLink
-            to={`/${user?.role}/dashboard`}
+            to={`/${
+              user?.role === "admin" || user?.role === "superAdmin"
+                ? "admin"
+                : "customer"
+            }/dashboard`}
             className={({ isActive }) =>
               isActive
                 ? "bg-orange-400 hover:bg-orange-400  border-none shadow-none outline-none btn btn-sm text-white  px-3 py-1 "
@@ -86,7 +96,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className=" flex flex-col gap-3 dropdown-content z-10 bg-white rounded-box  mt-3 w-52 py-3 px-5 shadow"
+            className=" flex flex-col lg:hidden gap-3 dropdown-content z-10 bg-white rounded-box  mt-3 w-52 py-3 px-5 shadow"
           >
             {navLink}
           </ul>
@@ -107,13 +117,22 @@ const Navbar = () => {
           <details className="dropdown p-0 m-0 dropdown-end">
             <summary className="avatar m-1">
               <div className="w-10 rounded-full">
-                <img src="https://png.pngtree.com/png-vector/20190130/ourmid/pngtree-characters-enjoy-food-cartoon-characters-gourmet-hand-painted-character-cuisine-enjoy-png-image_606799.jpg" />
+                <img
+                  src={
+                    data?.data?.photo ||
+                    "https://png.pngtree.com/png-vector/20190130/ourmid/pngtree-characters-enjoy-food-cartoon-characters-gourmet-hand-painted-character-cuisine-enjoy-png-image_606799.jpg"
+                  }
+                />
               </div>
             </summary>
-            <ul className="menu grid gap-2 dropdown-content bg-base-100 rounded-box z-[1] w-32 p-2 shadow">
-              <li>
-                <Link to="/user-profile">Manage Profile</Link>
-              </li>
+            <ul className="menu grid gap-2 dropdown-content bg-base-100 rounded-box z-[1] w-40 p-2 shadow">
+              {user.role !== "superAdmin" && (
+                <li>
+                  <Link to="/user-profile" className="text-nowrap">
+                    Manage Profile
+                  </Link>
+                </li>
+              )}
               <li
                 onClick={() => dispatch(userLogout())}
                 className="btn hover:bg-orange-500 btn-sm text-white bg-orange-400 border-none "

@@ -9,7 +9,7 @@ const CartFavButton = () => {
   const { cartItems } = useAppSelector((state) => state.cart);
 
   const { data: favData } = useGetUserFavMenuQuery(undefined, {
-    skip: !user || user?.role == "admin",
+    skip: !user || user?.role !== "customer",
   });
   return (
     <>

@@ -26,7 +26,7 @@ const FoodCard = ({ item }: IProps) => {
   };
   return (
     <div className="">
-      <div className="p-3 shadow-md rounded-lg max-w-[590px] ">
+      <div className="p-3 shadow-md rounded-lg w-[530px] ">
         <div className="shadow-inner  rounded-lg">
           <div className="grid grid-cols-2 items-center">
             <div className="w-40 rounded-lg h-40 bg-orange-400 m-4 ">

@@ -33,13 +33,17 @@ export const router = createBrowserRouter([
       },
       {
         path: "/user-profile",
-        element: <UserProfile />,
+        element: (
+          <PrivetRoute role={["customer", "admin"]}>
+            <UserProfile />
+          </PrivetRoute>
+        ),
       },
       { path: "/food-item/:id", element: <FoodDetails /> },
       {
         path: "/user-cart-items",
         element: (
-          <PrivetRoute role="customer">
+          <PrivetRoute role={["customer"]}>
             {" "}
             <CartItems />
           </PrivetRoute>
@@ -48,7 +52,7 @@ export const router = createBrowserRouter([
       {
         path: "/user-fav-items",
         element: (
-          <PrivetRoute role="customer">
+          <PrivetRoute role={["customer"]}>
             <FavItems />
           </PrivetRoute>
         ),
@@ -62,7 +66,7 @@ export const router = createBrowserRouter([
   {
     path: "/customer",
     element: (
-      <PrivetRoute role="customer">
+      <PrivetRoute role={["customer"]}>
         {" "}
         <DashboardLayout />
       </PrivetRoute>
@@ -72,7 +76,7 @@ export const router = createBrowserRouter([
   {
     path: "/admin",
     element: (
-      <PrivetRoute role="admin">
+      <PrivetRoute role={["admin", "superAdmin"]}>
         {" "}
         <DashboardLayout />
       </PrivetRoute>

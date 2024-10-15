@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { IAddItemForm } from "../../../../interface/formData.interface";
+
 import { useAddMenuMutation } from "../../../../Redux/api/menuApi/menuApi";
 import { uploadImageToCloudinary } from "../../../../utils/uploadImage";
 import { IApiResponse } from "../../../../Redux/interface/global.interface";
@@ -19,6 +19,7 @@ import {
   useGetAllCuisineQuery,
 } from "../../../../Redux/api/categoryCuisineApi/categoryCuisineApi";
 import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
+import { FieldValues } from "react-hook-form";
 
 const AddItem = () => {
   const { data: categories, isLoading: isCategoryLoading } =
@@ -30,10 +31,10 @@ const AddItem = () => {
   const [preview, setPreview] = useState<string | null>(null);
   const [addItem] = useAddMenuMutation();
 
-  const onFormSubmit = async (data: IAddItemForm) => {
+  const onFormSubmit = async (data: FieldValues) => {
     const formatdata = {
       ...data,
-      price: data.price.map((item) => {
+      price: data.price.map((item: { size: string; price: string }) => {
         return { price: Number(item.price), size: item.size };
       }),
       ...(data.limitedStatus?.quantity && {
@@ -45,7 +46,7 @@ const AddItem = () => {
     };
     console.log(formatdata);
     if (data?.photo) {
-      const uploadedImageUrl = await uploadImageToCloudinary(data.photo);
+      const uploadedImageUrl = await uploadImageToCloudinary(data.photo[0]);
 
       if (!uploadedImageUrl) {
         toast.error("Something went wrong. Try again.");

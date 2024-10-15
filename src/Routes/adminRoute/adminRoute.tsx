@@ -59,4 +59,19 @@ export const adminRouteOption = [
     path: "user-msg",
     element: <UserMessage />,
   },
+  {
+    name: "Admin Management",
+    children: [
+      {
+        name: "Add Admin",
+        path: "all-orders",
+        element: <Allorders />,
+      },
+      {
+        name: "Manage Admin",
+        path: "pending-orders",
+        element: <PendingOrders />,
+      },
+    ],
+  },
 ];

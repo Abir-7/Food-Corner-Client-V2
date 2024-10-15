@@ -32,6 +32,7 @@ const customBaseApiQuery: BaseQueryFn<
   const result: any = await baseQuery(args, api, extraOptions);
   if (result.error) {
     toast.error(result.error?.data?.message);
+    console.log(result.error);
   }
   if (result.error?.status === 401) {
     // const res = await fetch("http://localhost:3000/api/v1/auth/refresh-token", {
@@ -50,7 +51,6 @@ const customBaseApiQuery: BaseQueryFn<
     // }
     // console.log(data);
     api.dispatch(userLogout());
-    toast.success("User Logout");
   }
   return result;
 };
@@ -67,6 +67,7 @@ export const baseApi = createApi({
     "cuisine",
     "ratingus",
     "msg",
+    "profile",
   ],
   endpoints: () => ({}),
 });

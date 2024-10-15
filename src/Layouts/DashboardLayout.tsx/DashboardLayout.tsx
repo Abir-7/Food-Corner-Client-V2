@@ -12,13 +12,14 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 
 const userRole = {
   ADMIN: "admin",
+  SUPER_ADMIN: "superAdmin",
   FACULTY: "faculty",
   USER: "customer",
 };
 
 const DashboardLayout = () => {
   const { token } = useAppSelector((state) => state.auth);
-  let user;
+  let user: (JwtPayload & { role: string; userEmail: string }) | null = null;
 
   if (token) {
     user = decodeToken(token) as JwtPayload & {
@@ -30,6 +31,9 @@ const DashboardLayout = () => {
 
   switch (user?.role) {
     case userRole.ADMIN:
+      sideBarItems = sideNavLinkGenerator(adminRouteOption, userRole.ADMIN);
+      break;
+    case userRole.SUPER_ADMIN:
       sideBarItems = sideNavLinkGenerator(adminRouteOption, userRole.ADMIN);
       break;
 
@@ -72,49 +76,57 @@ const DashboardLayout = () => {
           >
             Home
           </NavLink>
-          {sideBarItems?.map((item: ISidebarItem) => {
-            if (item.key && item.label && !item.children) {
-              return (
-                <NavLink
-                  key={item.key}
-                  className={({ isActive }) =>
-                    isActive
-                      ? "bg-orange-400 border-2 border-white rounded-md p-2 text-white "
-                      : "  bg-white  text-orange-400  border-2 border-white hover:bg-orange-400 hover:text-white p-2 rounded-md duration-300 z-10 "
-                  } // Apply styles based on active state
-                  to={item.label}
-                >
-                  {item.key}
-                </NavLink>
-              );
-            }
-            if (item.children) {
-              return (
-                <details key={item.key}>
-                  <summary className="bg-orange-400 border border-white text-white font-semibold  px-3 py-2 rounded">
-                    {item.key}
-                  </summary>
-                  <div className="p-4  md:rounded-md flex flex-col   gap-3 ">
-                    {item?.children.map((item: ISidebarItem) => {
-                      return (
-                        <NavLink
-                          key={item.key}
-                          className={({ isActive }) =>
-                            isActive
-                              ? "bg-orange-400 border-2 border-white rounded-md p-2 text-white "
-                              : "  bg-white  text-orange-400  border-2 border-white hover:bg-orange-400 hover:text-white p-2 rounded-md duration-300 z-10 "
-                          }
-                          to={item.label}
-                        >
-                          {item.key}
-                        </NavLink>
-                      );
-                    })}
-                  </div>
-                </details>
-              );
-            }
-          })}
+          {user && (
+            <>
+              {" "}
+              {sideBarItems?.map((item: ISidebarItem) => {
+                if (item.key && item.label && !item.children) {
+                  return (
+                    <NavLink
+                      key={item.key}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "bg-orange-400 border-2 border-white rounded-md p-2 text-white "
+                          : "  bg-white  text-orange-400  border-2 border-white hover:bg-orange-400 hover:text-white p-2 rounded-md duration-300 z-10 "
+                      } // Apply styles based on active state
+                      to={item.label}
+                    >
+                      {item.key}
+                    </NavLink>
+                  );
+                }
+                if (
+                  item.children &&
+                  (user.role !== "admin" || item.key !== "Admin Management")
+                ) {
+                  return (
+                    <details key={item.key}>
+                      <summary className="bg-orange-400 border border-white text-white font-semibold  px-3 py-2 rounded">
+                        {item.key}
+                      </summary>
+                      <div className="p-4  md:rounded-md flex flex-col   gap-3 ">
+                        {item?.children.map((item: ISidebarItem) => {
+                          return (
+                            <NavLink
+                              key={item.key}
+                              className={({ isActive }) =>
+                                isActive
+                                  ? "bg-orange-400 border-2 border-white rounded-md p-2 text-white "
+                                  : "  bg-white  text-orange-400  border-2 border-white hover:bg-orange-400 hover:text-white p-2 rounded-md duration-300 z-10 "
+                              }
+                              to={item.label}
+                            >
+                              {item.key}
+                            </NavLink>
+                          );
+                        })}
+                      </div>
+                    </details>
+                  );
+                }
+              })}
+            </>
+          )}
         </div>
       </div>
     </div>

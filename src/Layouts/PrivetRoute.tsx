@@ -9,7 +9,7 @@ const PrivetRoute = ({
   role,
   children,
 }: {
-  role: string;
+  role: string[];
   children: ReactNode;
 }) => {
   let user;
@@ -28,7 +28,12 @@ const PrivetRoute = ({
     };
   }
 
-  if (user?.role !== role) {
+  if (!user) {
+    dispatch(userLogout());
+    return <Navigate replace={true} to={"/user-login"}></Navigate>;
+  }
+
+  if (!role.includes(user?.role)) {
     dispatch(userLogout());
     return <Navigate replace={true} to={"/user-login"}></Navigate>;
   }

@@ -8,7 +8,7 @@ import FavCard from "./FavCard";
 const FavItems = () => {
   const { user } = useAppSelector((state) => state.auth);
   const { data, isLoading } = useGetUserFavMenuQuery(undefined, {
-    skip: !user || user?.role == "admin",
+    skip: !user || user?.role !== "customer",
   });
 
   return (

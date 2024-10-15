@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FormProvider, useForm } from "react-hook-form";
+import { FieldValues, FormProvider, useForm } from "react-hook-form";
 
 import { ReactNode } from "react";
-import { IAddItemForm } from "../../interface/formData.interface";
 
 interface MyFormProps {
-  onFormSubmit: (data: IAddItemForm) => Promise<void>;
+  onFormSubmit: (data: FieldValues) => Promise<void>;
   children: ReactNode;
   defaultValues?: Record<string, unknown>;
   resolver?: any;
@@ -32,9 +31,9 @@ const CForm = ({
     formConfig["resolver"] = resolver;
   }
 
-  const methods = useForm<IAddItemForm>(formConfig);
+  const methods = useForm<FieldValues>(formConfig);
 
-  const submit = async (data: IAddItemForm) => {
+  const submit = async (data: FieldValues) => {
     await onFormSubmit(data);
     methods.reset();
   };
