@@ -137,7 +137,10 @@ const FoodItem = () => {
 
       {!isLoading ? (
         <>
-          <div className="grid md:grid-cols-2 min-h-[500px] my-5 gap-4 xl:grid-cols-3 justify-items-center relative">
+          <div className=" flex gap-4 justify-center flex-wrap relative">
+            {menuData?.data?.map((item: IMenuItem) => (
+              <FoodCard key={item._id} item={item} />
+            ))}
             {menuData?.data?.map((item: IMenuItem) => (
               <FoodCard key={item._id} item={item} />
             ))}

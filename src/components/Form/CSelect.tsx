@@ -51,7 +51,7 @@ const CSelect = ({
 
       {/* Error Handling */}
       {errors[name] && (
-        <p className="text-orange-400 text-sm">
+        <p className="text-orange-400 text-sm mt-1">
           {(errors[name] as any).message}
         </p>
       )}

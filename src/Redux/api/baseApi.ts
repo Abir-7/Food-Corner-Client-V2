@@ -11,8 +11,8 @@ import { toast } from "sonner";
 import { userLogout } from "../feature/userSlice/userSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3000/api/v1",
-  // baseUrl: "https://food-corner-back-end-mern.vercel.app/api/v1",
+  //baseUrl: "http://localhost:3000/api/v1",
+  baseUrl: "https://food-corner-back-end-mern.vercel.app/api/v1",
   credentials: "include",
 
   prepareHeaders: (headers, api) => {
@@ -68,6 +68,7 @@ export const baseApi = createApi({
     "ratingus",
     "msg",
     "profile",
+    "admin",
   ],
   endpoints: () => ({}),
 });

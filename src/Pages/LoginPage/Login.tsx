@@ -15,6 +15,7 @@ import { decodeToken } from "../../utils/decodeToken";
 import { JwtPayload } from "jwt-decode";
 import { useAppSelector } from "../../Redux/hooks";
 import ReactHelemt from "../../components/common/ReactHelmet/ReactHelemt";
+import { CFormButton } from "../../components/Form/CFormButton";
 
 const Login = () => {
   const userData = useAppSelector((state) => state.auth.user);
@@ -78,12 +79,7 @@ const Login = () => {
                   type="password"
                   errorMsg="User password is required is requiered"
                 ></CInput>
-                <button
-                  type="submit"
-                  className="btn my-5 btn-sm text-white bg-orange-400 border-none "
-                >
-                  Login
-                </button>
+                <CFormButton btnStyle="w-full" text="Login"></CFormButton>
               </CForm>
               <h1 className="text-center text-white font-semibold">
                 Don't Have a account?{" "}

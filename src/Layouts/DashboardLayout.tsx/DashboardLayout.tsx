@@ -69,8 +69,8 @@ const DashboardLayout = () => {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "bg-orange-400 border-2 border-white rounded-md p-2 text-white "
-                : "  bg-white  text-orange-400  border-2 border-white hover:bg-orange-400 hover:text-white p-2 rounded-md duration-300 z-10 "
+                ? "bg-white  text-orange-400  border-2 border-white   p-2 rounded-md z-10 "
+                : " hover:bg-white hover:text-orange-400  bg-orange-400 border-2 border-white rounded-md p-2 duration-300  text-white "
             } // Apply styles based on active state
             to="/"
           >
@@ -86,8 +86,8 @@ const DashboardLayout = () => {
                       key={item.key}
                       className={({ isActive }) =>
                         isActive
-                          ? "bg-orange-400 border-2 border-white rounded-md p-2 text-white "
-                          : "  bg-white  text-orange-400  border-2 border-white hover:bg-orange-400 hover:text-white p-2 rounded-md duration-300 z-10 "
+                          ? "bg-white  text-orange-400  border-2 border-white   p-2 rounded-md z-10 "
+                          : " hover:bg-white hover:text-orange-400  bg-orange-400 border-2 border-white rounded-md p-2 duration-300  text-white "
                       } // Apply styles based on active state
                       to={item.label}
                     >
@@ -101,7 +101,7 @@ const DashboardLayout = () => {
                 ) {
                   return (
                     <details key={item.key}>
-                      <summary className="bg-orange-400 border border-white text-white font-semibold  px-3 py-2 rounded">
+                      <summary className="bg-orange-400 border-2 border-white text-white font-semibold  px-3 py-2 rounded">
                         {item.key}
                       </summary>
                       <div className="p-4  md:rounded-md flex flex-col   gap-3 ">
@@ -111,8 +111,8 @@ const DashboardLayout = () => {
                               key={item.key}
                               className={({ isActive }) =>
                                 isActive
-                                  ? "bg-orange-400 border-2 border-white rounded-md p-2 text-white "
-                                  : "  bg-white  text-orange-400  border-2 border-white hover:bg-orange-400 hover:text-white p-2 rounded-md duration-300 z-10 "
+                                  ? "bg-white  text-orange-400  border-2 border-white   p-2 rounded-md z-10 "
+                                  : " hover:bg-white hover:text-orange-400  bg-orange-400 border-2 border-white rounded-md p-2 duration-300  text-white "
                               }
                               to={item.label}
                             >

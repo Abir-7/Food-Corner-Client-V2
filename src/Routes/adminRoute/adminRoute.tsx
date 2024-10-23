@@ -6,6 +6,8 @@ import Allorders from "../../Pages/Dashboard/AdminDashboard/AllOrders/Allorders"
 import AddCusineCategory from "../../Pages/Dashboard/AdminDashboard/AddCuisineCategory/AddCusineCategory";
 import { ManageCuisineCategory } from "../../Pages/Dashboard/AdminDashboard/EditCategoryCuisine/ManageCuisineCategory";
 import UserMessage from "../../Pages/Dashboard/AdminDashboard/UserMessage/UserMessage";
+import AddAdmin from "../../Pages/Dashboard/SuperAdmin/AddAdmin/AddAdmin";
+import ManageAdmin from "../../Pages/Dashboard/SuperAdmin/ManageAdmin/ManageAdmin";
 
 export const adminRouteOption = [
   {
@@ -64,13 +66,13 @@ export const adminRouteOption = [
     children: [
       {
         name: "Add Admin",
-        path: "all-orders",
-        element: <Allorders />,
+        path: "add-admin",
+        element: <AddAdmin />,
       },
       {
         name: "Manage Admin",
-        path: "pending-orders",
-        element: <PendingOrders />,
+        path: "manage-admin",
+        element: <ManageAdmin />,
       },
     ],
   },

@@ -16,6 +16,17 @@ const authApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    createAdmin: builder.mutation({
+      query: (data) => ({
+        url: "/user/create-admin",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
-export const { useCreateUserMutation, useLoginUserMutation } = authApi;
+export const {
+  useCreateUserMutation,
+  useLoginUserMutation,
+  useCreateAdminMutation,
+} = authApi;

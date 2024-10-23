@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFormContext } from "react-hook-form";
-
+import { get } from "lodash";
 interface InputProps {
   name: string;
   label: string;
-  errorMsg?: string | false;
+  errorMsg?: string | boolean;
   type?: string;
   labelStyle?: string;
   placeholder?: string;
@@ -23,6 +23,8 @@ const CInput = ({
     formState: { errors },
   } = useFormContext();
 
+  const error = get(errors, name);
+
   return (
     <div>
       <>
@@ -39,9 +41,9 @@ const CInput = ({
           />
         </div>
 
-        {errors[name] && (
-          <p className="text-orange-400 text-sm">
-            {(errors[name] as any).message}
+        {error && (
+          <p className="text-orange-400 text-sm mt-1">
+            {(error as any).message}
           </p>
         )}
       </>

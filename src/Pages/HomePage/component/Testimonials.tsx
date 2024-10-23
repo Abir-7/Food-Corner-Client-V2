@@ -68,7 +68,11 @@ export const Testimonials = () => {
               <SwiperSlide key={n}>
                 <div className=" flex items-center flex-col ">
                   <div className="w-14 rounded-full bg-orange-400 h-14">
-                    <img src={cmt?.customer?.photo} alt="" />
+                    <img
+                      src={cmt?.customer?.photo}
+                      alt=""
+                      className="rounded-full object-cover"
+                    />
                   </div>
                   <div className="text-center my-2">{cmt?.comment}</div>
                   <Rating

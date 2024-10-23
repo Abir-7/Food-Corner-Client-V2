@@ -15,7 +15,6 @@ const HomePage = () => {
       <OurServices></OurServices>
       <TopRatedItem></TopRatedItem>
       <NewsLetter></NewsLetter>
-
       <Testimonials></Testimonials>
     </div>
   );

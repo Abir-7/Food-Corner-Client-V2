@@ -59,7 +59,7 @@ const CImageInput = ({
         )}
       </div>
       {errors[name] && !preview && (
-        <p className="text-orange-400 text-sm">
+        <p className="text-orange-400 text-sm mt-1">
           {errors[name]?.message as string}
         </p>
       )}

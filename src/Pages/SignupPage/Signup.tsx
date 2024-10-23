@@ -11,6 +11,7 @@ import { IApiResponse } from "../../Redux/interface/global.interface";
 import { toast } from "sonner";
 import { useAppSelector } from "../../Redux/hooks";
 import ReactHelemt from "../../components/common/ReactHelmet/ReactHelemt";
+import { CFormButton } from "../../components/Form/CFormButton";
 
 const Signup = () => {
   const userData = useAppSelector((state) => state.auth.user);
@@ -107,12 +108,7 @@ const Signup = () => {
                   type="password"
                   errorMsg="User password is required is requiered"
                 ></CInput>
-                <button
-                  type="submit"
-                  className="btn my-5 btn-sm text-white bg-orange-400 border-none "
-                >
-                  Signup
-                </button>
+                <CFormButton btnStyle="w-full" text="Login"></CFormButton>
               </CForm>
               <h1 className="text-center text-white font-semibold">
                 Already Have a account?{" "}
