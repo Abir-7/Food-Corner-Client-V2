@@ -12,6 +12,7 @@ import { IApiResponse } from "../../Redux/interface/global.interface";
 import { toast } from "sonner";
 import { CFormButton } from "../../components/Form/CFormButton";
 import ReactHelemt from "../../components/common/ReactHelmet/ReactHelemt";
+import { Effect } from "../../components/FramerMotion/Effect";
 
 export const ContactUs = () => {
   const [saveMsg, { isLoading }] = useSaveMsgMutation();
@@ -24,48 +25,51 @@ export const ContactUs = () => {
   };
 
   return (
-    <div className="">
+    <>
       <ReactHelemt title=": Contact us"></ReactHelemt>
       <SectionHeader text="Contact-Us"></SectionHeader>
 
-      <div className="container mx-auto px-5 mt-10 grid md:grid-cols-2 items-center gap-10 md:gap-20 ">
-        <div className="w-full">
-          <p className="text-3xl font-bold">Get In Touch</p>
-          <CForm onFormSubmit={onFormSubmit}>
-            <CInput
-              label="Email"
-              errorMsg="Email is Required"
-              name="email"
-            ></CInput>
-            <CTextArea name="message" label="Message"></CTextArea>
-            <CFormButton
-              isLoading={isLoading}
-              btnStyle="w-full"
-              text="Send"
-            ></CFormButton>
-          </CForm>
+      <Effect>
+        {" "}
+        <div className="container mx-auto px-5 mt-10 grid md:grid-cols-2 items-center gap-10 md:gap-20 ">
+          <div className="w-full">
+            <p className="text-3xl font-bold">Get In Touch</p>
+            <CForm onFormSubmit={onFormSubmit}>
+              <CInput
+                label="Email"
+                errorMsg="Email is Required"
+                name="email"
+              ></CInput>
+              <CTextArea name="message" label="Message"></CTextArea>
+              <CFormButton
+                isLoading={isLoading}
+                btnStyle="w-full"
+                text="Send"
+              ></CFormButton>
+            </CForm>
+          </div>
+          <div className="space-y-5 md:mx-auto  mb-10">
+            <p className="text-3xl font-bold">Contact Info</p>
+            <div className="flex items-center  gap-4">
+              <MdMessage className="font-semibold text-orange-400 text-lg mt-1"></MdMessage>
+              <p>Food_Corner@gmail.com</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <FaPhoneAlt className="text-xl text-orange-400" />
+              <p>
+                +880 1234567890 <br /> +8802364786732
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <FaMapMarkerAlt className="text-xl text-orange-400" />
+              <p>
+                Dhanmondi-32, Dhaka <br /> Bangladesh
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="space-y-5 md:mx-auto  mb-10">
-          <p className="text-3xl font-bold">Contact Info</p>
-          <div className="flex items-center  gap-4">
-            <MdMessage className="font-semibold text-orange-400 text-lg mt-1"></MdMessage>
-            <p>Food_Corner@gmail.com</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <FaPhoneAlt className="text-xl text-orange-400" />
-            <p>
-              +880 1234567890 <br /> +8802364786732
-            </p>
-          </div>
-          <div className="flex items-center gap-4">
-            <FaMapMarkerAlt className="text-xl text-orange-400" />
-            <p>
-              Dhanmondi-32, Dhaka <br /> Bangladesh
-            </p>
-          </div>
-        </div>
-      </div>
-      <Reviews></Reviews>
-    </div>
+        <Reviews></Reviews>
+      </Effect>
+    </>
   );
 };

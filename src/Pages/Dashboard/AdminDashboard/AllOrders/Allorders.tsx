@@ -4,6 +4,7 @@ import { OrderTable } from "../../../../components/common/Order/OrderTable";
 import SectionHeader from "../../../../components/common/SectionHeader/SectionHeader";
 import { useGetAllUserOrdersQuery } from "../../../../Redux/api/orderApi/orderApi";
 import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
+import { Effect } from "../../../../components/FramerMotion/Effect";
 
 const Allorders = () => {
   const [filterOptions, setFilterOptions] = useState<
@@ -66,7 +67,10 @@ const Allorders = () => {
         {isLoading ? (
           <LoadingUi />
         ) : (
-          <OrderTable isFetching={isFetching} orders={orderData} />
+          <Effect>
+            {" "}
+            <OrderTable isFetching={isFetching} orders={orderData} />
+          </Effect>
         )}
       </div>
     </div>

@@ -8,8 +8,6 @@ import Modal from "../../../../components/common/modal/Modal";
 import CForm from "../../../../components/Form/CForm";
 import CTextArea from "../../../../components/Form/CTextArea";
 import { useReplyMsgMutation } from "../../../../Redux/api/contactUsApi/contactUsApi";
-import SectionHeader from "../../../../components/common/SectionHeader/SectionHeader";
-import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
 
 const ReplyModal = ({ id }: { id: string }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,10 +20,8 @@ const ReplyModal = ({ id }: { id: string }) => {
     }
   };
   return (
-    <div>
-      <ReactHelemt title=": User-Queries"></ReactHelemt>
-      <SectionHeader text="User Queries"></SectionHeader>{" "}
-      <div className="flex justify-center my-10  ">
+    <div className="">
+      <div className="flex justify-center my-5  ">
         <button
           onClick={() => setIsOpen(true)}
           className="btn btn-sm bg-orange-400 text-white hover:bg-orange-400"
@@ -33,9 +29,10 @@ const ReplyModal = ({ id }: { id: string }) => {
           Reply
         </button>
       </div>
-      <div>
+      <div className="modal">
         <Modal isOpen={isOpen}>
-          <div>
+          {" "}
+          <div className="">
             <p className="text-xl font-bold text-orange-400">Give Reply</p>
             <div>
               <CForm onFormSubmit={onFormSubmit}>

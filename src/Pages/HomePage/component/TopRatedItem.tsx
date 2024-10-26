@@ -2,11 +2,12 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { useGetTopRatedMenuQuery } from "../../../Redux/api/menuApi/menuApi";
 import { Link } from "react-router-dom";
+import SkeletonCard_Two from "../../../components/SkeletonLoading/SkeletonCard2";
 export const TopRatedItem = () => {
-  const { data } = useGetTopRatedMenuQuery("");
+  const { data, isLoading } = useGetTopRatedMenuQuery("");
   console.log(data);
   return (
-    <div className="container mx-auto p-1 my-10 ">
+    <div className="container mx-auto p-1  mt-10 ">
       <div className="  ">
         <p className="text-4xl sm:text-5xl font-bold ms-2 text-center md:text-start">
           Shop our Favourites
@@ -62,6 +63,14 @@ export const TopRatedItem = () => {
               </div>
             </div>
           ))}
+          {isLoading && (
+            <>
+              <SkeletonCard_Two></SkeletonCard_Two>
+              <SkeletonCard_Two></SkeletonCard_Two>{" "}
+              <SkeletonCard_Two></SkeletonCard_Two>
+              <SkeletonCard_Two></SkeletonCard_Two>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -12,6 +12,7 @@ import {
 } from "../../../../Redux/api/categoryCuisineApi/categoryCuisineApi";
 import { IApiResponse } from "../../../../Redux/interface/global.interface";
 import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
+import { Effect } from "../../../../components/FramerMotion/Effect";
 
 const AddCusineCategory = () => {
   const [addCategory] = useAddCategoryMutation();
@@ -46,21 +47,24 @@ const AddCusineCategory = () => {
       <ReactHelemt title=": Add-Cuisine/Category"></ReactHelemt>
       <SectionHeader text="Add Cuisine/Category"></SectionHeader>
 
-      <div className="container mx-auto px-2">
-        <CForm onFormSubmit={onFormSubmit}>
-          <CInput
-            placeholder="Add Category Name"
-            name="category"
-            label="Category"
-          ></CInput>
-          <CInput
-            placeholder="Add Cuisine Name"
-            name="cuisine"
-            label="Cuisine"
-          ></CInput>
-          <CFormButton btnStyle="w-56" text="Add"></CFormButton>
-        </CForm>
-      </div>
+      <Effect>
+        {" "}
+        <div className="container mx-auto px-2 mt-2">
+          <CForm onFormSubmit={onFormSubmit}>
+            <CInput
+              placeholder="Add Category Name"
+              name="category"
+              label="Category"
+            ></CInput>
+            <CInput
+              placeholder="Add Cuisine Name"
+              name="cuisine"
+              label="Cuisine"
+            ></CInput>
+            <CFormButton btnStyle="w-56" text="Add"></CFormButton>
+          </CForm>
+        </div>
+      </Effect>
     </div>
   );
 };

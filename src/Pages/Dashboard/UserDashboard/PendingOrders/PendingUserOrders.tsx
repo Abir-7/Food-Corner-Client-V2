@@ -2,6 +2,7 @@ import LoadingUi from "../../../../components/common/LoadingUi/LoadingUi";
 import { OrderTable } from "../../../../components/common/Order/OrderTable";
 import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
 import SectionHeader from "../../../../components/common/SectionHeader/SectionHeader";
+import { Effect } from "../../../../components/FramerMotion/Effect";
 import { useUserAllPendingOrdersQuery } from "../../../../Redux/api/orderApi/orderApi";
 
 const PendingUserOrders = () => {
@@ -19,7 +20,10 @@ const PendingUserOrders = () => {
         <LoadingUi></LoadingUi>
       ) : (
         <div>
-          <OrderTable orders={orderData!}></OrderTable>
+          <Effect>
+            {" "}
+            <OrderTable orders={orderData!}></OrderTable>
+          </Effect>
         </div>
       )}
     </div>

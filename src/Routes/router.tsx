@@ -28,6 +28,10 @@ export const router = createBrowserRouter([
         element: <FoodItem />,
       },
       {
+        path: "/food-item/:id",
+        element: <FoodDetails />,
+      },
+      {
         path: "/about-us",
         element: <AboutUs />,
       },
@@ -39,7 +43,7 @@ export const router = createBrowserRouter([
           </PrivetRoute>
         ),
       },
-      { path: "/food-item/:id", element: <FoodDetails /> },
+
       {
         path: "/user-cart-items",
         element: (

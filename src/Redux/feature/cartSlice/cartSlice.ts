@@ -1,20 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 //import { ICartItem } from "../../../interface/cartItem.iterface";
 import { cartItemCalculation } from "../../../utils/cartPriceCalculation";
-
-export interface ICartItem {
-  title: string;
-  id: string;
-  category: string;
-  size: string;
-  price: number;
-  quantity: number;
-  photo: string;
-}
+import { ICartItem } from "../../../interface/cartItem.iterface";
 
 interface ICartState {
   cartItems: ICartItem[];
   discount: number;
+  additionalDiscount: number;
   totalPrice: number;
   subTotal: number;
 }
@@ -24,6 +16,7 @@ const initialState: ICartState = {
   discount: 0,
   totalPrice: 0,
   subTotal: 0,
+  additionalDiscount: 0,
 };
 
 export const cartSlice = createSlice({
@@ -94,11 +87,31 @@ export const cartSlice = createSlice({
       );
       state.cartItems.splice(itemIndex, 1);
     },
+    setDiscount: (state) => {
+      const priceData = cartItemCalculation(state.cartItems, 10);
+      state.discount = priceData.discount;
+      state.subTotal = priceData.subTotal;
+      state.totalPrice = priceData.totalPrice;
+      state.additionalDiscount = priceData.additionalDiscount;
+    },
+    resetDiscount: (state) => {
+      const priceData = cartItemCalculation(state.cartItems, 0);
+      state.discount = priceData.discount;
+      state.subTotal = priceData.subTotal;
+      state.totalPrice = priceData.totalPrice;
+      state.additionalDiscount = priceData.additionalDiscount;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addItemToCart, increassItem, decreassItem, removeItemFromCart } =
-  cartSlice.actions;
+export const {
+  addItemToCart,
+  increassItem,
+  decreassItem,
+  removeItemFromCart,
+  setDiscount,
+  resetDiscount,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

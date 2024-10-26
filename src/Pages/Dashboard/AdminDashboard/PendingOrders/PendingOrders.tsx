@@ -9,6 +9,7 @@ import {
 } from "../../../../Redux/api/orderApi/orderApi";
 import { IApiResponse } from "../../../../Redux/interface/global.interface";
 import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
+import { Effect } from "../../../../components/FramerMotion/Effect";
 
 const PendingOrders = () => {
   const { data, isLoading } = useGetAllPendingOrdersQuery("", {
@@ -35,11 +36,14 @@ const PendingOrders = () => {
         {isLoading ? (
           <LoadingUi />
         ) : (
-          <OrderTable
-            handleDeliveryStatus={handleDeliveryStatus}
-            orders={data!}
-            isAction={true}
-          />
+          <Effect>
+            {" "}
+            <OrderTable
+              handleDeliveryStatus={handleDeliveryStatus}
+              orders={data!}
+              isAction={true}
+            />
+          </Effect>
         )}
       </div>
     </div>

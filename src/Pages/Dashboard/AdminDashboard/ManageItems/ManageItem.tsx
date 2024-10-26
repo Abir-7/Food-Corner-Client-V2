@@ -1,6 +1,7 @@
 import LoadingUi from "../../../../components/common/LoadingUi/LoadingUi";
 import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
 import SectionHeader from "../../../../components/common/SectionHeader/SectionHeader";
+import { Effect } from "../../../../components/FramerMotion/Effect";
 import { useGetAllMenuQuery } from "../../../../Redux/api/menuApi/menuApi";
 import ItemTable from "./ItemTable";
 
@@ -14,7 +15,10 @@ const ManageItem = () => {
       {isLoading ? (
         <LoadingUi></LoadingUi>
       ) : (
-        <ItemTable menuItems={menuItems!} />
+        <Effect>
+          {" "}
+          <ItemTable menuItems={menuItems!} />
+        </Effect>
       )}
     </div>
   );

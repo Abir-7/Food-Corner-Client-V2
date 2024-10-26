@@ -14,6 +14,7 @@ import { useAddRatingMutation } from "../../../../Redux/api/ratingApi/ratingApi"
 import { IApiResponse } from "../../../../Redux/interface/global.interface";
 import { toast } from "sonner";
 import ReactHelemt from "../../../../components/common/ReactHelmet/ReactHelemt";
+import { Effect } from "../../../../components/FramerMotion/Effect";
 
 const AllOrderbyUser = () => {
   const [addRating] = useAddRatingMutation();
@@ -79,34 +80,37 @@ const AllOrderbyUser = () => {
       {isLoading ? (
         <LoadingUi></LoadingUi>
       ) : (
-        <div>
-          <div className="flex gap-2 my-5 mx-2">
-            <input
-              type="text"
-              placeholder="Search by Transaction ID"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="input input-sm input-bordered w-full max-w-xs"
-            />
-            <div className="flex space-x-4">
-              <select
-                onChange={handleFilterChange}
-                className="select select-sm select-bordered w-full max-w-xs"
-              >
-                <option value="">Filter by Order Status</option>
-                <option value="deliveryStatus:pending">Pending</option>
-                <option value="deliveryStatus:onGoing">Ongoing</option>
-                <option value="deliveryStatus:delivered">Delivered</option>
-              </select>
+        <Effect>
+          {" "}
+          <div>
+            <div className="flex gap-2 my-5 mx-2">
+              <input
+                type="text"
+                placeholder="Search by Transaction ID"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="input input-sm input-bordered w-full max-w-xs"
+              />
+              <div className="flex space-x-4">
+                <select
+                  onChange={handleFilterChange}
+                  className="select select-sm select-bordered w-full max-w-xs"
+                >
+                  <option value="">Filter by Order Status</option>
+                  <option value="deliveryStatus:pending">Pending</option>
+                  <option value="deliveryStatus:onGoing">Ongoing</option>
+                  <option value="deliveryStatus:delivered">Delivered</option>
+                </select>
+              </div>
             </div>
+            <OrderTable
+              openModal={openModal}
+              canReview={true}
+              isFetching={isFetching}
+              orders={orders!}
+            ></OrderTable>
           </div>
-          <OrderTable
-            openModal={openModal}
-            canReview={true}
-            isFetching={isFetching}
-            orders={orders!}
-          ></OrderTable>
-        </div>
+        </Effect>
       )}
       <Modal isOpen={isModalOpen}>
         <div>

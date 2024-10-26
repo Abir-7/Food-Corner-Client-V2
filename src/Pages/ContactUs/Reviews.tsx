@@ -29,7 +29,7 @@ const Reviews = () => {
           Give Review
         </button>
       </div>
-      <div>
+      <div className="modal">
         <Modal isOpen={isOpen}>
           <div>
             <p className="text-xl font-bold text-orange-400">
