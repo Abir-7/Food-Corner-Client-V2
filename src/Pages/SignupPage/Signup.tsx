@@ -119,7 +119,7 @@ const Signup = () => {
                       type="password"
                       errorMsg="User password is required is requiered"
                     ></CInput>
-                    <CFormButton btnStyle="w-full" text="Login"></CFormButton>
+                    <CFormButton btnStyle="w-full" text="Signup"></CFormButton>
                   </CForm>
                   <h1 className="text-center text-white font-semibold">
                     Already Have a account?{" "}
