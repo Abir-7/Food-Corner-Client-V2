@@ -91,7 +91,7 @@ export const OrderTable = ({
                         {order.deliveryStatus.toUpperCase()}
                       </p>
                     )}
-                    {canReview && (
+                    {canReview && order.deliveryStatus == "delivered" && (
                       <button
                         onClick={() =>
                           openModal &&
