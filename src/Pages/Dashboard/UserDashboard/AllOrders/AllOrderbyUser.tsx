@@ -83,7 +83,7 @@ const AllOrderbyUser = () => {
         <Effect>
           {" "}
           <div>
-            <div className="flex gap-2 my-5 mx-2">
+            <div className="flex h-7 gap-2 my-5 mx-2">
               <input
                 type="text"
                 placeholder="Search by Transaction ID"
@@ -104,6 +104,7 @@ const AllOrderbyUser = () => {
               </div>
             </div>
             <OrderTable
+              cheight={68}
               openModal={openModal}
               canReview={true}
               isFetching={isFetching}

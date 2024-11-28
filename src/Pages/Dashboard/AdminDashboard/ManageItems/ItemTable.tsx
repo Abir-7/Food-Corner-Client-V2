@@ -43,7 +43,7 @@ const ItemTable = ({ menuItems }: { menuItems: IMenuItem[] }) => {
   };
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto min-h-screen">
       <table className="table">
         <thead>
           <tr>

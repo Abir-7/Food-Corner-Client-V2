@@ -32,7 +32,7 @@ const PendingOrders = () => {
     <div className="">
       <ReactHelemt title=": Pending-Orders"></ReactHelemt>
       <SectionHeader text="Pending Orders" />
-      <div className="flex flex-col space-y-4 mt-4 mx-2">
+      <div className=" ">
         {isLoading ? (
           <LoadingUi />
         ) : (

@@ -69,7 +69,11 @@ const Allorders = () => {
         ) : (
           <Effect>
             {" "}
-            <OrderTable isFetching={isFetching} orders={orderData} />
+            <OrderTable
+              cheight={68}
+              isFetching={isFetching}
+              orders={orderData}
+            />
           </Effect>
         )}
       </div>
